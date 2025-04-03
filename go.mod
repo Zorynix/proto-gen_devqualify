@@ -1,4 +1,4 @@
-module gitlab.com/diplom_mirea/proto/sso
+module github.com/Zorynix/protoc
 
 go 1.23.6
 
