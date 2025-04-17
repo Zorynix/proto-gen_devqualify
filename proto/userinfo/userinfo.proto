@@ -1,0 +1,93 @@
+syntax = "proto3";
+package userinfo.v1;
+
+option go_package = "diploma.userinfo.v1;userinfov1";
+
+
+enum Direction {
+  DIRECTION_UNSPECIFIED = 0;
+  BACKEND = 1;
+  FRONTEND = 2;
+  DEVOPS = 3;
+  DATA_SCIENCE = 4;
+}
+
+enum Level {
+  LEVEL_UNSPECIFIED = 0;
+  JUNIOR = 1;
+  MIDDLE = 2;
+  SENIOR = 3;
+}
+
+message Pagination {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+message User {
+  int64 id = 1;
+  string username = 2;
+  string email = 3;
+  Direction direction = 4;
+  Level level = 5;
+}
+
+service UserService {
+    rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+    rpc GetUser (GetUserRequest) returns (GetUserResponse);
+    rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
+    rpc ListUsers (ListUsersRequest) returns (ListUsersResponse);
+    rpc SearchUsers (SearchUsersRequest) returns (SearchUsersResponse);
+}
+
+message GetUserRequest {
+    int64 user_id = 1;
+}
+
+message GetUserResponse {
+    User user = 1;
+}
+
+message UpdateUserRequest {
+    int64 user_id = 1;
+    string username = 2;
+    string email = 3;
+    Direction direction = 4;
+    Level level = 5;
+}
+
+message UpdateUserResponse {
+    User user = 1;
+}
+
+message DeleteUserRequest { int64 user_id = 1; }
+
+message CreateUserRequest {
+    string username = 1;
+    string email = 2;
+    Direction direction = 3;
+    Level level = 4;
+}
+
+message CreateUserResponse { User user = 1; }
+
+message ListUsersRequest {
+    Pagination pagination = 1;
+    Direction direction = 2;
+    Level level = 3;
+}
+
+message ListUsersResponse {
+    repeated User users = 1;
+    string next_page_token = 2;
+}
+
+message SearchUsersRequest {
+    string query = 1;
+    Pagination pagination = 2;
+}
+
+message SearchUsersResponse {
+    repeated User users = 1;
+    string next_page_token = 2;
+}

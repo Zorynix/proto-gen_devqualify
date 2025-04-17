@@ -1,0 +1,156 @@
+syntax = "proto3";
+
+package test.v1;
+
+option go_package = "diploma.tests.v1;testsv1";
+
+enum Direction {
+  DIRECTION_UNSPECIFIED = 0;
+  BACKEND = 1;
+  FRONTEND = 2;
+  DEVOPS = 3;
+  DATA_SCIENCE = 4;
+}
+
+enum Level {
+  LEVEL_UNSPECIFIED = 0;
+  JUNIOR = 1;
+  MIDDLE = 2;
+  SENIOR = 3;
+}
+
+enum QuestionType {
+  QUESTION_TYPE_UNSPECIFIED = 0;
+  MCQ = 1;
+  TEXT = 2;
+  CODE = 3;
+}
+
+enum Difficulty {
+  DIFFICULTY_UNSPECIFIED = 0;
+  EASY = 1;
+  MEDIUM = 2;
+  HARD = 3;
+}
+
+message Pagination {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+message TestInfo {
+  int64 id = 1;
+  string title = 2;
+  string description = 3;
+  Direction direction = 4;
+  Level level = 5;
+}
+
+service TestService {
+    rpc CreateTest (CreateTestRequest) returns (CreateTestResponse);
+    rpc GetTests (GetTestsRequest) returns (GetTestsResponse);
+    rpc GetTest (GetTestRequest) returns (GetTestResponse);
+    rpc SubmitAnswers (SubmitAnswersRequest) returns (SubmitAnswersResponse);
+    rpc GetTestResults (GetTestResultsRequest) returns (GetTestResultsResponse);
+    rpc UpdateTest (UpdateTestRequest) returns (UpdateTestResponse);
+    rpc DeleteTest (DeleteTestRequest) returns (Pagination);
+    rpc PublishTest (PublishTestRequest) returns (PublishTestResponse);
+}
+
+message CreateTestRequest {
+    string title = 1;
+    string description = 2;
+    repeated Question questions = 3;
+    Difficulty difficulty = 4;
+    Pagination pagination = 5;
+}
+
+message Question {
+    int64 id = 1;
+    string text = 2;
+    QuestionType type = 3;
+    repeated string options = 4;
+    int32 correct_option = 5;
+    string sample_code = 6;
+}
+
+message CreateTestResponse {
+    int64 test_id = 1;
+    string message = 2;
+}
+
+message GetTestsRequest {
+    Direction direction = 1;
+    Level level = 2;
+    Difficulty difficulty = 3;
+    Pagination pagination = 4;
+}
+
+message GetTestsResponse {
+    repeated TestInfo tests = 1;
+    string next_page_token = 2;
+}
+
+message Test {
+    int64 id = 1;
+    string title = 2;
+    string description = 3;
+}
+
+message GetTestRequest {
+    int64 test_id = 1;
+}
+
+message GetTestResponse {
+    TestInfo test = 1;
+    repeated Question questions = 2;
+}
+
+message SubmitAnswersRequest {
+    int64 test_id = 1;
+    int64 user_id = 2;
+    repeated Answer answers = 3;
+}
+
+message Answer {
+    int64 question_id = 1;
+    int32 selected_option = 2;
+}
+
+message SubmitAnswersResponse {
+    int64 submission_id = 1;
+    string message = 2;
+}
+
+message GetTestResultsRequest {
+    int64 submission_id = 1;
+}
+
+message GetTestResultsResponse {
+    int32 score = 1;
+    int32 total_questions = 2;
+    string feedback = 3;
+}
+
+message UpdateTestRequest {
+    int64 test_id = 1;
+    string title = 2;
+    string description = 3;
+    repeated Question questions = 4;
+}
+
+message UpdateTestResponse {
+    string message = 1;
+}
+
+message DeleteTestRequest {
+    int64 test_id = 1;
+}
+
+message PublishTestRequest {
+    int64 test_id = 1;
+}
+
+message PublishTestResponse {
+    string message = 1;
+}
