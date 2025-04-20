@@ -19,6 +19,13 @@ enum Level {
   SENIOR = 3;
 }
 
+enum Difficulty {
+  DIFFICULTY_UNSPECIFIED = 0;
+  EASY = 1;
+  MEDIUM = 2;
+  HARD = 3;
+}
+
 message Pagination {
   int32 page_size = 1;
   string page_token = 2;
@@ -30,6 +37,7 @@ message User {
   string email = 3;
   Direction direction = 4;
   Level level = 5;
+  Difficulty difficulty = 6;
 }
 
 service UserService {
@@ -54,6 +62,7 @@ message UpdateUserRequest {
     string email = 3;
     Direction direction = 4;
     Level level = 5;
+    Difficulty difficulty = 6;
 }
 
 message UpdateUserResponse {
@@ -67,6 +76,7 @@ message CreateUserRequest {
     string email = 2;
     Direction direction = 3;
     Level level = 4;
+    Difficulty difficulty = 5;
 }
 
 message CreateUserResponse { User user = 1; }
@@ -75,6 +85,7 @@ message ListUsersRequest {
     Pagination pagination = 1;
     Direction direction = 2;
     Level level = 3;
+    Difficulty difficulty = 4;
 }
 
 message ListUsersResponse {

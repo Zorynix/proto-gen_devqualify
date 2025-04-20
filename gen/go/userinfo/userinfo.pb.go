@@ -128,6 +128,58 @@ func (Level) EnumDescriptor() ([]byte, []int) {
 	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{1}
 }
 
+type Difficulty int32
+
+const (
+	Difficulty_DIFFICULTY_UNSPECIFIED Difficulty = 0
+	Difficulty_EASY                   Difficulty = 1
+	Difficulty_MEDIUM                 Difficulty = 2
+	Difficulty_HARD                   Difficulty = 3
+)
+
+// Enum value maps for Difficulty.
+var (
+	Difficulty_name = map[int32]string{
+		0: "DIFFICULTY_UNSPECIFIED",
+		1: "EASY",
+		2: "MEDIUM",
+		3: "HARD",
+	}
+	Difficulty_value = map[string]int32{
+		"DIFFICULTY_UNSPECIFIED": 0,
+		"EASY":                   1,
+		"MEDIUM":                 2,
+		"HARD":                   3,
+	}
+)
+
+func (x Difficulty) Enum() *Difficulty {
+	p := new(Difficulty)
+	*p = x
+	return p
+}
+
+func (x Difficulty) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Difficulty) Descriptor() protoreflect.EnumDescriptor {
+	return file_userinfo_userinfo_proto_enumTypes[2].Descriptor()
+}
+
+func (Difficulty) Type() protoreflect.EnumType {
+	return &file_userinfo_userinfo_proto_enumTypes[2]
+}
+
+func (x Difficulty) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Difficulty.Descriptor instead.
+func (Difficulty) EnumDescriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{2}
+}
+
 type Pagination struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PageSize      int32                  `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
@@ -187,6 +239,7 @@ type User struct {
 	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
 	Direction     Direction              `protobuf:"varint,4,opt,name=direction,proto3,enum=userinfo.v1.Direction" json:"direction,omitempty"`
 	Level         Level                  `protobuf:"varint,5,opt,name=level,proto3,enum=userinfo.v1.Level" json:"level,omitempty"`
+	Difficulty    Difficulty             `protobuf:"varint,6,opt,name=difficulty,proto3,enum=userinfo.v1.Difficulty" json:"difficulty,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -254,6 +307,13 @@ func (x *User) GetLevel() Level {
 		return x.Level
 	}
 	return Level_LEVEL_UNSPECIFIED
+}
+
+func (x *User) GetDifficulty() Difficulty {
+	if x != nil {
+		return x.Difficulty
+	}
+	return Difficulty_DIFFICULTY_UNSPECIFIED
 }
 
 type GetUserRequest struct {
@@ -351,6 +411,7 @@ type UpdateUserRequest struct {
 	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
 	Direction     Direction              `protobuf:"varint,4,opt,name=direction,proto3,enum=userinfo.v1.Direction" json:"direction,omitempty"`
 	Level         Level                  `protobuf:"varint,5,opt,name=level,proto3,enum=userinfo.v1.Level" json:"level,omitempty"`
+	Difficulty    Difficulty             `protobuf:"varint,6,opt,name=difficulty,proto3,enum=userinfo.v1.Difficulty" json:"difficulty,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -418,6 +479,13 @@ func (x *UpdateUserRequest) GetLevel() Level {
 		return x.Level
 	}
 	return Level_LEVEL_UNSPECIFIED
+}
+
+func (x *UpdateUserRequest) GetDifficulty() Difficulty {
+	if x != nil {
+		return x.Difficulty
+	}
+	return Difficulty_DIFFICULTY_UNSPECIFIED
 }
 
 type UpdateUserResponse struct {
@@ -514,6 +582,7 @@ type CreateUserRequest struct {
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	Direction     Direction              `protobuf:"varint,3,opt,name=direction,proto3,enum=userinfo.v1.Direction" json:"direction,omitempty"`
 	Level         Level                  `protobuf:"varint,4,opt,name=level,proto3,enum=userinfo.v1.Level" json:"level,omitempty"`
+	Difficulty    Difficulty             `protobuf:"varint,5,opt,name=difficulty,proto3,enum=userinfo.v1.Difficulty" json:"difficulty,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -576,6 +645,13 @@ func (x *CreateUserRequest) GetLevel() Level {
 	return Level_LEVEL_UNSPECIFIED
 }
 
+func (x *CreateUserRequest) GetDifficulty() Difficulty {
+	if x != nil {
+		return x.Difficulty
+	}
+	return Difficulty_DIFFICULTY_UNSPECIFIED
+}
+
 type CreateUserResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	User          *User                  `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
@@ -625,6 +701,7 @@ type ListUsersRequest struct {
 	Pagination    *Pagination            `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 	Direction     Direction              `protobuf:"varint,2,opt,name=direction,proto3,enum=userinfo.v1.Direction" json:"direction,omitempty"`
 	Level         Level                  `protobuf:"varint,3,opt,name=level,proto3,enum=userinfo.v1.Level" json:"level,omitempty"`
+	Difficulty    Difficulty             `protobuf:"varint,4,opt,name=difficulty,proto3,enum=userinfo.v1.Difficulty" json:"difficulty,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -678,6 +755,13 @@ func (x *ListUsersRequest) GetLevel() Level {
 		return x.Level
 	}
 	return Level_LEVEL_UNSPECIFIED
+}
+
+func (x *ListUsersRequest) GetDifficulty() Difficulty {
+	if x != nil {
+		return x.Difficulty
+	}
+	return Difficulty_DIFFICULTY_UNSPECIFIED
 }
 
 type ListUsersResponse struct {
@@ -845,40 +929,52 @@ const file_userinfo_userinfo_proto_rawDesc = "" +
 	"Pagination\x12\x1b\n" +
 	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tR\tpageToken\"\xa8\x01\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\xe1\x01\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x124\n" +
 	"\tdirection\x18\x04 \x01(\x0e2\x16.userinfo.v1.DirectionR\tdirection\x12(\n" +
-	"\x05level\x18\x05 \x01(\x0e2\x12.userinfo.v1.LevelR\x05level\")\n" +
+	"\x05level\x18\x05 \x01(\x0e2\x12.userinfo.v1.LevelR\x05level\x127\n" +
+	"\n" +
+	"difficulty\x18\x06 \x01(\x0e2\x17.userinfo.v1.DifficultyR\n" +
+	"difficulty\")\n" +
 	"\x0eGetUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\"8\n" +
 	"\x0fGetUserResponse\x12%\n" +
-	"\x04user\x18\x01 \x01(\v2\x11.userinfo.v1.UserR\x04user\"\xbe\x01\n" +
+	"\x04user\x18\x01 \x01(\v2\x11.userinfo.v1.UserR\x04user\"\xf7\x01\n" +
 	"\x11UpdateUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x124\n" +
 	"\tdirection\x18\x04 \x01(\x0e2\x16.userinfo.v1.DirectionR\tdirection\x12(\n" +
-	"\x05level\x18\x05 \x01(\x0e2\x12.userinfo.v1.LevelR\x05level\";\n" +
+	"\x05level\x18\x05 \x01(\x0e2\x12.userinfo.v1.LevelR\x05level\x127\n" +
+	"\n" +
+	"difficulty\x18\x06 \x01(\x0e2\x17.userinfo.v1.DifficultyR\n" +
+	"difficulty\";\n" +
 	"\x12UpdateUserResponse\x12%\n" +
 	"\x04user\x18\x01 \x01(\v2\x11.userinfo.v1.UserR\x04user\",\n" +
 	"\x11DeleteUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xa5\x01\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xde\x01\n" +
 	"\x11CreateUserRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x124\n" +
 	"\tdirection\x18\x03 \x01(\x0e2\x16.userinfo.v1.DirectionR\tdirection\x12(\n" +
-	"\x05level\x18\x04 \x01(\x0e2\x12.userinfo.v1.LevelR\x05level\";\n" +
+	"\x05level\x18\x04 \x01(\x0e2\x12.userinfo.v1.LevelR\x05level\x127\n" +
+	"\n" +
+	"difficulty\x18\x05 \x01(\x0e2\x17.userinfo.v1.DifficultyR\n" +
+	"difficulty\";\n" +
 	"\x12CreateUserResponse\x12%\n" +
-	"\x04user\x18\x01 \x01(\v2\x11.userinfo.v1.UserR\x04user\"\xab\x01\n" +
+	"\x04user\x18\x01 \x01(\v2\x11.userinfo.v1.UserR\x04user\"\xe4\x01\n" +
 	"\x10ListUsersRequest\x127\n" +
 	"\n" +
 	"pagination\x18\x01 \x01(\v2\x17.userinfo.v1.PaginationR\n" +
 	"pagination\x124\n" +
 	"\tdirection\x18\x02 \x01(\x0e2\x16.userinfo.v1.DirectionR\tdirection\x12(\n" +
-	"\x05level\x18\x03 \x01(\x0e2\x12.userinfo.v1.LevelR\x05level\"d\n" +
+	"\x05level\x18\x03 \x01(\x0e2\x12.userinfo.v1.LevelR\x05level\x127\n" +
+	"\n" +
+	"difficulty\x18\x04 \x01(\x0e2\x17.userinfo.v1.DifficultyR\n" +
+	"difficulty\"d\n" +
 	"\x11ListUsersResponse\x12'\n" +
 	"\x05users\x18\x01 \x03(\v2\x11.userinfo.v1.UserR\x05users\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"c\n" +
@@ -904,7 +1000,14 @@ const file_userinfo_userinfo_proto_rawDesc = "" +
 	"\n" +
 	"\x06MIDDLE\x10\x02\x12\n" +
 	"\n" +
-	"\x06SENIOR\x10\x032\x8f\x03\n" +
+	"\x06SENIOR\x10\x03*H\n" +
+	"\n" +
+	"Difficulty\x12\x1a\n" +
+	"\x16DIFFICULTY_UNSPECIFIED\x10\x00\x12\b\n" +
+	"\x04EASY\x10\x01\x12\n" +
+	"\n" +
+	"\x06MEDIUM\x10\x02\x12\b\n" +
+	"\x04HARD\x10\x032\x8f\x03\n" +
 	"\vUserService\x12M\n" +
 	"\n" +
 	"CreateUser\x12\x1e.userinfo.v1.CreateUserRequest\x1a\x1f.userinfo.v1.CreateUserResponse\x12D\n" +
@@ -926,56 +1029,61 @@ func file_userinfo_userinfo_proto_rawDescGZIP() []byte {
 	return file_userinfo_userinfo_proto_rawDescData
 }
 
-var file_userinfo_userinfo_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_userinfo_userinfo_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_userinfo_userinfo_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_userinfo_userinfo_proto_goTypes = []any{
 	(Direction)(0),              // 0: userinfo.v1.Direction
 	(Level)(0),                  // 1: userinfo.v1.Level
-	(*Pagination)(nil),          // 2: userinfo.v1.Pagination
-	(*User)(nil),                // 3: userinfo.v1.User
-	(*GetUserRequest)(nil),      // 4: userinfo.v1.GetUserRequest
-	(*GetUserResponse)(nil),     // 5: userinfo.v1.GetUserResponse
-	(*UpdateUserRequest)(nil),   // 6: userinfo.v1.UpdateUserRequest
-	(*UpdateUserResponse)(nil),  // 7: userinfo.v1.UpdateUserResponse
-	(*DeleteUserRequest)(nil),   // 8: userinfo.v1.DeleteUserRequest
-	(*CreateUserRequest)(nil),   // 9: userinfo.v1.CreateUserRequest
-	(*CreateUserResponse)(nil),  // 10: userinfo.v1.CreateUserResponse
-	(*ListUsersRequest)(nil),    // 11: userinfo.v1.ListUsersRequest
-	(*ListUsersResponse)(nil),   // 12: userinfo.v1.ListUsersResponse
-	(*SearchUsersRequest)(nil),  // 13: userinfo.v1.SearchUsersRequest
-	(*SearchUsersResponse)(nil), // 14: userinfo.v1.SearchUsersResponse
+	(Difficulty)(0),             // 2: userinfo.v1.Difficulty
+	(*Pagination)(nil),          // 3: userinfo.v1.Pagination
+	(*User)(nil),                // 4: userinfo.v1.User
+	(*GetUserRequest)(nil),      // 5: userinfo.v1.GetUserRequest
+	(*GetUserResponse)(nil),     // 6: userinfo.v1.GetUserResponse
+	(*UpdateUserRequest)(nil),   // 7: userinfo.v1.UpdateUserRequest
+	(*UpdateUserResponse)(nil),  // 8: userinfo.v1.UpdateUserResponse
+	(*DeleteUserRequest)(nil),   // 9: userinfo.v1.DeleteUserRequest
+	(*CreateUserRequest)(nil),   // 10: userinfo.v1.CreateUserRequest
+	(*CreateUserResponse)(nil),  // 11: userinfo.v1.CreateUserResponse
+	(*ListUsersRequest)(nil),    // 12: userinfo.v1.ListUsersRequest
+	(*ListUsersResponse)(nil),   // 13: userinfo.v1.ListUsersResponse
+	(*SearchUsersRequest)(nil),  // 14: userinfo.v1.SearchUsersRequest
+	(*SearchUsersResponse)(nil), // 15: userinfo.v1.SearchUsersResponse
 }
 var file_userinfo_userinfo_proto_depIdxs = []int32{
 	0,  // 0: userinfo.v1.User.direction:type_name -> userinfo.v1.Direction
 	1,  // 1: userinfo.v1.User.level:type_name -> userinfo.v1.Level
-	3,  // 2: userinfo.v1.GetUserResponse.user:type_name -> userinfo.v1.User
-	0,  // 3: userinfo.v1.UpdateUserRequest.direction:type_name -> userinfo.v1.Direction
-	1,  // 4: userinfo.v1.UpdateUserRequest.level:type_name -> userinfo.v1.Level
-	3,  // 5: userinfo.v1.UpdateUserResponse.user:type_name -> userinfo.v1.User
-	0,  // 6: userinfo.v1.CreateUserRequest.direction:type_name -> userinfo.v1.Direction
-	1,  // 7: userinfo.v1.CreateUserRequest.level:type_name -> userinfo.v1.Level
-	3,  // 8: userinfo.v1.CreateUserResponse.user:type_name -> userinfo.v1.User
-	2,  // 9: userinfo.v1.ListUsersRequest.pagination:type_name -> userinfo.v1.Pagination
-	0,  // 10: userinfo.v1.ListUsersRequest.direction:type_name -> userinfo.v1.Direction
-	1,  // 11: userinfo.v1.ListUsersRequest.level:type_name -> userinfo.v1.Level
-	3,  // 12: userinfo.v1.ListUsersResponse.users:type_name -> userinfo.v1.User
-	2,  // 13: userinfo.v1.SearchUsersRequest.pagination:type_name -> userinfo.v1.Pagination
-	3,  // 14: userinfo.v1.SearchUsersResponse.users:type_name -> userinfo.v1.User
-	9,  // 15: userinfo.v1.UserService.CreateUser:input_type -> userinfo.v1.CreateUserRequest
-	4,  // 16: userinfo.v1.UserService.GetUser:input_type -> userinfo.v1.GetUserRequest
-	6,  // 17: userinfo.v1.UserService.UpdateUser:input_type -> userinfo.v1.UpdateUserRequest
-	11, // 18: userinfo.v1.UserService.ListUsers:input_type -> userinfo.v1.ListUsersRequest
-	13, // 19: userinfo.v1.UserService.SearchUsers:input_type -> userinfo.v1.SearchUsersRequest
-	10, // 20: userinfo.v1.UserService.CreateUser:output_type -> userinfo.v1.CreateUserResponse
-	5,  // 21: userinfo.v1.UserService.GetUser:output_type -> userinfo.v1.GetUserResponse
-	7,  // 22: userinfo.v1.UserService.UpdateUser:output_type -> userinfo.v1.UpdateUserResponse
-	12, // 23: userinfo.v1.UserService.ListUsers:output_type -> userinfo.v1.ListUsersResponse
-	14, // 24: userinfo.v1.UserService.SearchUsers:output_type -> userinfo.v1.SearchUsersResponse
-	20, // [20:25] is the sub-list for method output_type
-	15, // [15:20] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	2,  // 2: userinfo.v1.User.difficulty:type_name -> userinfo.v1.Difficulty
+	4,  // 3: userinfo.v1.GetUserResponse.user:type_name -> userinfo.v1.User
+	0,  // 4: userinfo.v1.UpdateUserRequest.direction:type_name -> userinfo.v1.Direction
+	1,  // 5: userinfo.v1.UpdateUserRequest.level:type_name -> userinfo.v1.Level
+	2,  // 6: userinfo.v1.UpdateUserRequest.difficulty:type_name -> userinfo.v1.Difficulty
+	4,  // 7: userinfo.v1.UpdateUserResponse.user:type_name -> userinfo.v1.User
+	0,  // 8: userinfo.v1.CreateUserRequest.direction:type_name -> userinfo.v1.Direction
+	1,  // 9: userinfo.v1.CreateUserRequest.level:type_name -> userinfo.v1.Level
+	2,  // 10: userinfo.v1.CreateUserRequest.difficulty:type_name -> userinfo.v1.Difficulty
+	4,  // 11: userinfo.v1.CreateUserResponse.user:type_name -> userinfo.v1.User
+	3,  // 12: userinfo.v1.ListUsersRequest.pagination:type_name -> userinfo.v1.Pagination
+	0,  // 13: userinfo.v1.ListUsersRequest.direction:type_name -> userinfo.v1.Direction
+	1,  // 14: userinfo.v1.ListUsersRequest.level:type_name -> userinfo.v1.Level
+	2,  // 15: userinfo.v1.ListUsersRequest.difficulty:type_name -> userinfo.v1.Difficulty
+	4,  // 16: userinfo.v1.ListUsersResponse.users:type_name -> userinfo.v1.User
+	3,  // 17: userinfo.v1.SearchUsersRequest.pagination:type_name -> userinfo.v1.Pagination
+	4,  // 18: userinfo.v1.SearchUsersResponse.users:type_name -> userinfo.v1.User
+	10, // 19: userinfo.v1.UserService.CreateUser:input_type -> userinfo.v1.CreateUserRequest
+	5,  // 20: userinfo.v1.UserService.GetUser:input_type -> userinfo.v1.GetUserRequest
+	7,  // 21: userinfo.v1.UserService.UpdateUser:input_type -> userinfo.v1.UpdateUserRequest
+	12, // 22: userinfo.v1.UserService.ListUsers:input_type -> userinfo.v1.ListUsersRequest
+	14, // 23: userinfo.v1.UserService.SearchUsers:input_type -> userinfo.v1.SearchUsersRequest
+	11, // 24: userinfo.v1.UserService.CreateUser:output_type -> userinfo.v1.CreateUserResponse
+	6,  // 25: userinfo.v1.UserService.GetUser:output_type -> userinfo.v1.GetUserResponse
+	8,  // 26: userinfo.v1.UserService.UpdateUser:output_type -> userinfo.v1.UpdateUserResponse
+	13, // 27: userinfo.v1.UserService.ListUsers:output_type -> userinfo.v1.ListUsersResponse
+	15, // 28: userinfo.v1.UserService.SearchUsers:output_type -> userinfo.v1.SearchUsersResponse
+	24, // [24:29] is the sub-list for method output_type
+	19, // [19:24] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_userinfo_userinfo_proto_init() }
@@ -988,7 +1096,7 @@ func file_userinfo_userinfo_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_userinfo_userinfo_proto_rawDesc), len(file_userinfo_userinfo_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   1,

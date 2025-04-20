@@ -11,6 +11,7 @@ service AuthService {
     rpc ValidateToken (ValidateTokenRequest) returns (ValidateTokenResponse);
     rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenResponse);
     rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
+    rpc ConfirmEmail (ConfirmEmailRequest) returns (ConfirmEmailResponse);
 }
 
 message RegisterRequest {
@@ -65,4 +66,13 @@ message IsAdminRequest {
 
 message IsAdminResponse {
     bool is_admin = 1;
+}
+
+message ConfirmEmailRequest {
+    string confirmation_token = 1;
+    string email = 2;
+}
+
+message ConfirmEmailResponse {
+    bool confirmed = 1;
 }

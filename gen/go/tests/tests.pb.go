@@ -291,6 +291,7 @@ type TestInfo struct {
 	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	Direction     Direction              `protobuf:"varint,4,opt,name=direction,proto3,enum=test.v1.Direction" json:"direction,omitempty"`
 	Level         Level                  `protobuf:"varint,5,opt,name=level,proto3,enum=test.v1.Level" json:"level,omitempty"`
+	Difficulty    Difficulty             `protobuf:"varint,6,opt,name=difficulty,proto3,enum=test.v1.Difficulty" json:"difficulty,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -360,13 +361,21 @@ func (x *TestInfo) GetLevel() Level {
 	return Level_LEVEL_UNSPECIFIED
 }
 
+func (x *TestInfo) GetDifficulty() Difficulty {
+	if x != nil {
+		return x.Difficulty
+	}
+	return Difficulty_DIFFICULTY_UNSPECIFIED
+}
+
 type CreateTestRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Title         string                 `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
 	Description   string                 `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
 	Questions     []*Question            `protobuf:"bytes,3,rep,name=questions,proto3" json:"questions,omitempty"`
-	Difficulty    Difficulty             `protobuf:"varint,4,opt,name=difficulty,proto3,enum=test.v1.Difficulty" json:"difficulty,omitempty"`
-	Pagination    *Pagination            `protobuf:"bytes,5,opt,name=pagination,proto3" json:"pagination,omitempty"`
+	Direction     Direction              `protobuf:"varint,4,opt,name=direction,proto3,enum=test.v1.Direction" json:"direction,omitempty"`
+	Level         Level                  `protobuf:"varint,5,opt,name=level,proto3,enum=test.v1.Level" json:"level,omitempty"`
+	Difficulty    Difficulty             `protobuf:"varint,6,opt,name=difficulty,proto3,enum=test.v1.Difficulty" json:"difficulty,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -422,18 +431,25 @@ func (x *CreateTestRequest) GetQuestions() []*Question {
 	return nil
 }
 
+func (x *CreateTestRequest) GetDirection() Direction {
+	if x != nil {
+		return x.Direction
+	}
+	return Direction_DIRECTION_UNSPECIFIED
+}
+
+func (x *CreateTestRequest) GetLevel() Level {
+	if x != nil {
+		return x.Level
+	}
+	return Level_LEVEL_UNSPECIFIED
+}
+
 func (x *CreateTestRequest) GetDifficulty() Difficulty {
 	if x != nil {
 		return x.Difficulty
 	}
 	return Difficulty_DIFFICULTY_UNSPECIFIED
-}
-
-func (x *CreateTestRequest) GetPagination() *Pagination {
-	if x != nil {
-		return x.Pagination
-	}
-	return nil
 }
 
 type Question struct {
@@ -1369,23 +1385,25 @@ const file_tests_tests_proto_rawDesc = "" +
 	"Pagination\x12\x1b\n" +
 	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tR\tpageToken\"\xaa\x01\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\xdf\x01\n" +
 	"\bTestInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x120\n" +
 	"\tdirection\x18\x04 \x01(\x0e2\x12.test.v1.DirectionR\tdirection\x12$\n" +
-	"\x05level\x18\x05 \x01(\x0e2\x0e.test.v1.LevelR\x05level\"\xe6\x01\n" +
+	"\x05level\x18\x05 \x01(\x0e2\x0e.test.v1.LevelR\x05level\x123\n" +
+	"\n" +
+	"difficulty\x18\x06 \x01(\x0e2\x13.test.v1.DifficultyR\n" +
+	"difficulty\"\x89\x02\n" +
 	"\x11CreateTestRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12/\n" +
-	"\tquestions\x18\x03 \x03(\v2\x11.test.v1.QuestionR\tquestions\x123\n" +
+	"\tquestions\x18\x03 \x03(\v2\x11.test.v1.QuestionR\tquestions\x120\n" +
+	"\tdirection\x18\x04 \x01(\x0e2\x12.test.v1.DirectionR\tdirection\x12$\n" +
+	"\x05level\x18\x05 \x01(\x0e2\x0e.test.v1.LevelR\x05level\x123\n" +
 	"\n" +
-	"difficulty\x18\x04 \x01(\x0e2\x13.test.v1.DifficultyR\n" +
-	"difficulty\x123\n" +
-	"\n" +
-	"pagination\x18\x05 \x01(\v2\x13.test.v1.PaginationR\n" +
-	"pagination\"\xbb\x01\n" +
+	"difficulty\x18\x06 \x01(\x0e2\x13.test.v1.DifficultyR\n" +
+	"difficulty\"\xbb\x01\n" +
 	"\bQuestion\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04text\x18\x02 \x01(\tR\x04text\x12)\n" +
@@ -1531,40 +1549,42 @@ var file_tests_tests_proto_goTypes = []any{
 var file_tests_tests_proto_depIdxs = []int32{
 	0,  // 0: test.v1.TestInfo.direction:type_name -> test.v1.Direction
 	1,  // 1: test.v1.TestInfo.level:type_name -> test.v1.Level
-	7,  // 2: test.v1.CreateTestRequest.questions:type_name -> test.v1.Question
-	3,  // 3: test.v1.CreateTestRequest.difficulty:type_name -> test.v1.Difficulty
-	4,  // 4: test.v1.CreateTestRequest.pagination:type_name -> test.v1.Pagination
-	2,  // 5: test.v1.Question.type:type_name -> test.v1.QuestionType
-	0,  // 6: test.v1.GetTestsRequest.direction:type_name -> test.v1.Direction
-	1,  // 7: test.v1.GetTestsRequest.level:type_name -> test.v1.Level
-	3,  // 8: test.v1.GetTestsRequest.difficulty:type_name -> test.v1.Difficulty
-	4,  // 9: test.v1.GetTestsRequest.pagination:type_name -> test.v1.Pagination
-	5,  // 10: test.v1.GetTestsResponse.tests:type_name -> test.v1.TestInfo
-	5,  // 11: test.v1.GetTestResponse.test:type_name -> test.v1.TestInfo
-	7,  // 12: test.v1.GetTestResponse.questions:type_name -> test.v1.Question
-	15, // 13: test.v1.SubmitAnswersRequest.answers:type_name -> test.v1.Answer
-	7,  // 14: test.v1.UpdateTestRequest.questions:type_name -> test.v1.Question
-	6,  // 15: test.v1.TestService.CreateTest:input_type -> test.v1.CreateTestRequest
-	9,  // 16: test.v1.TestService.GetTests:input_type -> test.v1.GetTestsRequest
-	12, // 17: test.v1.TestService.GetTest:input_type -> test.v1.GetTestRequest
-	14, // 18: test.v1.TestService.SubmitAnswers:input_type -> test.v1.SubmitAnswersRequest
-	17, // 19: test.v1.TestService.GetTestResults:input_type -> test.v1.GetTestResultsRequest
-	19, // 20: test.v1.TestService.UpdateTest:input_type -> test.v1.UpdateTestRequest
-	21, // 21: test.v1.TestService.DeleteTest:input_type -> test.v1.DeleteTestRequest
-	22, // 22: test.v1.TestService.PublishTest:input_type -> test.v1.PublishTestRequest
-	8,  // 23: test.v1.TestService.CreateTest:output_type -> test.v1.CreateTestResponse
-	10, // 24: test.v1.TestService.GetTests:output_type -> test.v1.GetTestsResponse
-	13, // 25: test.v1.TestService.GetTest:output_type -> test.v1.GetTestResponse
-	16, // 26: test.v1.TestService.SubmitAnswers:output_type -> test.v1.SubmitAnswersResponse
-	18, // 27: test.v1.TestService.GetTestResults:output_type -> test.v1.GetTestResultsResponse
-	20, // 28: test.v1.TestService.UpdateTest:output_type -> test.v1.UpdateTestResponse
-	4,  // 29: test.v1.TestService.DeleteTest:output_type -> test.v1.Pagination
-	23, // 30: test.v1.TestService.PublishTest:output_type -> test.v1.PublishTestResponse
-	23, // [23:31] is the sub-list for method output_type
-	15, // [15:23] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	3,  // 2: test.v1.TestInfo.difficulty:type_name -> test.v1.Difficulty
+	7,  // 3: test.v1.CreateTestRequest.questions:type_name -> test.v1.Question
+	0,  // 4: test.v1.CreateTestRequest.direction:type_name -> test.v1.Direction
+	1,  // 5: test.v1.CreateTestRequest.level:type_name -> test.v1.Level
+	3,  // 6: test.v1.CreateTestRequest.difficulty:type_name -> test.v1.Difficulty
+	2,  // 7: test.v1.Question.type:type_name -> test.v1.QuestionType
+	0,  // 8: test.v1.GetTestsRequest.direction:type_name -> test.v1.Direction
+	1,  // 9: test.v1.GetTestsRequest.level:type_name -> test.v1.Level
+	3,  // 10: test.v1.GetTestsRequest.difficulty:type_name -> test.v1.Difficulty
+	4,  // 11: test.v1.GetTestsRequest.pagination:type_name -> test.v1.Pagination
+	5,  // 12: test.v1.GetTestsResponse.tests:type_name -> test.v1.TestInfo
+	5,  // 13: test.v1.GetTestResponse.test:type_name -> test.v1.TestInfo
+	7,  // 14: test.v1.GetTestResponse.questions:type_name -> test.v1.Question
+	15, // 15: test.v1.SubmitAnswersRequest.answers:type_name -> test.v1.Answer
+	7,  // 16: test.v1.UpdateTestRequest.questions:type_name -> test.v1.Question
+	6,  // 17: test.v1.TestService.CreateTest:input_type -> test.v1.CreateTestRequest
+	9,  // 18: test.v1.TestService.GetTests:input_type -> test.v1.GetTestsRequest
+	12, // 19: test.v1.TestService.GetTest:input_type -> test.v1.GetTestRequest
+	14, // 20: test.v1.TestService.SubmitAnswers:input_type -> test.v1.SubmitAnswersRequest
+	17, // 21: test.v1.TestService.GetTestResults:input_type -> test.v1.GetTestResultsRequest
+	19, // 22: test.v1.TestService.UpdateTest:input_type -> test.v1.UpdateTestRequest
+	21, // 23: test.v1.TestService.DeleteTest:input_type -> test.v1.DeleteTestRequest
+	22, // 24: test.v1.TestService.PublishTest:input_type -> test.v1.PublishTestRequest
+	8,  // 25: test.v1.TestService.CreateTest:output_type -> test.v1.CreateTestResponse
+	10, // 26: test.v1.TestService.GetTests:output_type -> test.v1.GetTestsResponse
+	13, // 27: test.v1.TestService.GetTest:output_type -> test.v1.GetTestResponse
+	16, // 28: test.v1.TestService.SubmitAnswers:output_type -> test.v1.SubmitAnswersResponse
+	18, // 29: test.v1.TestService.GetTestResults:output_type -> test.v1.GetTestResultsResponse
+	20, // 30: test.v1.TestService.UpdateTest:output_type -> test.v1.UpdateTestResponse
+	4,  // 31: test.v1.TestService.DeleteTest:output_type -> test.v1.Pagination
+	23, // 32: test.v1.TestService.PublishTest:output_type -> test.v1.PublishTestResponse
+	25, // [25:33] is the sub-list for method output_type
+	17, // [17:25] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_tests_tests_proto_init() }

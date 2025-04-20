@@ -77,6 +77,110 @@ func (Direction) EnumDescriptor() ([]byte, []int) {
 	return file_analytics_analytics_proto_rawDescGZIP(), []int{0}
 }
 
+type Level int32
+
+const (
+	Level_LEVEL_UNSPECIFIED Level = 0
+	Level_JUNIOR            Level = 1
+	Level_MIDDLE            Level = 2
+	Level_SENIOR            Level = 3
+)
+
+// Enum value maps for Level.
+var (
+	Level_name = map[int32]string{
+		0: "LEVEL_UNSPECIFIED",
+		1: "JUNIOR",
+		2: "MIDDLE",
+		3: "SENIOR",
+	}
+	Level_value = map[string]int32{
+		"LEVEL_UNSPECIFIED": 0,
+		"JUNIOR":            1,
+		"MIDDLE":            2,
+		"SENIOR":            3,
+	}
+)
+
+func (x Level) Enum() *Level {
+	p := new(Level)
+	*p = x
+	return p
+}
+
+func (x Level) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Level) Descriptor() protoreflect.EnumDescriptor {
+	return file_analytics_analytics_proto_enumTypes[1].Descriptor()
+}
+
+func (Level) Type() protoreflect.EnumType {
+	return &file_analytics_analytics_proto_enumTypes[1]
+}
+
+func (x Level) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Level.Descriptor instead.
+func (Level) EnumDescriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{1}
+}
+
+type Difficulty int32
+
+const (
+	Difficulty_DIFFICULTY_UNSPECIFIED Difficulty = 0
+	Difficulty_EASY                   Difficulty = 1
+	Difficulty_MEDIUM                 Difficulty = 2
+	Difficulty_HARD                   Difficulty = 3
+)
+
+// Enum value maps for Difficulty.
+var (
+	Difficulty_name = map[int32]string{
+		0: "DIFFICULTY_UNSPECIFIED",
+		1: "EASY",
+		2: "MEDIUM",
+		3: "HARD",
+	}
+	Difficulty_value = map[string]int32{
+		"DIFFICULTY_UNSPECIFIED": 0,
+		"EASY":                   1,
+		"MEDIUM":                 2,
+		"HARD":                   3,
+	}
+)
+
+func (x Difficulty) Enum() *Difficulty {
+	p := new(Difficulty)
+	*p = x
+	return p
+}
+
+func (x Difficulty) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Difficulty) Descriptor() protoreflect.EnumDescriptor {
+	return file_analytics_analytics_proto_enumTypes[2].Descriptor()
+}
+
+func (Difficulty) Type() protoreflect.EnumType {
+	return &file_analytics_analytics_proto_enumTypes[2]
+}
+
+func (x Difficulty) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use Difficulty.Descriptor instead.
+func (Difficulty) EnumDescriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{2}
+}
+
 type ReportType int32
 
 const (
@@ -110,11 +214,11 @@ func (x ReportType) String() string {
 }
 
 func (ReportType) Descriptor() protoreflect.EnumDescriptor {
-	return file_analytics_analytics_proto_enumTypes[1].Descriptor()
+	return file_analytics_analytics_proto_enumTypes[3].Descriptor()
 }
 
 func (ReportType) Type() protoreflect.EnumType {
-	return &file_analytics_analytics_proto_enumTypes[1]
+	return &file_analytics_analytics_proto_enumTypes[3]
 }
 
 func (x ReportType) Number() protoreflect.EnumNumber {
@@ -123,7 +227,7 @@ func (x ReportType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ReportType.Descriptor instead.
 func (ReportType) EnumDescriptor() ([]byte, []int) {
-	return file_analytics_analytics_proto_rawDescGZIP(), []int{1}
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{3}
 }
 
 type TimestampRange struct {
@@ -578,7 +682,9 @@ type GenerateReportRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ReportType    ReportType             `protobuf:"varint,1,opt,name=report_type,json=reportType,proto3,enum=analytics.v1.ReportType" json:"report_type,omitempty"`
 	Direction     Direction              `protobuf:"varint,2,opt,name=direction,proto3,enum=analytics.v1.Direction" json:"direction,omitempty"`
-	TimeRange     *TimestampRange        `protobuf:"bytes,3,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	Level         Level                  `protobuf:"varint,3,opt,name=level,proto3,enum=analytics.v1.Level" json:"level,omitempty"`
+	Difficulty    Difficulty             `protobuf:"varint,4,opt,name=difficulty,proto3,enum=analytics.v1.Difficulty" json:"difficulty,omitempty"`
+	TimeRange     *TimestampRange        `protobuf:"bytes,5,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -625,6 +731,20 @@ func (x *GenerateReportRequest) GetDirection() Direction {
 		return x.Direction
 	}
 	return Direction_DIRECTION_UNSPECIFIED
+}
+
+func (x *GenerateReportRequest) GetLevel() Level {
+	if x != nil {
+		return x.Level
+	}
+	return Level_LEVEL_UNSPECIFIED
+}
+
+func (x *GenerateReportRequest) GetDifficulty() Difficulty {
+	if x != nil {
+		return x.Difficulty
+	}
+	return Difficulty_DIFFICULTY_UNSPECIFIED
 }
 
 func (x *GenerateReportRequest) GetTimeRange() *TimestampRange {
@@ -828,13 +948,17 @@ const file_analytics_analytics_proto_rawDesc = "" +
 	"\tTestStats\x12\x17\n" +
 	"\atest_id\x18\x01 \x01(\x03R\x06testId\x12\x1a\n" +
 	"\battempts\x18\x02 \x01(\x05R\battempts\x12#\n" +
-	"\raverage_score\x18\x03 \x01(\x01R\faverageScore\"\xc6\x01\n" +
+	"\raverage_score\x18\x03 \x01(\x01R\faverageScore\"\xab\x02\n" +
 	"\x15GenerateReportRequest\x129\n" +
 	"\vreport_type\x18\x01 \x01(\x0e2\x18.analytics.v1.ReportTypeR\n" +
 	"reportType\x125\n" +
-	"\tdirection\x18\x02 \x01(\x0e2\x17.analytics.v1.DirectionR\tdirection\x12;\n" +
+	"\tdirection\x18\x02 \x01(\x0e2\x17.analytics.v1.DirectionR\tdirection\x12)\n" +
+	"\x05level\x18\x03 \x01(\x0e2\x13.analytics.v1.LevelR\x05level\x128\n" +
 	"\n" +
-	"time_range\x18\x03 \x01(\v2\x1c.analytics.v1.TimestampRangeR\ttimeRange\"T\n" +
+	"difficulty\x18\x04 \x01(\x0e2\x18.analytics.v1.DifficultyR\n" +
+	"difficulty\x12;\n" +
+	"\n" +
+	"time_range\x18\x05 \x01(\v2\x1c.analytics.v1.TimestampRangeR\ttimeRange\"T\n" +
 	"\x16GenerateReportResponse\x12\x1b\n" +
 	"\treport_id\x18\x01 \x01(\x03R\breportId\x12\x1d\n" +
 	"\n" +
@@ -854,7 +978,22 @@ const file_analytics_analytics_proto_rawDesc = "" +
 	"\bFRONTEND\x10\x02\x12\n" +
 	"\n" +
 	"\x06DEVOPS\x10\x03\x12\x10\n" +
-	"\fDATA_SCIENCE\x10\x04*D\n" +
+	"\fDATA_SCIENCE\x10\x04*B\n" +
+	"\x05Level\x12\x15\n" +
+	"\x11LEVEL_UNSPECIFIED\x10\x00\x12\n" +
+	"\n" +
+	"\x06JUNIOR\x10\x01\x12\n" +
+	"\n" +
+	"\x06MIDDLE\x10\x02\x12\n" +
+	"\n" +
+	"\x06SENIOR\x10\x03*H\n" +
+	"\n" +
+	"Difficulty\x12\x1a\n" +
+	"\x16DIFFICULTY_UNSPECIFIED\x10\x00\x12\b\n" +
+	"\x04EASY\x10\x01\x12\n" +
+	"\n" +
+	"\x06MEDIUM\x10\x02\x12\b\n" +
+	"\x04HARD\x10\x03*D\n" +
 	"\n" +
 	"ReportType\x12\x1b\n" +
 	"\x17REPORT_TYPE_UNSPECIFIED\x10\x00\x12\v\n" +
@@ -878,51 +1017,55 @@ func file_analytics_analytics_proto_rawDescGZIP() []byte {
 	return file_analytics_analytics_proto_rawDescData
 }
 
-var file_analytics_analytics_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_analytics_analytics_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_analytics_analytics_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_analytics_analytics_proto_goTypes = []any{
 	(Direction)(0),                    // 0: analytics.v1.Direction
-	(ReportType)(0),                   // 1: analytics.v1.ReportType
-	(*TimestampRange)(nil),            // 2: analytics.v1.TimestampRange
-	(*Pagination)(nil),                // 3: analytics.v1.Pagination
-	(*GetTestStatisticsRequest)(nil),  // 4: analytics.v1.GetTestStatisticsRequest
-	(*GetTestStatisticsResponse)(nil), // 5: analytics.v1.GetTestStatisticsResponse
-	(*QuestionStats)(nil),             // 6: analytics.v1.QuestionStats
-	(*GetUserStatisticsRequest)(nil),  // 7: analytics.v1.GetUserStatisticsRequest
-	(*GetUserStatisticsResponse)(nil), // 8: analytics.v1.GetUserStatisticsResponse
-	(*TestStats)(nil),                 // 9: analytics.v1.TestStats
-	(*GenerateReportRequest)(nil),     // 10: analytics.v1.GenerateReportRequest
-	(*GenerateReportResponse)(nil),    // 11: analytics.v1.GenerateReportResponse
-	(*ListReportsRequest)(nil),        // 12: analytics.v1.ListReportsRequest
-	(*ListReportsResponse)(nil),       // 13: analytics.v1.ListReportsResponse
-	(*timestamppb.Timestamp)(nil),     // 14: google.protobuf.Timestamp
+	(Level)(0),                        // 1: analytics.v1.Level
+	(Difficulty)(0),                   // 2: analytics.v1.Difficulty
+	(ReportType)(0),                   // 3: analytics.v1.ReportType
+	(*TimestampRange)(nil),            // 4: analytics.v1.TimestampRange
+	(*Pagination)(nil),                // 5: analytics.v1.Pagination
+	(*GetTestStatisticsRequest)(nil),  // 6: analytics.v1.GetTestStatisticsRequest
+	(*GetTestStatisticsResponse)(nil), // 7: analytics.v1.GetTestStatisticsResponse
+	(*QuestionStats)(nil),             // 8: analytics.v1.QuestionStats
+	(*GetUserStatisticsRequest)(nil),  // 9: analytics.v1.GetUserStatisticsRequest
+	(*GetUserStatisticsResponse)(nil), // 10: analytics.v1.GetUserStatisticsResponse
+	(*TestStats)(nil),                 // 11: analytics.v1.TestStats
+	(*GenerateReportRequest)(nil),     // 12: analytics.v1.GenerateReportRequest
+	(*GenerateReportResponse)(nil),    // 13: analytics.v1.GenerateReportResponse
+	(*ListReportsRequest)(nil),        // 14: analytics.v1.ListReportsRequest
+	(*ListReportsResponse)(nil),       // 15: analytics.v1.ListReportsResponse
+	(*timestamppb.Timestamp)(nil),     // 16: google.protobuf.Timestamp
 }
 var file_analytics_analytics_proto_depIdxs = []int32{
-	14, // 0: analytics.v1.TimestampRange.start:type_name -> google.protobuf.Timestamp
-	14, // 1: analytics.v1.TimestampRange.end:type_name -> google.protobuf.Timestamp
-	2,  // 2: analytics.v1.GetTestStatisticsRequest.time_range:type_name -> analytics.v1.TimestampRange
-	6,  // 3: analytics.v1.GetTestStatisticsResponse.question_stats:type_name -> analytics.v1.QuestionStats
-	2,  // 4: analytics.v1.GetUserStatisticsRequest.time_range:type_name -> analytics.v1.TimestampRange
-	9,  // 5: analytics.v1.GetUserStatisticsResponse.test_stats:type_name -> analytics.v1.TestStats
-	1,  // 6: analytics.v1.GenerateReportRequest.report_type:type_name -> analytics.v1.ReportType
+	16, // 0: analytics.v1.TimestampRange.start:type_name -> google.protobuf.Timestamp
+	16, // 1: analytics.v1.TimestampRange.end:type_name -> google.protobuf.Timestamp
+	4,  // 2: analytics.v1.GetTestStatisticsRequest.time_range:type_name -> analytics.v1.TimestampRange
+	8,  // 3: analytics.v1.GetTestStatisticsResponse.question_stats:type_name -> analytics.v1.QuestionStats
+	4,  // 4: analytics.v1.GetUserStatisticsRequest.time_range:type_name -> analytics.v1.TimestampRange
+	11, // 5: analytics.v1.GetUserStatisticsResponse.test_stats:type_name -> analytics.v1.TestStats
+	3,  // 6: analytics.v1.GenerateReportRequest.report_type:type_name -> analytics.v1.ReportType
 	0,  // 7: analytics.v1.GenerateReportRequest.direction:type_name -> analytics.v1.Direction
-	2,  // 8: analytics.v1.GenerateReportRequest.time_range:type_name -> analytics.v1.TimestampRange
-	3,  // 9: analytics.v1.ListReportsRequest.pagination:type_name -> analytics.v1.Pagination
-	1,  // 10: analytics.v1.ListReportsRequest.report_type:type_name -> analytics.v1.ReportType
-	11, // 11: analytics.v1.ListReportsResponse.reports:type_name -> analytics.v1.GenerateReportResponse
-	4,  // 12: analytics.v1.AnalyticsService.GetTestStatistics:input_type -> analytics.v1.GetTestStatisticsRequest
-	7,  // 13: analytics.v1.AnalyticsService.GetUserStatistics:input_type -> analytics.v1.GetUserStatisticsRequest
-	10, // 14: analytics.v1.AnalyticsService.GenerateReport:input_type -> analytics.v1.GenerateReportRequest
-	12, // 15: analytics.v1.AnalyticsService.ListReports:input_type -> analytics.v1.ListReportsRequest
-	5,  // 16: analytics.v1.AnalyticsService.GetTestStatistics:output_type -> analytics.v1.GetTestStatisticsResponse
-	8,  // 17: analytics.v1.AnalyticsService.GetUserStatistics:output_type -> analytics.v1.GetUserStatisticsResponse
-	11, // 18: analytics.v1.AnalyticsService.GenerateReport:output_type -> analytics.v1.GenerateReportResponse
-	13, // 19: analytics.v1.AnalyticsService.ListReports:output_type -> analytics.v1.ListReportsResponse
-	16, // [16:20] is the sub-list for method output_type
-	12, // [12:16] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	1,  // 8: analytics.v1.GenerateReportRequest.level:type_name -> analytics.v1.Level
+	2,  // 9: analytics.v1.GenerateReportRequest.difficulty:type_name -> analytics.v1.Difficulty
+	4,  // 10: analytics.v1.GenerateReportRequest.time_range:type_name -> analytics.v1.TimestampRange
+	5,  // 11: analytics.v1.ListReportsRequest.pagination:type_name -> analytics.v1.Pagination
+	3,  // 12: analytics.v1.ListReportsRequest.report_type:type_name -> analytics.v1.ReportType
+	13, // 13: analytics.v1.ListReportsResponse.reports:type_name -> analytics.v1.GenerateReportResponse
+	6,  // 14: analytics.v1.AnalyticsService.GetTestStatistics:input_type -> analytics.v1.GetTestStatisticsRequest
+	9,  // 15: analytics.v1.AnalyticsService.GetUserStatistics:input_type -> analytics.v1.GetUserStatisticsRequest
+	12, // 16: analytics.v1.AnalyticsService.GenerateReport:input_type -> analytics.v1.GenerateReportRequest
+	14, // 17: analytics.v1.AnalyticsService.ListReports:input_type -> analytics.v1.ListReportsRequest
+	7,  // 18: analytics.v1.AnalyticsService.GetTestStatistics:output_type -> analytics.v1.GetTestStatisticsResponse
+	10, // 19: analytics.v1.AnalyticsService.GetUserStatistics:output_type -> analytics.v1.GetUserStatisticsResponse
+	13, // 20: analytics.v1.AnalyticsService.GenerateReport:output_type -> analytics.v1.GenerateReportResponse
+	15, // 21: analytics.v1.AnalyticsService.ListReports:output_type -> analytics.v1.ListReportsResponse
+	18, // [18:22] is the sub-list for method output_type
+	14, // [14:18] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_analytics_analytics_proto_init() }
@@ -935,7 +1078,7 @@ func file_analytics_analytics_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_analytics_analytics_proto_rawDesc), len(file_analytics_analytics_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      4,
 			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,

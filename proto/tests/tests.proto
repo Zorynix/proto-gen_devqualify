@@ -44,6 +44,7 @@ message TestInfo {
   string description = 3;
   Direction direction = 4;
   Level level = 5;
+  Difficulty difficulty = 6;
 }
 
 service TestService {
@@ -61,8 +62,9 @@ message CreateTestRequest {
     string title = 1;
     string description = 2;
     repeated Question questions = 3;
-    Difficulty difficulty = 4;
-    Pagination pagination = 5;
+    Direction direction = 4;
+    Level level = 5;
+    Difficulty difficulty = 6;
 }
 
 message Question {
