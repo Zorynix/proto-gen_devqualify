@@ -693,6 +693,94 @@ func (x *ConfirmEmailResponse) GetConfirmed() bool {
 	return false
 }
 
+type SendConfirmationCodeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SendConfirmationCodeRequest) Reset() {
+	*x = SendConfirmationCodeRequest{}
+	mi := &file_sso_sso_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SendConfirmationCodeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendConfirmationCodeRequest) ProtoMessage() {}
+
+func (x *SendConfirmationCodeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sso_sso_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendConfirmationCodeRequest.ProtoReflect.Descriptor instead.
+func (*SendConfirmationCodeRequest) Descriptor() ([]byte, []int) {
+	return file_sso_sso_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *SendConfirmationCodeRequest) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+type SendConfirmationCodeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SendConfirmationCodeResponse) Reset() {
+	*x = SendConfirmationCodeResponse{}
+	mi := &file_sso_sso_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SendConfirmationCodeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SendConfirmationCodeResponse) ProtoMessage() {}
+
+func (x *SendConfirmationCodeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sso_sso_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SendConfirmationCodeResponse.ProtoReflect.Descriptor instead.
+func (*SendConfirmationCodeResponse) Descriptor() ([]byte, []int) {
+	return file_sso_sso_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *SendConfirmationCodeResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
 var File_sso_sso_proto protoreflect.FileDescriptor
 
 const file_sso_sso_proto_rawDesc = "" +
@@ -732,7 +820,11 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\x12confirmation_token\x18\x01 \x01(\tR\x11confirmationToken\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\"4\n" +
 	"\x14ConfirmEmailResponse\x12\x1c\n" +
-	"\tconfirmed\x18\x01 \x01(\bR\tconfirmed2\xbf\x03\n" +
+	"\tconfirmed\x18\x01 \x01(\bR\tconfirmed\"3\n" +
+	"\x1bSendConfirmationCodeRequest\x12\x14\n" +
+	"\x05email\x18\x01 \x01(\tR\x05email\"8\n" +
+	"\x1cSendConfirmationCodeResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess2\x9e\x04\n" +
 	"\vAuthService\x129\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x16.auth.RegisterResponse\x120\n" +
 	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x123\n" +
@@ -740,7 +832,8 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\rValidateToken\x12\x1a.auth.ValidateTokenRequest\x1a\x1b.auth.ValidateTokenResponse\x12E\n" +
 	"\fRefreshToken\x12\x19.auth.RefreshTokenRequest\x1a\x1a.auth.RefreshTokenResponse\x126\n" +
 	"\aIsAdmin\x12\x14.auth.IsAdminRequest\x1a\x15.auth.IsAdminResponse\x12E\n" +
-	"\fConfirmEmail\x12\x19.auth.ConfirmEmailRequest\x1a\x1a.auth.ConfirmEmailResponseB\x16Z\x14diploma.sso.v1;ssov1b\x06proto3"
+	"\fConfirmEmail\x12\x19.auth.ConfirmEmailRequest\x1a\x1a.auth.ConfirmEmailResponse\x12]\n" +
+	"\x14SendConfirmationCode\x12!.auth.SendConfirmationCodeRequest\x1a\".auth.SendConfirmationCodeResponseB\x16Z\x14diploma.sso.v1;ssov1b\x06proto3"
 
 var (
 	file_sso_sso_proto_rawDescOnce sync.Once
@@ -754,22 +847,24 @@ func file_sso_sso_proto_rawDescGZIP() []byte {
 	return file_sso_sso_proto_rawDescData
 }
 
-var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_sso_sso_proto_goTypes = []any{
-	(*RegisterRequest)(nil),       // 0: auth.RegisterRequest
-	(*RegisterResponse)(nil),      // 1: auth.RegisterResponse
-	(*LoginRequest)(nil),          // 2: auth.LoginRequest
-	(*LoginResponse)(nil),         // 3: auth.LoginResponse
-	(*LogoutRequest)(nil),         // 4: auth.LogoutRequest
-	(*LogoutResponse)(nil),        // 5: auth.LogoutResponse
-	(*ValidateTokenRequest)(nil),  // 6: auth.ValidateTokenRequest
-	(*ValidateTokenResponse)(nil), // 7: auth.ValidateTokenResponse
-	(*RefreshTokenRequest)(nil),   // 8: auth.RefreshTokenRequest
-	(*RefreshTokenResponse)(nil),  // 9: auth.RefreshTokenResponse
-	(*IsAdminRequest)(nil),        // 10: auth.IsAdminRequest
-	(*IsAdminResponse)(nil),       // 11: auth.IsAdminResponse
-	(*ConfirmEmailRequest)(nil),   // 12: auth.ConfirmEmailRequest
-	(*ConfirmEmailResponse)(nil),  // 13: auth.ConfirmEmailResponse
+	(*RegisterRequest)(nil),              // 0: auth.RegisterRequest
+	(*RegisterResponse)(nil),             // 1: auth.RegisterResponse
+	(*LoginRequest)(nil),                 // 2: auth.LoginRequest
+	(*LoginResponse)(nil),                // 3: auth.LoginResponse
+	(*LogoutRequest)(nil),                // 4: auth.LogoutRequest
+	(*LogoutResponse)(nil),               // 5: auth.LogoutResponse
+	(*ValidateTokenRequest)(nil),         // 6: auth.ValidateTokenRequest
+	(*ValidateTokenResponse)(nil),        // 7: auth.ValidateTokenResponse
+	(*RefreshTokenRequest)(nil),          // 8: auth.RefreshTokenRequest
+	(*RefreshTokenResponse)(nil),         // 9: auth.RefreshTokenResponse
+	(*IsAdminRequest)(nil),               // 10: auth.IsAdminRequest
+	(*IsAdminResponse)(nil),              // 11: auth.IsAdminResponse
+	(*ConfirmEmailRequest)(nil),          // 12: auth.ConfirmEmailRequest
+	(*ConfirmEmailResponse)(nil),         // 13: auth.ConfirmEmailResponse
+	(*SendConfirmationCodeRequest)(nil),  // 14: auth.SendConfirmationCodeRequest
+	(*SendConfirmationCodeResponse)(nil), // 15: auth.SendConfirmationCodeResponse
 }
 var file_sso_sso_proto_depIdxs = []int32{
 	0,  // 0: auth.AuthService.Register:input_type -> auth.RegisterRequest
@@ -779,15 +874,17 @@ var file_sso_sso_proto_depIdxs = []int32{
 	8,  // 4: auth.AuthService.RefreshToken:input_type -> auth.RefreshTokenRequest
 	10, // 5: auth.AuthService.IsAdmin:input_type -> auth.IsAdminRequest
 	12, // 6: auth.AuthService.ConfirmEmail:input_type -> auth.ConfirmEmailRequest
-	1,  // 7: auth.AuthService.Register:output_type -> auth.RegisterResponse
-	3,  // 8: auth.AuthService.Login:output_type -> auth.LoginResponse
-	5,  // 9: auth.AuthService.Logout:output_type -> auth.LogoutResponse
-	7,  // 10: auth.AuthService.ValidateToken:output_type -> auth.ValidateTokenResponse
-	9,  // 11: auth.AuthService.RefreshToken:output_type -> auth.RefreshTokenResponse
-	11, // 12: auth.AuthService.IsAdmin:output_type -> auth.IsAdminResponse
-	13, // 13: auth.AuthService.ConfirmEmail:output_type -> auth.ConfirmEmailResponse
-	7,  // [7:14] is the sub-list for method output_type
-	0,  // [0:7] is the sub-list for method input_type
+	14, // 7: auth.AuthService.SendConfirmationCode:input_type -> auth.SendConfirmationCodeRequest
+	1,  // 8: auth.AuthService.Register:output_type -> auth.RegisterResponse
+	3,  // 9: auth.AuthService.Login:output_type -> auth.LoginResponse
+	5,  // 10: auth.AuthService.Logout:output_type -> auth.LogoutResponse
+	7,  // 11: auth.AuthService.ValidateToken:output_type -> auth.ValidateTokenResponse
+	9,  // 12: auth.AuthService.RefreshToken:output_type -> auth.RefreshTokenResponse
+	11, // 13: auth.AuthService.IsAdmin:output_type -> auth.IsAdminResponse
+	13, // 14: auth.AuthService.ConfirmEmail:output_type -> auth.ConfirmEmailResponse
+	15, // 15: auth.AuthService.SendConfirmationCode:output_type -> auth.SendConfirmationCodeResponse
+	8,  // [8:16] is the sub-list for method output_type
+	0,  // [0:8] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -804,7 +901,7 @@ func file_sso_sso_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sso_sso_proto_rawDesc), len(file_sso_sso_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

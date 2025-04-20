@@ -12,6 +12,7 @@ service AuthService {
     rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenResponse);
     rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
     rpc ConfirmEmail (ConfirmEmailRequest) returns (ConfirmEmailResponse);
+    rpc SendConfirmationCode (SendConfirmationCodeRequest) returns (SendConfirmationCodeResponse);
 }
 
 message RegisterRequest {
@@ -75,4 +76,12 @@ message ConfirmEmailRequest {
 
 message ConfirmEmailResponse {
     bool confirmed = 1;
+}
+
+message SendConfirmationCodeRequest {
+    string email = 1;
+}
+
+message SendConfirmationCodeResponse {
+    bool success = 1;
 }
