@@ -3,7 +3,6 @@ package userinfo.v1;
 
 option go_package = "diploma.userinfo.v1;userinfov1";
 
-
 enum Direction {
   DIRECTION_UNSPECIFIED = 0;
   BACKEND = 1;
@@ -19,16 +18,17 @@ enum Level {
   SENIOR = 3;
 }
 
-enum Difficulty {
-  DIFFICULTY_UNSPECIFIED = 0;
-  EASY = 1;
-  MEDIUM = 2;
-  HARD = 3;
-}
-
 message Pagination {
   int32 page_size = 1;
   string page_token = 2;
+}
+
+message Achievement {
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  string icon_url = 4;
+  string date_earned = 5;
 }
 
 message User {
@@ -37,68 +37,109 @@ message User {
   string email = 3;
   Direction direction = 4;
   Level level = 5;
-  Difficulty difficulty = 6;
+  int32 total_correct_answers = 6;
+  int32 total_incorrect_answers = 7;
+  int32 completed_tests_count = 8;
+  int32 achievements_count = 9;
+  repeated Achievement achievements = 10;
+}
+
+message TestSummary {
+  int64 id = 1;
+  string title = 2;
+  string completion_date = 3;
+  int32 score = 4;
+  int32 total_points = 5;
 }
 
 service UserService {
-    rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
-    rpc GetUser (GetUserRequest) returns (GetUserResponse);
-    rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
-    rpc ListUsers (ListUsersRequest) returns (ListUsersResponse);
-    rpc SearchUsers (SearchUsersRequest) returns (SearchUsersResponse);
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+  rpc UpdateUserProfile(UpdateUserProfileRequest) returns (UpdateUserProfileResponse);
+  rpc GetUserTestHistory(GetUserTestHistoryRequest) returns (GetUserTestHistoryResponse);
+  rpc GetUserAchievements(GetUserAchievementsRequest) returns (GetUserAchievementsResponse);
+  rpc GetLeaderboard(GetLeaderboardRequest) returns (GetLeaderboardResponse);
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse);
 }
 
 message GetUserRequest {
-    int64 user_id = 1;
+  int64 user_id = 1;
 }
 
 message GetUserResponse {
-    User user = 1;
+  User user = 1;
 }
 
-message UpdateUserRequest {
-    int64 user_id = 1;
-    string username = 2;
-    string email = 3;
-    Direction direction = 4;
-    Level level = 5;
-    Difficulty difficulty = 6;
+message UpdateUserProfileRequest {
+  int64 user_id = 1;
+  string username = 2;
+  string email = 3;
+  Direction direction = 4;
+  Level level = 5;
 }
 
-message UpdateUserResponse {
-    User user = 1;
+message UpdateUserProfileResponse {
+  User user = 1;
 }
 
-message DeleteUserRequest { int64 user_id = 1; }
+message GetUserTestHistoryRequest {
+  int64 user_id = 1;
+  Pagination pagination = 2;
+}
+
+message GetUserTestHistoryResponse {
+  repeated TestSummary tests = 1;
+  string next_page_token = 2;
+}
+
+message GetUserAchievementsRequest {
+  int64 user_id = 1;
+}
+
+message GetUserAchievementsResponse {
+  repeated Achievement achievements = 1;
+}
+
+message GetLeaderboardRequest {
+  Direction direction = 1;
+  Level level = 2;
+  Pagination pagination = 3;
+}
+
+message GetLeaderboardResponse {
+  repeated User users = 1;
+  string next_page_token = 2;
+}
 
 message CreateUserRequest {
-    string username = 1;
-    string email = 2;
-    Direction direction = 3;
-    Level level = 4;
-    Difficulty difficulty = 5;
+  string username = 1;
+  string email = 2;
+  Direction direction = 3;
+  Level level = 4;
 }
 
-message CreateUserResponse { User user = 1; }
+message CreateUserResponse {
+  User user = 1;
+}
 
 message ListUsersRequest {
-    Pagination pagination = 1;
-    Direction direction = 2;
-    Level level = 3;
-    Difficulty difficulty = 4;
+  Pagination pagination = 1;
+  Direction direction = 2;
+  Level level = 3;
 }
 
 message ListUsersResponse {
-    repeated User users = 1;
-    string next_page_token = 2;
+  repeated User users = 1;
+  string next_page_token = 2;
 }
 
 message SearchUsersRequest {
-    string query = 1;
-    Pagination pagination = 2;
+  string query = 1;
+  Pagination pagination = 2;
 }
 
 message SearchUsersResponse {
-    repeated User users = 1;
-    string next_page_token = 2;
+  repeated User users = 1;
+  string next_page_token = 2;
 }
