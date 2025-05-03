@@ -19,22 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserService_CreateUser_FullMethodName  = "/userinfo.v1.UserService/CreateUser"
-	UserService_GetUser_FullMethodName     = "/userinfo.v1.UserService/GetUser"
-	UserService_UpdateUser_FullMethodName  = "/userinfo.v1.UserService/UpdateUser"
-	UserService_ListUsers_FullMethodName   = "/userinfo.v1.UserService/ListUsers"
-	UserService_SearchUsers_FullMethodName = "/userinfo.v1.UserService/SearchUsers"
+	UserService_GetUser_FullMethodName             = "/userinfo.v1.UserService/GetUser"
+	UserService_UpdateUserProfile_FullMethodName   = "/userinfo.v1.UserService/UpdateUserProfile"
+	UserService_GetUserTestHistory_FullMethodName  = "/userinfo.v1.UserService/GetUserTestHistory"
+	UserService_GetUserAchievements_FullMethodName = "/userinfo.v1.UserService/GetUserAchievements"
+	UserService_GetLeaderboard_FullMethodName      = "/userinfo.v1.UserService/GetLeaderboard"
 )
 
 // UserServiceClient is the client API for UserService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
-	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
-	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
-	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
-	SearchUsers(ctx context.Context, in *SearchUsersRequest, opts ...grpc.CallOption) (*SearchUsersResponse, error)
+	UpdateUserProfile(ctx context.Context, in *UpdateUserProfileRequest, opts ...grpc.CallOption) (*UpdateUserProfileResponse, error)
+	GetUserTestHistory(ctx context.Context, in *GetUserTestHistoryRequest, opts ...grpc.CallOption) (*GetUserTestHistoryResponse, error)
+	GetUserAchievements(ctx context.Context, in *GetUserAchievementsRequest, opts ...grpc.CallOption) (*GetUserAchievementsResponse, error)
+	GetLeaderboard(ctx context.Context, in *GetLeaderboardRequest, opts ...grpc.CallOption) (*GetLeaderboardResponse, error)
 }
 
 type userServiceClient struct {
@@ -43,16 +43,6 @@ type userServiceClient struct {
 
 func NewUserServiceClient(cc grpc.ClientConnInterface) UserServiceClient {
 	return &userServiceClient{cc}
-}
-
-func (c *userServiceClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateUserResponse)
-	err := c.cc.Invoke(ctx, UserService_CreateUser_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *userServiceClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error) {
@@ -65,30 +55,40 @@ func (c *userServiceClient) GetUser(ctx context.Context, in *GetUserRequest, opt
 	return out, nil
 }
 
-func (c *userServiceClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
+func (c *userServiceClient) UpdateUserProfile(ctx context.Context, in *UpdateUserProfileRequest, opts ...grpc.CallOption) (*UpdateUserProfileResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateUserResponse)
-	err := c.cc.Invoke(ctx, UserService_UpdateUser_FullMethodName, in, out, cOpts...)
+	out := new(UpdateUserProfileResponse)
+	err := c.cc.Invoke(ctx, UserService_UpdateUserProfile_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userServiceClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error) {
+func (c *userServiceClient) GetUserTestHistory(ctx context.Context, in *GetUserTestHistoryRequest, opts ...grpc.CallOption) (*GetUserTestHistoryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListUsersResponse)
-	err := c.cc.Invoke(ctx, UserService_ListUsers_FullMethodName, in, out, cOpts...)
+	out := new(GetUserTestHistoryResponse)
+	err := c.cc.Invoke(ctx, UserService_GetUserTestHistory_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *userServiceClient) SearchUsers(ctx context.Context, in *SearchUsersRequest, opts ...grpc.CallOption) (*SearchUsersResponse, error) {
+func (c *userServiceClient) GetUserAchievements(ctx context.Context, in *GetUserAchievementsRequest, opts ...grpc.CallOption) (*GetUserAchievementsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SearchUsersResponse)
-	err := c.cc.Invoke(ctx, UserService_SearchUsers_FullMethodName, in, out, cOpts...)
+	out := new(GetUserAchievementsResponse)
+	err := c.cc.Invoke(ctx, UserService_GetUserAchievements_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) GetLeaderboard(ctx context.Context, in *GetLeaderboardRequest, opts ...grpc.CallOption) (*GetLeaderboardResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLeaderboardResponse)
+	err := c.cc.Invoke(ctx, UserService_GetLeaderboard_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -99,11 +99,11 @@ func (c *userServiceClient) SearchUsers(ctx context.Context, in *SearchUsersRequ
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
 type UserServiceServer interface {
-	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
-	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
-	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
-	SearchUsers(context.Context, *SearchUsersRequest) (*SearchUsersResponse, error)
+	UpdateUserProfile(context.Context, *UpdateUserProfileRequest) (*UpdateUserProfileResponse, error)
+	GetUserTestHistory(context.Context, *GetUserTestHistoryRequest) (*GetUserTestHistoryResponse, error)
+	GetUserAchievements(context.Context, *GetUserAchievementsRequest) (*GetUserAchievementsResponse, error)
+	GetLeaderboard(context.Context, *GetLeaderboardRequest) (*GetLeaderboardResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -114,20 +114,20 @@ type UserServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedUserServiceServer struct{}
 
-func (UnimplementedUserServiceServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
-}
 func (UnimplementedUserServiceServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
-func (UnimplementedUserServiceServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+func (UnimplementedUserServiceServer) UpdateUserProfile(context.Context, *UpdateUserProfileRequest) (*UpdateUserProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserProfile not implemented")
 }
-func (UnimplementedUserServiceServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
+func (UnimplementedUserServiceServer) GetUserTestHistory(context.Context, *GetUserTestHistoryRequest) (*GetUserTestHistoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserTestHistory not implemented")
 }
-func (UnimplementedUserServiceServer) SearchUsers(context.Context, *SearchUsersRequest) (*SearchUsersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchUsers not implemented")
+func (UnimplementedUserServiceServer) GetUserAchievements(context.Context, *GetUserAchievementsRequest) (*GetUserAchievementsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserAchievements not implemented")
+}
+func (UnimplementedUserServiceServer) GetLeaderboard(context.Context, *GetLeaderboardRequest) (*GetLeaderboardResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLeaderboard not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 func (UnimplementedUserServiceServer) testEmbeddedByValue()                     {}
@@ -150,24 +150,6 @@ func RegisterUserServiceServer(s grpc.ServiceRegistrar, srv UserServiceServer) {
 	s.RegisterService(&UserService_ServiceDesc, srv)
 }
 
-func _UserService_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateUserRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).CreateUser(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: UserService_CreateUser_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).CreateUser(ctx, req.(*CreateUserRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _UserService_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserRequest)
 	if err := dec(in); err != nil {
@@ -186,56 +168,74 @@ func _UserService_GetUser_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserService_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateUserRequest)
+func _UserService_UpdateUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserProfileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).UpdateUser(ctx, in)
+		return srv.(UserServiceServer).UpdateUserProfile(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserService_UpdateUser_FullMethodName,
+		FullMethod: UserService_UpdateUserProfile_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+		return srv.(UserServiceServer).UpdateUserProfile(ctx, req.(*UpdateUserProfileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserService_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListUsersRequest)
+func _UserService_GetUserTestHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserTestHistoryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).ListUsers(ctx, in)
+		return srv.(UserServiceServer).GetUserTestHistory(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserService_ListUsers_FullMethodName,
+		FullMethod: UserService_GetUserTestHistory_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).ListUsers(ctx, req.(*ListUsersRequest))
+		return srv.(UserServiceServer).GetUserTestHistory(ctx, req.(*GetUserTestHistoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserService_SearchUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SearchUsersRequest)
+func _UserService_GetUserAchievements_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserAchievementsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).SearchUsers(ctx, in)
+		return srv.(UserServiceServer).GetUserAchievements(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserService_SearchUsers_FullMethodName,
+		FullMethod: UserService_GetUserAchievements_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).SearchUsers(ctx, req.(*SearchUsersRequest))
+		return srv.(UserServiceServer).GetUserAchievements(ctx, req.(*GetUserAchievementsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_GetLeaderboard_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLeaderboardRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).GetLeaderboard(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_GetLeaderboard_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).GetLeaderboard(ctx, req.(*GetLeaderboardRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -248,24 +248,24 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*UserServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreateUser",
-			Handler:    _UserService_CreateUser_Handler,
-		},
-		{
 			MethodName: "GetUser",
 			Handler:    _UserService_GetUser_Handler,
 		},
 		{
-			MethodName: "UpdateUser",
-			Handler:    _UserService_UpdateUser_Handler,
+			MethodName: "UpdateUserProfile",
+			Handler:    _UserService_UpdateUserProfile_Handler,
 		},
 		{
-			MethodName: "ListUsers",
-			Handler:    _UserService_ListUsers_Handler,
+			MethodName: "GetUserTestHistory",
+			Handler:    _UserService_GetUserTestHistory_Handler,
 		},
 		{
-			MethodName: "SearchUsers",
-			Handler:    _UserService_SearchUsers_Handler,
+			MethodName: "GetUserAchievements",
+			Handler:    _UserService_GetUserAchievements_Handler,
+		},
+		{
+			MethodName: "GetLeaderboard",
+			Handler:    _UserService_GetLeaderboard_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

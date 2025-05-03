@@ -128,58 +128,6 @@ func (Level) EnumDescriptor() ([]byte, []int) {
 	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{1}
 }
 
-type Difficulty int32
-
-const (
-	Difficulty_DIFFICULTY_UNSPECIFIED Difficulty = 0
-	Difficulty_EASY                   Difficulty = 1
-	Difficulty_MEDIUM                 Difficulty = 2
-	Difficulty_HARD                   Difficulty = 3
-)
-
-// Enum value maps for Difficulty.
-var (
-	Difficulty_name = map[int32]string{
-		0: "DIFFICULTY_UNSPECIFIED",
-		1: "EASY",
-		2: "MEDIUM",
-		3: "HARD",
-	}
-	Difficulty_value = map[string]int32{
-		"DIFFICULTY_UNSPECIFIED": 0,
-		"EASY":                   1,
-		"MEDIUM":                 2,
-		"HARD":                   3,
-	}
-)
-
-func (x Difficulty) Enum() *Difficulty {
-	p := new(Difficulty)
-	*p = x
-	return p
-}
-
-func (x Difficulty) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Difficulty) Descriptor() protoreflect.EnumDescriptor {
-	return file_userinfo_userinfo_proto_enumTypes[2].Descriptor()
-}
-
-func (Difficulty) Type() protoreflect.EnumType {
-	return &file_userinfo_userinfo_proto_enumTypes[2]
-}
-
-func (x Difficulty) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use Difficulty.Descriptor instead.
-func (Difficulty) EnumDescriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{2}
-}
-
 type Pagination struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	PageSize      int32                  `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
@@ -232,21 +180,101 @@ func (x *Pagination) GetPageToken() string {
 	return ""
 }
 
-type User struct {
+type Achievement struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Username      string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
-	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
-	Direction     Direction              `protobuf:"varint,4,opt,name=direction,proto3,enum=userinfo.v1.Direction" json:"direction,omitempty"`
-	Level         Level                  `protobuf:"varint,5,opt,name=level,proto3,enum=userinfo.v1.Level" json:"level,omitempty"`
-	Difficulty    Difficulty             `protobuf:"varint,6,opt,name=difficulty,proto3,enum=userinfo.v1.Difficulty" json:"difficulty,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	IconUrl       string                 `protobuf:"bytes,4,opt,name=icon_url,json=iconUrl,proto3" json:"icon_url,omitempty"`
+	DateEarned    string                 `protobuf:"bytes,5,opt,name=date_earned,json=dateEarned,proto3" json:"date_earned,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
+func (x *Achievement) Reset() {
+	*x = Achievement{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Achievement) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Achievement) ProtoMessage() {}
+
+func (x *Achievement) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Achievement.ProtoReflect.Descriptor instead.
+func (*Achievement) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *Achievement) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *Achievement) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Achievement) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *Achievement) GetIconUrl() string {
+	if x != nil {
+		return x.IconUrl
+	}
+	return ""
+}
+
+func (x *Achievement) GetDateEarned() string {
+	if x != nil {
+		return x.DateEarned
+	}
+	return ""
+}
+
+type User struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Id                    int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Username              string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
+	Email                 string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	Direction             Direction              `protobuf:"varint,4,opt,name=direction,proto3,enum=userinfo.v1.Direction" json:"direction,omitempty"`
+	Level                 Level                  `protobuf:"varint,5,opt,name=level,proto3,enum=userinfo.v1.Level" json:"level,omitempty"`
+	TotalCorrectAnswers   int32                  `protobuf:"varint,6,opt,name=total_correct_answers,json=totalCorrectAnswers,proto3" json:"total_correct_answers,omitempty"`
+	TotalIncorrectAnswers int32                  `protobuf:"varint,7,opt,name=total_incorrect_answers,json=totalIncorrectAnswers,proto3" json:"total_incorrect_answers,omitempty"`
+	CompletedTestsCount   int32                  `protobuf:"varint,8,opt,name=completed_tests_count,json=completedTestsCount,proto3" json:"completed_tests_count,omitempty"`
+	AchievementsCount     int32                  `protobuf:"varint,9,opt,name=achievements_count,json=achievementsCount,proto3" json:"achievements_count,omitempty"`
+	Achievements          []*Achievement         `protobuf:"bytes,10,rep,name=achievements,proto3" json:"achievements,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
 func (x *User) Reset() {
 	*x = User{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[1]
+	mi := &file_userinfo_userinfo_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -258,7 +286,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[1]
+	mi := &file_userinfo_userinfo_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -271,7 +299,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{1}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *User) GetId() int64 {
@@ -309,11 +337,115 @@ func (x *User) GetLevel() Level {
 	return Level_LEVEL_UNSPECIFIED
 }
 
-func (x *User) GetDifficulty() Difficulty {
+func (x *User) GetTotalCorrectAnswers() int32 {
 	if x != nil {
-		return x.Difficulty
+		return x.TotalCorrectAnswers
 	}
-	return Difficulty_DIFFICULTY_UNSPECIFIED
+	return 0
+}
+
+func (x *User) GetTotalIncorrectAnswers() int32 {
+	if x != nil {
+		return x.TotalIncorrectAnswers
+	}
+	return 0
+}
+
+func (x *User) GetCompletedTestsCount() int32 {
+	if x != nil {
+		return x.CompletedTestsCount
+	}
+	return 0
+}
+
+func (x *User) GetAchievementsCount() int32 {
+	if x != nil {
+		return x.AchievementsCount
+	}
+	return 0
+}
+
+func (x *User) GetAchievements() []*Achievement {
+	if x != nil {
+		return x.Achievements
+	}
+	return nil
+}
+
+type TestSummary struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Id             int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Title          string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	CompletionDate string                 `protobuf:"bytes,3,opt,name=completion_date,json=completionDate,proto3" json:"completion_date,omitempty"`
+	Score          int32                  `protobuf:"varint,4,opt,name=score,proto3" json:"score,omitempty"`
+	TotalPoints    int32                  `protobuf:"varint,5,opt,name=total_points,json=totalPoints,proto3" json:"total_points,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *TestSummary) Reset() {
+	*x = TestSummary{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TestSummary) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TestSummary) ProtoMessage() {}
+
+func (x *TestSummary) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TestSummary.ProtoReflect.Descriptor instead.
+func (*TestSummary) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *TestSummary) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *TestSummary) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *TestSummary) GetCompletionDate() string {
+	if x != nil {
+		return x.CompletionDate
+	}
+	return ""
+}
+
+func (x *TestSummary) GetScore() int32 {
+	if x != nil {
+		return x.Score
+	}
+	return 0
+}
+
+func (x *TestSummary) GetTotalPoints() int32 {
+	if x != nil {
+		return x.TotalPoints
+	}
+	return 0
 }
 
 type GetUserRequest struct {
@@ -325,7 +457,7 @@ type GetUserRequest struct {
 
 func (x *GetUserRequest) Reset() {
 	*x = GetUserRequest{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[2]
+	mi := &file_userinfo_userinfo_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -337,7 +469,7 @@ func (x *GetUserRequest) String() string {
 func (*GetUserRequest) ProtoMessage() {}
 
 func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[2]
+	mi := &file_userinfo_userinfo_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -350,7 +482,7 @@ func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserRequest.ProtoReflect.Descriptor instead.
 func (*GetUserRequest) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{2}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GetUserRequest) GetUserId() int64 {
@@ -369,7 +501,7 @@ type GetUserResponse struct {
 
 func (x *GetUserResponse) Reset() {
 	*x = GetUserResponse{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[3]
+	mi := &file_userinfo_userinfo_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -381,7 +513,7 @@ func (x *GetUserResponse) String() string {
 func (*GetUserResponse) ProtoMessage() {}
 
 func (x *GetUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[3]
+	mi := &file_userinfo_userinfo_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -394,7 +526,7 @@ func (x *GetUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserResponse.ProtoReflect.Descriptor instead.
 func (*GetUserResponse) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{3}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *GetUserResponse) GetUser() *User {
@@ -404,155 +536,30 @@ func (x *GetUserResponse) GetUser() *User {
 	return nil
 }
 
-type UpdateUserRequest struct {
+type UpdateUserProfileRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	Username      string                 `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
-	Email         string                 `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
-	Direction     Direction              `protobuf:"varint,4,opt,name=direction,proto3,enum=userinfo.v1.Direction" json:"direction,omitempty"`
-	Level         Level                  `protobuf:"varint,5,opt,name=level,proto3,enum=userinfo.v1.Level" json:"level,omitempty"`
-	Difficulty    Difficulty             `protobuf:"varint,6,opt,name=difficulty,proto3,enum=userinfo.v1.Difficulty" json:"difficulty,omitempty"`
+	Direction     Direction              `protobuf:"varint,3,opt,name=direction,proto3,enum=userinfo.v1.Direction" json:"direction,omitempty"`
+	Level         Level                  `protobuf:"varint,4,opt,name=level,proto3,enum=userinfo.v1.Level" json:"level,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UpdateUserRequest) Reset() {
-	*x = UpdateUserRequest{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateUserRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateUserRequest) ProtoMessage() {}
-
-func (x *UpdateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateUserRequest.ProtoReflect.Descriptor instead.
-func (*UpdateUserRequest) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *UpdateUserRequest) GetUserId() int64 {
-	if x != nil {
-		return x.UserId
-	}
-	return 0
-}
-
-func (x *UpdateUserRequest) GetUsername() string {
-	if x != nil {
-		return x.Username
-	}
-	return ""
-}
-
-func (x *UpdateUserRequest) GetEmail() string {
-	if x != nil {
-		return x.Email
-	}
-	return ""
-}
-
-func (x *UpdateUserRequest) GetDirection() Direction {
-	if x != nil {
-		return x.Direction
-	}
-	return Direction_DIRECTION_UNSPECIFIED
-}
-
-func (x *UpdateUserRequest) GetLevel() Level {
-	if x != nil {
-		return x.Level
-	}
-	return Level_LEVEL_UNSPECIFIED
-}
-
-func (x *UpdateUserRequest) GetDifficulty() Difficulty {
-	if x != nil {
-		return x.Difficulty
-	}
-	return Difficulty_DIFFICULTY_UNSPECIFIED
-}
-
-type UpdateUserResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	User          *User                  `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *UpdateUserResponse) Reset() {
-	*x = UpdateUserResponse{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *UpdateUserResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*UpdateUserResponse) ProtoMessage() {}
-
-func (x *UpdateUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use UpdateUserResponse.ProtoReflect.Descriptor instead.
-func (*UpdateUserResponse) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *UpdateUserResponse) GetUser() *User {
-	if x != nil {
-		return x.User
-	}
-	return nil
-}
-
-type DeleteUserRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeleteUserRequest) Reset() {
-	*x = DeleteUserRequest{}
+func (x *UpdateUserProfileRequest) Reset() {
+	*x = UpdateUserProfileRequest{}
 	mi := &file_userinfo_userinfo_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DeleteUserRequest) String() string {
+func (x *UpdateUserProfileRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DeleteUserRequest) ProtoMessage() {}
+func (*UpdateUserProfileRequest) ProtoMessage() {}
 
-func (x *DeleteUserRequest) ProtoReflect() protoreflect.Message {
+func (x *UpdateUserProfileRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_userinfo_userinfo_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -564,116 +571,61 @@ func (x *DeleteUserRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DeleteUserRequest.ProtoReflect.Descriptor instead.
-func (*DeleteUserRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UpdateUserProfileRequest.ProtoReflect.Descriptor instead.
+func (*UpdateUserProfileRequest) Descriptor() ([]byte, []int) {
 	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *DeleteUserRequest) GetUserId() int64 {
+func (x *UpdateUserProfileRequest) GetUserId() int64 {
 	if x != nil {
 		return x.UserId
 	}
 	return 0
 }
 
-type CreateUserRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
-	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
-	Direction     Direction              `protobuf:"varint,3,opt,name=direction,proto3,enum=userinfo.v1.Direction" json:"direction,omitempty"`
-	Level         Level                  `protobuf:"varint,4,opt,name=level,proto3,enum=userinfo.v1.Level" json:"level,omitempty"`
-	Difficulty    Difficulty             `protobuf:"varint,5,opt,name=difficulty,proto3,enum=userinfo.v1.Difficulty" json:"difficulty,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *CreateUserRequest) Reset() {
-	*x = CreateUserRequest{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CreateUserRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CreateUserRequest) ProtoMessage() {}
-
-func (x *CreateUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CreateUserRequest.ProtoReflect.Descriptor instead.
-func (*CreateUserRequest) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *CreateUserRequest) GetUsername() string {
+func (x *UpdateUserProfileRequest) GetUsername() string {
 	if x != nil {
 		return x.Username
 	}
 	return ""
 }
 
-func (x *CreateUserRequest) GetEmail() string {
-	if x != nil {
-		return x.Email
-	}
-	return ""
-}
-
-func (x *CreateUserRequest) GetDirection() Direction {
+func (x *UpdateUserProfileRequest) GetDirection() Direction {
 	if x != nil {
 		return x.Direction
 	}
 	return Direction_DIRECTION_UNSPECIFIED
 }
 
-func (x *CreateUserRequest) GetLevel() Level {
+func (x *UpdateUserProfileRequest) GetLevel() Level {
 	if x != nil {
 		return x.Level
 	}
 	return Level_LEVEL_UNSPECIFIED
 }
 
-func (x *CreateUserRequest) GetDifficulty() Difficulty {
-	if x != nil {
-		return x.Difficulty
-	}
-	return Difficulty_DIFFICULTY_UNSPECIFIED
-}
-
-type CreateUserResponse struct {
+type UpdateUserProfileResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	User          *User                  `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *CreateUserResponse) Reset() {
-	*x = CreateUserResponse{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[8]
+func (x *UpdateUserProfileResponse) Reset() {
+	*x = UpdateUserProfileResponse{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *CreateUserResponse) String() string {
+func (x *UpdateUserProfileResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateUserResponse) ProtoMessage() {}
+func (*UpdateUserProfileResponse) ProtoMessage() {}
 
-func (x *CreateUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[8]
+func (x *UpdateUserProfileResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -684,43 +636,41 @@ func (x *CreateUserResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateUserResponse.ProtoReflect.Descriptor instead.
-func (*CreateUserResponse) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{8}
+// Deprecated: Use UpdateUserProfileResponse.ProtoReflect.Descriptor instead.
+func (*UpdateUserProfileResponse) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *CreateUserResponse) GetUser() *User {
+func (x *UpdateUserProfileResponse) GetUser() *User {
 	if x != nil {
 		return x.User
 	}
 	return nil
 }
 
-type ListUsersRequest struct {
+type GetUserTestHistoryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Pagination    *Pagination            `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
-	Direction     Direction              `protobuf:"varint,2,opt,name=direction,proto3,enum=userinfo.v1.Direction" json:"direction,omitempty"`
-	Level         Level                  `protobuf:"varint,3,opt,name=level,proto3,enum=userinfo.v1.Level" json:"level,omitempty"`
-	Difficulty    Difficulty             `protobuf:"varint,4,opt,name=difficulty,proto3,enum=userinfo.v1.Difficulty" json:"difficulty,omitempty"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Pagination    *Pagination            `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListUsersRequest) Reset() {
-	*x = ListUsersRequest{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[9]
+func (x *GetUserTestHistoryRequest) Reset() {
+	*x = GetUserTestHistoryRequest{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListUsersRequest) String() string {
+func (x *GetUserTestHistoryRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListUsersRequest) ProtoMessage() {}
+func (*GetUserTestHistoryRequest) ProtoMessage() {}
 
-func (x *ListUsersRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[9]
+func (x *GetUserTestHistoryRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -731,62 +681,48 @@ func (x *ListUsersRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListUsersRequest.ProtoReflect.Descriptor instead.
-func (*ListUsersRequest) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{9}
+// Deprecated: Use GetUserTestHistoryRequest.ProtoReflect.Descriptor instead.
+func (*GetUserTestHistoryRequest) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *ListUsersRequest) GetPagination() *Pagination {
+func (x *GetUserTestHistoryRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *GetUserTestHistoryRequest) GetPagination() *Pagination {
 	if x != nil {
 		return x.Pagination
 	}
 	return nil
 }
 
-func (x *ListUsersRequest) GetDirection() Direction {
-	if x != nil {
-		return x.Direction
-	}
-	return Direction_DIRECTION_UNSPECIFIED
-}
-
-func (x *ListUsersRequest) GetLevel() Level {
-	if x != nil {
-		return x.Level
-	}
-	return Level_LEVEL_UNSPECIFIED
-}
-
-func (x *ListUsersRequest) GetDifficulty() Difficulty {
-	if x != nil {
-		return x.Difficulty
-	}
-	return Difficulty_DIFFICULTY_UNSPECIFIED
-}
-
-type ListUsersResponse struct {
+type GetUserTestHistoryResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Users         []*User                `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
+	Tests         []*TestSummary         `protobuf:"bytes,1,rep,name=tests,proto3" json:"tests,omitempty"`
 	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *ListUsersResponse) Reset() {
-	*x = ListUsersResponse{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[10]
+func (x *GetUserTestHistoryResponse) Reset() {
+	*x = GetUserTestHistoryResponse{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListUsersResponse) String() string {
+func (x *GetUserTestHistoryResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListUsersResponse) ProtoMessage() {}
+func (*GetUserTestHistoryResponse) ProtoMessage() {}
 
-func (x *ListUsersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[10]
+func (x *GetUserTestHistoryResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -797,47 +733,90 @@ func (x *ListUsersResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListUsersResponse.ProtoReflect.Descriptor instead.
-func (*ListUsersResponse) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{10}
+// Deprecated: Use GetUserTestHistoryResponse.ProtoReflect.Descriptor instead.
+func (*GetUserTestHistoryResponse) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *ListUsersResponse) GetUsers() []*User {
+func (x *GetUserTestHistoryResponse) GetTests() []*TestSummary {
 	if x != nil {
-		return x.Users
+		return x.Tests
 	}
 	return nil
 }
 
-func (x *ListUsersResponse) GetNextPageToken() string {
+func (x *GetUserTestHistoryResponse) GetNextPageToken() string {
 	if x != nil {
 		return x.NextPageToken
 	}
 	return ""
 }
 
-type SearchUsersRequest struct {
+type GetUserAchievementsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Query         string                 `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
-	Pagination    *Pagination            `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SearchUsersRequest) Reset() {
-	*x = SearchUsersRequest{}
+func (x *GetUserAchievementsRequest) Reset() {
+	*x = GetUserAchievementsRequest{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserAchievementsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserAchievementsRequest) ProtoMessage() {}
+
+func (x *GetUserAchievementsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserAchievementsRequest.ProtoReflect.Descriptor instead.
+func (*GetUserAchievementsRequest) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *GetUserAchievementsRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+type GetUserAchievementsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Achievements  []*Achievement         `protobuf:"bytes,1,rep,name=achievements,proto3" json:"achievements,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserAchievementsResponse) Reset() {
+	*x = GetUserAchievementsResponse{}
 	mi := &file_userinfo_userinfo_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SearchUsersRequest) String() string {
+func (x *GetUserAchievementsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SearchUsersRequest) ProtoMessage() {}
+func (*GetUserAchievementsResponse) ProtoMessage() {}
 
-func (x *SearchUsersRequest) ProtoReflect() protoreflect.Message {
+func (x *GetUserAchievementsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_userinfo_userinfo_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -849,26 +828,79 @@ func (x *SearchUsersRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SearchUsersRequest.ProtoReflect.Descriptor instead.
-func (*SearchUsersRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetUserAchievementsResponse.ProtoReflect.Descriptor instead.
+func (*GetUserAchievementsResponse) Descriptor() ([]byte, []int) {
 	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *SearchUsersRequest) GetQuery() string {
+func (x *GetUserAchievementsResponse) GetAchievements() []*Achievement {
 	if x != nil {
-		return x.Query
+		return x.Achievements
 	}
-	return ""
+	return nil
 }
 
-func (x *SearchUsersRequest) GetPagination() *Pagination {
+type GetLeaderboardRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Direction     Direction              `protobuf:"varint,1,opt,name=direction,proto3,enum=userinfo.v1.Direction" json:"direction,omitempty"`
+	Level         Level                  `protobuf:"varint,2,opt,name=level,proto3,enum=userinfo.v1.Level" json:"level,omitempty"`
+	Pagination    *Pagination            `protobuf:"bytes,3,opt,name=pagination,proto3" json:"pagination,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLeaderboardRequest) Reset() {
+	*x = GetLeaderboardRequest{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLeaderboardRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLeaderboardRequest) ProtoMessage() {}
+
+func (x *GetLeaderboardRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLeaderboardRequest.ProtoReflect.Descriptor instead.
+func (*GetLeaderboardRequest) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *GetLeaderboardRequest) GetDirection() Direction {
+	if x != nil {
+		return x.Direction
+	}
+	return Direction_DIRECTION_UNSPECIFIED
+}
+
+func (x *GetLeaderboardRequest) GetLevel() Level {
+	if x != nil {
+		return x.Level
+	}
+	return Level_LEVEL_UNSPECIFIED
+}
+
+func (x *GetLeaderboardRequest) GetPagination() *Pagination {
 	if x != nil {
 		return x.Pagination
 	}
 	return nil
 }
 
-type SearchUsersResponse struct {
+type GetLeaderboardResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Users         []*User                `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
 	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
@@ -876,21 +908,21 @@ type SearchUsersResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SearchUsersResponse) Reset() {
-	*x = SearchUsersResponse{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[12]
+func (x *GetLeaderboardResponse) Reset() {
+	*x = GetLeaderboardResponse{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SearchUsersResponse) String() string {
+func (x *GetLeaderboardResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SearchUsersResponse) ProtoMessage() {}
+func (*GetLeaderboardResponse) ProtoMessage() {}
 
-func (x *SearchUsersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[12]
+func (x *GetLeaderboardResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -901,19 +933,19 @@ func (x *SearchUsersResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SearchUsersResponse.ProtoReflect.Descriptor instead.
-func (*SearchUsersResponse) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{12}
+// Deprecated: Use GetLeaderboardResponse.ProtoReflect.Descriptor instead.
+func (*GetLeaderboardResponse) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *SearchUsersResponse) GetUsers() []*User {
+func (x *GetLeaderboardResponse) GetUsers() []*User {
 	if x != nil {
 		return x.Users
 	}
 	return nil
 }
 
-func (x *SearchUsersResponse) GetNextPageToken() string {
+func (x *GetLeaderboardResponse) GetNextPageToken() string {
 	if x != nil {
 		return x.NextPageToken
 	}
@@ -929,61 +961,62 @@ const file_userinfo_userinfo_proto_rawDesc = "" +
 	"Pagination\x12\x1b\n" +
 	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tR\tpageToken\"\xe1\x01\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\x8f\x01\n" +
+	"\vAchievement\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x19\n" +
+	"\bicon_url\x18\x04 \x01(\tR\aiconUrl\x12\x1f\n" +
+	"\vdate_earned\x18\x05 \x01(\tR\n" +
+	"dateEarned\"\xb5\x03\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x03 \x01(\tR\x05email\x124\n" +
 	"\tdirection\x18\x04 \x01(\x0e2\x16.userinfo.v1.DirectionR\tdirection\x12(\n" +
-	"\x05level\x18\x05 \x01(\x0e2\x12.userinfo.v1.LevelR\x05level\x127\n" +
-	"\n" +
-	"difficulty\x18\x06 \x01(\x0e2\x17.userinfo.v1.DifficultyR\n" +
-	"difficulty\")\n" +
+	"\x05level\x18\x05 \x01(\x0e2\x12.userinfo.v1.LevelR\x05level\x122\n" +
+	"\x15total_correct_answers\x18\x06 \x01(\x05R\x13totalCorrectAnswers\x126\n" +
+	"\x17total_incorrect_answers\x18\a \x01(\x05R\x15totalIncorrectAnswers\x122\n" +
+	"\x15completed_tests_count\x18\b \x01(\x05R\x13completedTestsCount\x12-\n" +
+	"\x12achievements_count\x18\t \x01(\x05R\x11achievementsCount\x12<\n" +
+	"\fachievements\x18\n" +
+	" \x03(\v2\x18.userinfo.v1.AchievementR\fachievements\"\x95\x01\n" +
+	"\vTestSummary\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x12'\n" +
+	"\x0fcompletion_date\x18\x03 \x01(\tR\x0ecompletionDate\x12\x14\n" +
+	"\x05score\x18\x04 \x01(\x05R\x05score\x12!\n" +
+	"\ftotal_points\x18\x05 \x01(\x05R\vtotalPoints\")\n" +
 	"\x0eGetUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\"8\n" +
 	"\x0fGetUserResponse\x12%\n" +
-	"\x04user\x18\x01 \x01(\v2\x11.userinfo.v1.UserR\x04user\"\xf7\x01\n" +
-	"\x11UpdateUserRequest\x12\x17\n" +
+	"\x04user\x18\x01 \x01(\v2\x11.userinfo.v1.UserR\x04user\"\xaf\x01\n" +
+	"\x18UpdateUserProfileRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1a\n" +
-	"\busername\x18\x02 \x01(\tR\busername\x12\x14\n" +
-	"\x05email\x18\x03 \x01(\tR\x05email\x124\n" +
-	"\tdirection\x18\x04 \x01(\x0e2\x16.userinfo.v1.DirectionR\tdirection\x12(\n" +
-	"\x05level\x18\x05 \x01(\x0e2\x12.userinfo.v1.LevelR\x05level\x127\n" +
-	"\n" +
-	"difficulty\x18\x06 \x01(\x0e2\x17.userinfo.v1.DifficultyR\n" +
-	"difficulty\";\n" +
-	"\x12UpdateUserResponse\x12%\n" +
-	"\x04user\x18\x01 \x01(\v2\x11.userinfo.v1.UserR\x04user\",\n" +
-	"\x11DeleteUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\xde\x01\n" +
-	"\x11CreateUserRequest\x12\x1a\n" +
-	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
-	"\x05email\x18\x02 \x01(\tR\x05email\x124\n" +
+	"\busername\x18\x02 \x01(\tR\busername\x124\n" +
 	"\tdirection\x18\x03 \x01(\x0e2\x16.userinfo.v1.DirectionR\tdirection\x12(\n" +
-	"\x05level\x18\x04 \x01(\x0e2\x12.userinfo.v1.LevelR\x05level\x127\n" +
-	"\n" +
-	"difficulty\x18\x05 \x01(\x0e2\x17.userinfo.v1.DifficultyR\n" +
-	"difficulty\";\n" +
-	"\x12CreateUserResponse\x12%\n" +
-	"\x04user\x18\x01 \x01(\v2\x11.userinfo.v1.UserR\x04user\"\xe4\x01\n" +
-	"\x10ListUsersRequest\x127\n" +
-	"\n" +
-	"pagination\x18\x01 \x01(\v2\x17.userinfo.v1.PaginationR\n" +
-	"pagination\x124\n" +
-	"\tdirection\x18\x02 \x01(\x0e2\x16.userinfo.v1.DirectionR\tdirection\x12(\n" +
-	"\x05level\x18\x03 \x01(\x0e2\x12.userinfo.v1.LevelR\x05level\x127\n" +
-	"\n" +
-	"difficulty\x18\x04 \x01(\x0e2\x17.userinfo.v1.DifficultyR\n" +
-	"difficulty\"d\n" +
-	"\x11ListUsersResponse\x12'\n" +
-	"\x05users\x18\x01 \x03(\v2\x11.userinfo.v1.UserR\x05users\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"c\n" +
-	"\x12SearchUsersRequest\x12\x14\n" +
-	"\x05query\x18\x01 \x01(\tR\x05query\x127\n" +
+	"\x05level\x18\x04 \x01(\x0e2\x12.userinfo.v1.LevelR\x05level\"B\n" +
+	"\x19UpdateUserProfileResponse\x12%\n" +
+	"\x04user\x18\x01 \x01(\v2\x11.userinfo.v1.UserR\x04user\"m\n" +
+	"\x19GetUserTestHistoryRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x127\n" +
 	"\n" +
 	"pagination\x18\x02 \x01(\v2\x17.userinfo.v1.PaginationR\n" +
-	"pagination\"f\n" +
-	"\x13SearchUsersResponse\x12'\n" +
+	"pagination\"t\n" +
+	"\x1aGetUserTestHistoryResponse\x12.\n" +
+	"\x05tests\x18\x01 \x03(\v2\x18.userinfo.v1.TestSummaryR\x05tests\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"5\n" +
+	"\x1aGetUserAchievementsRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"[\n" +
+	"\x1bGetUserAchievementsResponse\x12<\n" +
+	"\fachievements\x18\x01 \x03(\v2\x18.userinfo.v1.AchievementR\fachievements\"\xb0\x01\n" +
+	"\x15GetLeaderboardRequest\x124\n" +
+	"\tdirection\x18\x01 \x01(\x0e2\x16.userinfo.v1.DirectionR\tdirection\x12(\n" +
+	"\x05level\x18\x02 \x01(\x0e2\x12.userinfo.v1.LevelR\x05level\x127\n" +
+	"\n" +
+	"pagination\x18\x03 \x01(\v2\x17.userinfo.v1.PaginationR\n" +
+	"pagination\"i\n" +
+	"\x16GetLeaderboardResponse\x12'\n" +
 	"\x05users\x18\x01 \x03(\v2\x11.userinfo.v1.UserR\x05users\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken*_\n" +
 	"\tDirection\x12\x19\n" +
@@ -1000,22 +1033,13 @@ const file_userinfo_userinfo_proto_rawDesc = "" +
 	"\n" +
 	"\x06MIDDLE\x10\x02\x12\n" +
 	"\n" +
-	"\x06SENIOR\x10\x03*H\n" +
-	"\n" +
-	"Difficulty\x12\x1a\n" +
-	"\x16DIFFICULTY_UNSPECIFIED\x10\x00\x12\b\n" +
-	"\x04EASY\x10\x01\x12\n" +
-	"\n" +
-	"\x06MEDIUM\x10\x02\x12\b\n" +
-	"\x04HARD\x10\x032\x8f\x03\n" +
-	"\vUserService\x12M\n" +
-	"\n" +
-	"CreateUser\x12\x1e.userinfo.v1.CreateUserRequest\x1a\x1f.userinfo.v1.CreateUserResponse\x12D\n" +
-	"\aGetUser\x12\x1b.userinfo.v1.GetUserRequest\x1a\x1c.userinfo.v1.GetUserResponse\x12M\n" +
-	"\n" +
-	"UpdateUser\x12\x1e.userinfo.v1.UpdateUserRequest\x1a\x1f.userinfo.v1.UpdateUserResponse\x12J\n" +
-	"\tListUsers\x12\x1d.userinfo.v1.ListUsersRequest\x1a\x1e.userinfo.v1.ListUsersResponse\x12P\n" +
-	"\vSearchUsers\x12\x1f.userinfo.v1.SearchUsersRequest\x1a .userinfo.v1.SearchUsersResponseB Z\x1ediploma.userinfo.v1;userinfov1b\x06proto3"
+	"\x06SENIOR\x10\x032\xe3\x03\n" +
+	"\vUserService\x12D\n" +
+	"\aGetUser\x12\x1b.userinfo.v1.GetUserRequest\x1a\x1c.userinfo.v1.GetUserResponse\x12b\n" +
+	"\x11UpdateUserProfile\x12%.userinfo.v1.UpdateUserProfileRequest\x1a&.userinfo.v1.UpdateUserProfileResponse\x12e\n" +
+	"\x12GetUserTestHistory\x12&.userinfo.v1.GetUserTestHistoryRequest\x1a'.userinfo.v1.GetUserTestHistoryResponse\x12h\n" +
+	"\x13GetUserAchievements\x12'.userinfo.v1.GetUserAchievementsRequest\x1a(.userinfo.v1.GetUserAchievementsResponse\x12Y\n" +
+	"\x0eGetLeaderboard\x12\".userinfo.v1.GetLeaderboardRequest\x1a#.userinfo.v1.GetLeaderboardResponseB Z\x1ediploma.userinfo.v1;userinfov1b\x06proto3"
 
 var (
 	file_userinfo_userinfo_proto_rawDescOnce sync.Once
@@ -1029,61 +1053,56 @@ func file_userinfo_userinfo_proto_rawDescGZIP() []byte {
 	return file_userinfo_userinfo_proto_rawDescData
 }
 
-var file_userinfo_userinfo_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_userinfo_userinfo_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_userinfo_userinfo_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_userinfo_userinfo_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_userinfo_userinfo_proto_goTypes = []any{
-	(Direction)(0),              // 0: userinfo.v1.Direction
-	(Level)(0),                  // 1: userinfo.v1.Level
-	(Difficulty)(0),             // 2: userinfo.v1.Difficulty
-	(*Pagination)(nil),          // 3: userinfo.v1.Pagination
-	(*User)(nil),                // 4: userinfo.v1.User
-	(*GetUserRequest)(nil),      // 5: userinfo.v1.GetUserRequest
-	(*GetUserResponse)(nil),     // 6: userinfo.v1.GetUserResponse
-	(*UpdateUserRequest)(nil),   // 7: userinfo.v1.UpdateUserRequest
-	(*UpdateUserResponse)(nil),  // 8: userinfo.v1.UpdateUserResponse
-	(*DeleteUserRequest)(nil),   // 9: userinfo.v1.DeleteUserRequest
-	(*CreateUserRequest)(nil),   // 10: userinfo.v1.CreateUserRequest
-	(*CreateUserResponse)(nil),  // 11: userinfo.v1.CreateUserResponse
-	(*ListUsersRequest)(nil),    // 12: userinfo.v1.ListUsersRequest
-	(*ListUsersResponse)(nil),   // 13: userinfo.v1.ListUsersResponse
-	(*SearchUsersRequest)(nil),  // 14: userinfo.v1.SearchUsersRequest
-	(*SearchUsersResponse)(nil), // 15: userinfo.v1.SearchUsersResponse
+	(Direction)(0),                      // 0: userinfo.v1.Direction
+	(Level)(0),                          // 1: userinfo.v1.Level
+	(*Pagination)(nil),                  // 2: userinfo.v1.Pagination
+	(*Achievement)(nil),                 // 3: userinfo.v1.Achievement
+	(*User)(nil),                        // 4: userinfo.v1.User
+	(*TestSummary)(nil),                 // 5: userinfo.v1.TestSummary
+	(*GetUserRequest)(nil),              // 6: userinfo.v1.GetUserRequest
+	(*GetUserResponse)(nil),             // 7: userinfo.v1.GetUserResponse
+	(*UpdateUserProfileRequest)(nil),    // 8: userinfo.v1.UpdateUserProfileRequest
+	(*UpdateUserProfileResponse)(nil),   // 9: userinfo.v1.UpdateUserProfileResponse
+	(*GetUserTestHistoryRequest)(nil),   // 10: userinfo.v1.GetUserTestHistoryRequest
+	(*GetUserTestHistoryResponse)(nil),  // 11: userinfo.v1.GetUserTestHistoryResponse
+	(*GetUserAchievementsRequest)(nil),  // 12: userinfo.v1.GetUserAchievementsRequest
+	(*GetUserAchievementsResponse)(nil), // 13: userinfo.v1.GetUserAchievementsResponse
+	(*GetLeaderboardRequest)(nil),       // 14: userinfo.v1.GetLeaderboardRequest
+	(*GetLeaderboardResponse)(nil),      // 15: userinfo.v1.GetLeaderboardResponse
 }
 var file_userinfo_userinfo_proto_depIdxs = []int32{
 	0,  // 0: userinfo.v1.User.direction:type_name -> userinfo.v1.Direction
 	1,  // 1: userinfo.v1.User.level:type_name -> userinfo.v1.Level
-	2,  // 2: userinfo.v1.User.difficulty:type_name -> userinfo.v1.Difficulty
+	3,  // 2: userinfo.v1.User.achievements:type_name -> userinfo.v1.Achievement
 	4,  // 3: userinfo.v1.GetUserResponse.user:type_name -> userinfo.v1.User
-	0,  // 4: userinfo.v1.UpdateUserRequest.direction:type_name -> userinfo.v1.Direction
-	1,  // 5: userinfo.v1.UpdateUserRequest.level:type_name -> userinfo.v1.Level
-	2,  // 6: userinfo.v1.UpdateUserRequest.difficulty:type_name -> userinfo.v1.Difficulty
-	4,  // 7: userinfo.v1.UpdateUserResponse.user:type_name -> userinfo.v1.User
-	0,  // 8: userinfo.v1.CreateUserRequest.direction:type_name -> userinfo.v1.Direction
-	1,  // 9: userinfo.v1.CreateUserRequest.level:type_name -> userinfo.v1.Level
-	2,  // 10: userinfo.v1.CreateUserRequest.difficulty:type_name -> userinfo.v1.Difficulty
-	4,  // 11: userinfo.v1.CreateUserResponse.user:type_name -> userinfo.v1.User
-	3,  // 12: userinfo.v1.ListUsersRequest.pagination:type_name -> userinfo.v1.Pagination
-	0,  // 13: userinfo.v1.ListUsersRequest.direction:type_name -> userinfo.v1.Direction
-	1,  // 14: userinfo.v1.ListUsersRequest.level:type_name -> userinfo.v1.Level
-	2,  // 15: userinfo.v1.ListUsersRequest.difficulty:type_name -> userinfo.v1.Difficulty
-	4,  // 16: userinfo.v1.ListUsersResponse.users:type_name -> userinfo.v1.User
-	3,  // 17: userinfo.v1.SearchUsersRequest.pagination:type_name -> userinfo.v1.Pagination
-	4,  // 18: userinfo.v1.SearchUsersResponse.users:type_name -> userinfo.v1.User
-	10, // 19: userinfo.v1.UserService.CreateUser:input_type -> userinfo.v1.CreateUserRequest
-	5,  // 20: userinfo.v1.UserService.GetUser:input_type -> userinfo.v1.GetUserRequest
-	7,  // 21: userinfo.v1.UserService.UpdateUser:input_type -> userinfo.v1.UpdateUserRequest
-	12, // 22: userinfo.v1.UserService.ListUsers:input_type -> userinfo.v1.ListUsersRequest
-	14, // 23: userinfo.v1.UserService.SearchUsers:input_type -> userinfo.v1.SearchUsersRequest
-	11, // 24: userinfo.v1.UserService.CreateUser:output_type -> userinfo.v1.CreateUserResponse
-	6,  // 25: userinfo.v1.UserService.GetUser:output_type -> userinfo.v1.GetUserResponse
-	8,  // 26: userinfo.v1.UserService.UpdateUser:output_type -> userinfo.v1.UpdateUserResponse
-	13, // 27: userinfo.v1.UserService.ListUsers:output_type -> userinfo.v1.ListUsersResponse
-	15, // 28: userinfo.v1.UserService.SearchUsers:output_type -> userinfo.v1.SearchUsersResponse
-	24, // [24:29] is the sub-list for method output_type
-	19, // [19:24] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	0,  // 4: userinfo.v1.UpdateUserProfileRequest.direction:type_name -> userinfo.v1.Direction
+	1,  // 5: userinfo.v1.UpdateUserProfileRequest.level:type_name -> userinfo.v1.Level
+	4,  // 6: userinfo.v1.UpdateUserProfileResponse.user:type_name -> userinfo.v1.User
+	2,  // 7: userinfo.v1.GetUserTestHistoryRequest.pagination:type_name -> userinfo.v1.Pagination
+	5,  // 8: userinfo.v1.GetUserTestHistoryResponse.tests:type_name -> userinfo.v1.TestSummary
+	3,  // 9: userinfo.v1.GetUserAchievementsResponse.achievements:type_name -> userinfo.v1.Achievement
+	0,  // 10: userinfo.v1.GetLeaderboardRequest.direction:type_name -> userinfo.v1.Direction
+	1,  // 11: userinfo.v1.GetLeaderboardRequest.level:type_name -> userinfo.v1.Level
+	2,  // 12: userinfo.v1.GetLeaderboardRequest.pagination:type_name -> userinfo.v1.Pagination
+	4,  // 13: userinfo.v1.GetLeaderboardResponse.users:type_name -> userinfo.v1.User
+	6,  // 14: userinfo.v1.UserService.GetUser:input_type -> userinfo.v1.GetUserRequest
+	8,  // 15: userinfo.v1.UserService.UpdateUserProfile:input_type -> userinfo.v1.UpdateUserProfileRequest
+	10, // 16: userinfo.v1.UserService.GetUserTestHistory:input_type -> userinfo.v1.GetUserTestHistoryRequest
+	12, // 17: userinfo.v1.UserService.GetUserAchievements:input_type -> userinfo.v1.GetUserAchievementsRequest
+	14, // 18: userinfo.v1.UserService.GetLeaderboard:input_type -> userinfo.v1.GetLeaderboardRequest
+	7,  // 19: userinfo.v1.UserService.GetUser:output_type -> userinfo.v1.GetUserResponse
+	9,  // 20: userinfo.v1.UserService.UpdateUserProfile:output_type -> userinfo.v1.UpdateUserProfileResponse
+	11, // 21: userinfo.v1.UserService.GetUserTestHistory:output_type -> userinfo.v1.GetUserTestHistoryResponse
+	13, // 22: userinfo.v1.UserService.GetUserAchievements:output_type -> userinfo.v1.GetUserAchievementsResponse
+	15, // 23: userinfo.v1.UserService.GetLeaderboard:output_type -> userinfo.v1.GetLeaderboardResponse
+	19, // [19:24] is the sub-list for method output_type
+	14, // [14:19] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_userinfo_userinfo_proto_init() }
@@ -1096,8 +1115,8 @@ func file_userinfo_userinfo_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_userinfo_userinfo_proto_rawDesc), len(file_userinfo_userinfo_proto_rawDesc)),
-			NumEnums:      3,
-			NumMessages:   13,
+			NumEnums:      2,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

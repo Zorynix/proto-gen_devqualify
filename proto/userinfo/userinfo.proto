@@ -58,9 +58,6 @@ service UserService {
   rpc GetUserTestHistory(GetUserTestHistoryRequest) returns (GetUserTestHistoryResponse);
   rpc GetUserAchievements(GetUserAchievementsRequest) returns (GetUserAchievementsResponse);
   rpc GetLeaderboard(GetLeaderboardRequest) returns (GetLeaderboardResponse);
-  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
-  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
-  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse);
 }
 
 message GetUserRequest {
@@ -74,9 +71,8 @@ message GetUserResponse {
 message UpdateUserProfileRequest {
   int64 user_id = 1;
   string username = 2;
-  string email = 3;
-  Direction direction = 4;
-  Level level = 5;
+  Direction direction = 3;
+  Level level = 4;
 }
 
 message UpdateUserProfileResponse {
@@ -108,38 +104,6 @@ message GetLeaderboardRequest {
 }
 
 message GetLeaderboardResponse {
-  repeated User users = 1;
-  string next_page_token = 2;
-}
-
-message CreateUserRequest {
-  string username = 1;
-  string email = 2;
-  Direction direction = 3;
-  Level level = 4;
-}
-
-message CreateUserResponse {
-  User user = 1;
-}
-
-message ListUsersRequest {
-  Pagination pagination = 1;
-  Direction direction = 2;
-  Level level = 3;
-}
-
-message ListUsersResponse {
-  repeated User users = 1;
-  string next_page_token = 2;
-}
-
-message SearchUsersRequest {
-  string query = 1;
-  Pagination pagination = 2;
-}
-
-message SearchUsersResponse {
   repeated User users = 1;
   string next_page_token = 2;
 }
