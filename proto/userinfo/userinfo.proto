@@ -58,6 +58,7 @@ service UserService {
   rpc GetUserTestHistory(GetUserTestHistoryRequest) returns (GetUserTestHistoryResponse);
   rpc GetUserAchievements(GetUserAchievementsRequest) returns (GetUserAchievementsResponse);
   rpc GetLeaderboard(GetLeaderboardRequest) returns (GetLeaderboardResponse);
+  rpc UpdateUserAchievements(UpdateUserAchievementsRequest) returns (UpdateUserAchievementsResponse);
 }
 
 message GetUserRequest {
@@ -106,4 +107,15 @@ message GetLeaderboardRequest {
 message GetLeaderboardResponse {
   repeated User users = 1;
   string next_page_token = 2;
+}
+
+message UpdateUserAchievementsRequest {
+  int64 user_id = 1;
+  repeated int64 achievement_ids = 2;
+}
+
+message UpdateUserAchievementsResponse {
+  bool success = 1;
+  repeated Achievement achievements = 2;
+  string message = 3;
 }

@@ -19,11 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserService_GetUser_FullMethodName             = "/userinfo.v1.UserService/GetUser"
-	UserService_UpdateUserProfile_FullMethodName   = "/userinfo.v1.UserService/UpdateUserProfile"
-	UserService_GetUserTestHistory_FullMethodName  = "/userinfo.v1.UserService/GetUserTestHistory"
-	UserService_GetUserAchievements_FullMethodName = "/userinfo.v1.UserService/GetUserAchievements"
-	UserService_GetLeaderboard_FullMethodName      = "/userinfo.v1.UserService/GetLeaderboard"
+	UserService_GetUser_FullMethodName                = "/userinfo.v1.UserService/GetUser"
+	UserService_UpdateUserProfile_FullMethodName      = "/userinfo.v1.UserService/UpdateUserProfile"
+	UserService_GetUserTestHistory_FullMethodName     = "/userinfo.v1.UserService/GetUserTestHistory"
+	UserService_GetUserAchievements_FullMethodName    = "/userinfo.v1.UserService/GetUserAchievements"
+	UserService_GetLeaderboard_FullMethodName         = "/userinfo.v1.UserService/GetLeaderboard"
+	UserService_UpdateUserAchievements_FullMethodName = "/userinfo.v1.UserService/UpdateUserAchievements"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -35,6 +36,7 @@ type UserServiceClient interface {
 	GetUserTestHistory(ctx context.Context, in *GetUserTestHistoryRequest, opts ...grpc.CallOption) (*GetUserTestHistoryResponse, error)
 	GetUserAchievements(ctx context.Context, in *GetUserAchievementsRequest, opts ...grpc.CallOption) (*GetUserAchievementsResponse, error)
 	GetLeaderboard(ctx context.Context, in *GetLeaderboardRequest, opts ...grpc.CallOption) (*GetLeaderboardResponse, error)
+	UpdateUserAchievements(ctx context.Context, in *UpdateUserAchievementsRequest, opts ...grpc.CallOption) (*UpdateUserAchievementsResponse, error)
 }
 
 type userServiceClient struct {
@@ -95,6 +97,16 @@ func (c *userServiceClient) GetLeaderboard(ctx context.Context, in *GetLeaderboa
 	return out, nil
 }
 
+func (c *userServiceClient) UpdateUserAchievements(ctx context.Context, in *UpdateUserAchievementsRequest, opts ...grpc.CallOption) (*UpdateUserAchievementsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserAchievementsResponse)
+	err := c.cc.Invoke(ctx, UserService_UpdateUserAchievements_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
@@ -104,6 +116,7 @@ type UserServiceServer interface {
 	GetUserTestHistory(context.Context, *GetUserTestHistoryRequest) (*GetUserTestHistoryResponse, error)
 	GetUserAchievements(context.Context, *GetUserAchievementsRequest) (*GetUserAchievementsResponse, error)
 	GetLeaderboard(context.Context, *GetLeaderboardRequest) (*GetLeaderboardResponse, error)
+	UpdateUserAchievements(context.Context, *UpdateUserAchievementsRequest) (*UpdateUserAchievementsResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -128,6 +141,9 @@ func (UnimplementedUserServiceServer) GetUserAchievements(context.Context, *GetU
 }
 func (UnimplementedUserServiceServer) GetLeaderboard(context.Context, *GetLeaderboardRequest) (*GetLeaderboardResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLeaderboard not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateUserAchievements(context.Context, *UpdateUserAchievementsRequest) (*UpdateUserAchievementsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserAchievements not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 func (UnimplementedUserServiceServer) testEmbeddedByValue()                     {}
@@ -240,6 +256,24 @@ func _UserService_GetLeaderboard_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_UpdateUserAchievements_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserAchievementsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateUserAchievements(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UpdateUserAchievements_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateUserAchievements(ctx, req.(*UpdateUserAchievementsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -266,6 +300,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetLeaderboard",
 			Handler:    _UserService_GetLeaderboard_Handler,
+		},
+		{
+			MethodName: "UpdateUserAchievements",
+			Handler:    _UserService_UpdateUserAchievements_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

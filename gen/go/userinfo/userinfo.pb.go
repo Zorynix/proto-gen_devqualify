@@ -952,6 +952,118 @@ func (x *GetLeaderboardResponse) GetNextPageToken() string {
 	return ""
 }
 
+type UpdateUserAchievementsRequest struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	UserId         int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	AchievementIds []int64                `protobuf:"varint,2,rep,packed,name=achievement_ids,json=achievementIds,proto3" json:"achievement_ids,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *UpdateUserAchievementsRequest) Reset() {
+	*x = UpdateUserAchievementsRequest{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserAchievementsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserAchievementsRequest) ProtoMessage() {}
+
+func (x *UpdateUserAchievementsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserAchievementsRequest.ProtoReflect.Descriptor instead.
+func (*UpdateUserAchievementsRequest) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *UpdateUserAchievementsRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UpdateUserAchievementsRequest) GetAchievementIds() []int64 {
+	if x != nil {
+		return x.AchievementIds
+	}
+	return nil
+}
+
+type UpdateUserAchievementsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Achievements  []*Achievement         `protobuf:"bytes,2,rep,name=achievements,proto3" json:"achievements,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserAchievementsResponse) Reset() {
+	*x = UpdateUserAchievementsResponse{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserAchievementsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserAchievementsResponse) ProtoMessage() {}
+
+func (x *UpdateUserAchievementsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserAchievementsResponse.ProtoReflect.Descriptor instead.
+func (*UpdateUserAchievementsResponse) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *UpdateUserAchievementsResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *UpdateUserAchievementsResponse) GetAchievements() []*Achievement {
+	if x != nil {
+		return x.Achievements
+	}
+	return nil
+}
+
+func (x *UpdateUserAchievementsResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 var File_userinfo_userinfo_proto protoreflect.FileDescriptor
 
 const file_userinfo_userinfo_proto_rawDesc = "" +
@@ -1018,7 +1130,14 @@ const file_userinfo_userinfo_proto_rawDesc = "" +
 	"pagination\"i\n" +
 	"\x16GetLeaderboardResponse\x12'\n" +
 	"\x05users\x18\x01 \x03(\v2\x11.userinfo.v1.UserR\x05users\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken*_\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"a\n" +
+	"\x1dUpdateUserAchievementsRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12'\n" +
+	"\x0fachievement_ids\x18\x02 \x03(\x03R\x0eachievementIds\"\x92\x01\n" +
+	"\x1eUpdateUserAchievementsResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12<\n" +
+	"\fachievements\x18\x02 \x03(\v2\x18.userinfo.v1.AchievementR\fachievements\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage*_\n" +
 	"\tDirection\x12\x19\n" +
 	"\x15DIRECTION_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aBACKEND\x10\x01\x12\f\n" +
@@ -1033,13 +1152,14 @@ const file_userinfo_userinfo_proto_rawDesc = "" +
 	"\n" +
 	"\x06MIDDLE\x10\x02\x12\n" +
 	"\n" +
-	"\x06SENIOR\x10\x032\xe3\x03\n" +
+	"\x06SENIOR\x10\x032\xd6\x04\n" +
 	"\vUserService\x12D\n" +
 	"\aGetUser\x12\x1b.userinfo.v1.GetUserRequest\x1a\x1c.userinfo.v1.GetUserResponse\x12b\n" +
 	"\x11UpdateUserProfile\x12%.userinfo.v1.UpdateUserProfileRequest\x1a&.userinfo.v1.UpdateUserProfileResponse\x12e\n" +
 	"\x12GetUserTestHistory\x12&.userinfo.v1.GetUserTestHistoryRequest\x1a'.userinfo.v1.GetUserTestHistoryResponse\x12h\n" +
 	"\x13GetUserAchievements\x12'.userinfo.v1.GetUserAchievementsRequest\x1a(.userinfo.v1.GetUserAchievementsResponse\x12Y\n" +
-	"\x0eGetLeaderboard\x12\".userinfo.v1.GetLeaderboardRequest\x1a#.userinfo.v1.GetLeaderboardResponseB Z\x1ediploma.userinfo.v1;userinfov1b\x06proto3"
+	"\x0eGetLeaderboard\x12\".userinfo.v1.GetLeaderboardRequest\x1a#.userinfo.v1.GetLeaderboardResponse\x12q\n" +
+	"\x16UpdateUserAchievements\x12*.userinfo.v1.UpdateUserAchievementsRequest\x1a+.userinfo.v1.UpdateUserAchievementsResponseB Z\x1ediploma.userinfo.v1;userinfov1b\x06proto3"
 
 var (
 	file_userinfo_userinfo_proto_rawDescOnce sync.Once
@@ -1054,24 +1174,26 @@ func file_userinfo_userinfo_proto_rawDescGZIP() []byte {
 }
 
 var file_userinfo_userinfo_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_userinfo_userinfo_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_userinfo_userinfo_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_userinfo_userinfo_proto_goTypes = []any{
-	(Direction)(0),                      // 0: userinfo.v1.Direction
-	(Level)(0),                          // 1: userinfo.v1.Level
-	(*Pagination)(nil),                  // 2: userinfo.v1.Pagination
-	(*Achievement)(nil),                 // 3: userinfo.v1.Achievement
-	(*User)(nil),                        // 4: userinfo.v1.User
-	(*TestSummary)(nil),                 // 5: userinfo.v1.TestSummary
-	(*GetUserRequest)(nil),              // 6: userinfo.v1.GetUserRequest
-	(*GetUserResponse)(nil),             // 7: userinfo.v1.GetUserResponse
-	(*UpdateUserProfileRequest)(nil),    // 8: userinfo.v1.UpdateUserProfileRequest
-	(*UpdateUserProfileResponse)(nil),   // 9: userinfo.v1.UpdateUserProfileResponse
-	(*GetUserTestHistoryRequest)(nil),   // 10: userinfo.v1.GetUserTestHistoryRequest
-	(*GetUserTestHistoryResponse)(nil),  // 11: userinfo.v1.GetUserTestHistoryResponse
-	(*GetUserAchievementsRequest)(nil),  // 12: userinfo.v1.GetUserAchievementsRequest
-	(*GetUserAchievementsResponse)(nil), // 13: userinfo.v1.GetUserAchievementsResponse
-	(*GetLeaderboardRequest)(nil),       // 14: userinfo.v1.GetLeaderboardRequest
-	(*GetLeaderboardResponse)(nil),      // 15: userinfo.v1.GetLeaderboardResponse
+	(Direction)(0),                         // 0: userinfo.v1.Direction
+	(Level)(0),                             // 1: userinfo.v1.Level
+	(*Pagination)(nil),                     // 2: userinfo.v1.Pagination
+	(*Achievement)(nil),                    // 3: userinfo.v1.Achievement
+	(*User)(nil),                           // 4: userinfo.v1.User
+	(*TestSummary)(nil),                    // 5: userinfo.v1.TestSummary
+	(*GetUserRequest)(nil),                 // 6: userinfo.v1.GetUserRequest
+	(*GetUserResponse)(nil),                // 7: userinfo.v1.GetUserResponse
+	(*UpdateUserProfileRequest)(nil),       // 8: userinfo.v1.UpdateUserProfileRequest
+	(*UpdateUserProfileResponse)(nil),      // 9: userinfo.v1.UpdateUserProfileResponse
+	(*GetUserTestHistoryRequest)(nil),      // 10: userinfo.v1.GetUserTestHistoryRequest
+	(*GetUserTestHistoryResponse)(nil),     // 11: userinfo.v1.GetUserTestHistoryResponse
+	(*GetUserAchievementsRequest)(nil),     // 12: userinfo.v1.GetUserAchievementsRequest
+	(*GetUserAchievementsResponse)(nil),    // 13: userinfo.v1.GetUserAchievementsResponse
+	(*GetLeaderboardRequest)(nil),          // 14: userinfo.v1.GetLeaderboardRequest
+	(*GetLeaderboardResponse)(nil),         // 15: userinfo.v1.GetLeaderboardResponse
+	(*UpdateUserAchievementsRequest)(nil),  // 16: userinfo.v1.UpdateUserAchievementsRequest
+	(*UpdateUserAchievementsResponse)(nil), // 17: userinfo.v1.UpdateUserAchievementsResponse
 }
 var file_userinfo_userinfo_proto_depIdxs = []int32{
 	0,  // 0: userinfo.v1.User.direction:type_name -> userinfo.v1.Direction
@@ -1088,21 +1210,24 @@ var file_userinfo_userinfo_proto_depIdxs = []int32{
 	1,  // 11: userinfo.v1.GetLeaderboardRequest.level:type_name -> userinfo.v1.Level
 	2,  // 12: userinfo.v1.GetLeaderboardRequest.pagination:type_name -> userinfo.v1.Pagination
 	4,  // 13: userinfo.v1.GetLeaderboardResponse.users:type_name -> userinfo.v1.User
-	6,  // 14: userinfo.v1.UserService.GetUser:input_type -> userinfo.v1.GetUserRequest
-	8,  // 15: userinfo.v1.UserService.UpdateUserProfile:input_type -> userinfo.v1.UpdateUserProfileRequest
-	10, // 16: userinfo.v1.UserService.GetUserTestHistory:input_type -> userinfo.v1.GetUserTestHistoryRequest
-	12, // 17: userinfo.v1.UserService.GetUserAchievements:input_type -> userinfo.v1.GetUserAchievementsRequest
-	14, // 18: userinfo.v1.UserService.GetLeaderboard:input_type -> userinfo.v1.GetLeaderboardRequest
-	7,  // 19: userinfo.v1.UserService.GetUser:output_type -> userinfo.v1.GetUserResponse
-	9,  // 20: userinfo.v1.UserService.UpdateUserProfile:output_type -> userinfo.v1.UpdateUserProfileResponse
-	11, // 21: userinfo.v1.UserService.GetUserTestHistory:output_type -> userinfo.v1.GetUserTestHistoryResponse
-	13, // 22: userinfo.v1.UserService.GetUserAchievements:output_type -> userinfo.v1.GetUserAchievementsResponse
-	15, // 23: userinfo.v1.UserService.GetLeaderboard:output_type -> userinfo.v1.GetLeaderboardResponse
-	19, // [19:24] is the sub-list for method output_type
-	14, // [14:19] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	3,  // 14: userinfo.v1.UpdateUserAchievementsResponse.achievements:type_name -> userinfo.v1.Achievement
+	6,  // 15: userinfo.v1.UserService.GetUser:input_type -> userinfo.v1.GetUserRequest
+	8,  // 16: userinfo.v1.UserService.UpdateUserProfile:input_type -> userinfo.v1.UpdateUserProfileRequest
+	10, // 17: userinfo.v1.UserService.GetUserTestHistory:input_type -> userinfo.v1.GetUserTestHistoryRequest
+	12, // 18: userinfo.v1.UserService.GetUserAchievements:input_type -> userinfo.v1.GetUserAchievementsRequest
+	14, // 19: userinfo.v1.UserService.GetLeaderboard:input_type -> userinfo.v1.GetLeaderboardRequest
+	16, // 20: userinfo.v1.UserService.UpdateUserAchievements:input_type -> userinfo.v1.UpdateUserAchievementsRequest
+	7,  // 21: userinfo.v1.UserService.GetUser:output_type -> userinfo.v1.GetUserResponse
+	9,  // 22: userinfo.v1.UserService.UpdateUserProfile:output_type -> userinfo.v1.UpdateUserProfileResponse
+	11, // 23: userinfo.v1.UserService.GetUserTestHistory:output_type -> userinfo.v1.GetUserTestHistoryResponse
+	13, // 24: userinfo.v1.UserService.GetUserAchievements:output_type -> userinfo.v1.GetUserAchievementsResponse
+	15, // 25: userinfo.v1.UserService.GetLeaderboard:output_type -> userinfo.v1.GetLeaderboardResponse
+	17, // 26: userinfo.v1.UserService.UpdateUserAchievements:output_type -> userinfo.v1.UpdateUserAchievementsResponse
+	21, // [21:27] is the sub-list for method output_type
+	15, // [15:21] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_userinfo_userinfo_proto_init() }
@@ -1116,7 +1241,7 @@ func file_userinfo_userinfo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_userinfo_userinfo_proto_rawDesc), len(file_userinfo_userinfo_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   14,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
