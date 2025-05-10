@@ -25,6 +25,9 @@ const (
 	UserService_GetUserAchievements_FullMethodName    = "/userinfo.v1.UserService/GetUserAchievements"
 	UserService_GetLeaderboard_FullMethodName         = "/userinfo.v1.UserService/GetLeaderboard"
 	UserService_UpdateUserAchievements_FullMethodName = "/userinfo.v1.UserService/UpdateUserAchievements"
+	UserService_UploadUserAvatar_FullMethodName       = "/userinfo.v1.UserService/UploadUserAvatar"
+	UserService_UpdateUserAvatar_FullMethodName       = "/userinfo.v1.UserService/UpdateUserAvatar"
+	UserService_GetUserAvatar_FullMethodName          = "/userinfo.v1.UserService/GetUserAvatar"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -37,6 +40,9 @@ type UserServiceClient interface {
 	GetUserAchievements(ctx context.Context, in *GetUserAchievementsRequest, opts ...grpc.CallOption) (*GetUserAchievementsResponse, error)
 	GetLeaderboard(ctx context.Context, in *GetLeaderboardRequest, opts ...grpc.CallOption) (*GetLeaderboardResponse, error)
 	UpdateUserAchievements(ctx context.Context, in *UpdateUserAchievementsRequest, opts ...grpc.CallOption) (*UpdateUserAchievementsResponse, error)
+	UploadUserAvatar(ctx context.Context, in *UploadUserAvatarRequest, opts ...grpc.CallOption) (*UploadUserAvatarResponse, error)
+	UpdateUserAvatar(ctx context.Context, in *UpdateUserAvatarRequest, opts ...grpc.CallOption) (*UpdateUserAvatarResponse, error)
+	GetUserAvatar(ctx context.Context, in *GetUserAvatarRequest, opts ...grpc.CallOption) (*GetUserAvatarResponse, error)
 }
 
 type userServiceClient struct {
@@ -107,6 +113,36 @@ func (c *userServiceClient) UpdateUserAchievements(ctx context.Context, in *Upda
 	return out, nil
 }
 
+func (c *userServiceClient) UploadUserAvatar(ctx context.Context, in *UploadUserAvatarRequest, opts ...grpc.CallOption) (*UploadUserAvatarResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UploadUserAvatarResponse)
+	err := c.cc.Invoke(ctx, UserService_UploadUserAvatar_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UpdateUserAvatar(ctx context.Context, in *UpdateUserAvatarRequest, opts ...grpc.CallOption) (*UpdateUserAvatarResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserAvatarResponse)
+	err := c.cc.Invoke(ctx, UserService_UpdateUserAvatar_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) GetUserAvatar(ctx context.Context, in *GetUserAvatarRequest, opts ...grpc.CallOption) (*GetUserAvatarResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserAvatarResponse)
+	err := c.cc.Invoke(ctx, UserService_GetUserAvatar_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
@@ -117,6 +153,9 @@ type UserServiceServer interface {
 	GetUserAchievements(context.Context, *GetUserAchievementsRequest) (*GetUserAchievementsResponse, error)
 	GetLeaderboard(context.Context, *GetLeaderboardRequest) (*GetLeaderboardResponse, error)
 	UpdateUserAchievements(context.Context, *UpdateUserAchievementsRequest) (*UpdateUserAchievementsResponse, error)
+	UploadUserAvatar(context.Context, *UploadUserAvatarRequest) (*UploadUserAvatarResponse, error)
+	UpdateUserAvatar(context.Context, *UpdateUserAvatarRequest) (*UpdateUserAvatarResponse, error)
+	GetUserAvatar(context.Context, *GetUserAvatarRequest) (*GetUserAvatarResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -144,6 +183,15 @@ func (UnimplementedUserServiceServer) GetLeaderboard(context.Context, *GetLeader
 }
 func (UnimplementedUserServiceServer) UpdateUserAchievements(context.Context, *UpdateUserAchievementsRequest) (*UpdateUserAchievementsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserAchievements not implemented")
+}
+func (UnimplementedUserServiceServer) UploadUserAvatar(context.Context, *UploadUserAvatarRequest) (*UploadUserAvatarResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UploadUserAvatar not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateUserAvatar(context.Context, *UpdateUserAvatarRequest) (*UpdateUserAvatarResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserAvatar not implemented")
+}
+func (UnimplementedUserServiceServer) GetUserAvatar(context.Context, *GetUserAvatarRequest) (*GetUserAvatarResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserAvatar not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 func (UnimplementedUserServiceServer) testEmbeddedByValue()                     {}
@@ -274,6 +322,60 @@ func _UserService_UpdateUserAchievements_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_UploadUserAvatar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UploadUserAvatarRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UploadUserAvatar(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UploadUserAvatar_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UploadUserAvatar(ctx, req.(*UploadUserAvatarRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UpdateUserAvatar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserAvatarRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateUserAvatar(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UpdateUserAvatar_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateUserAvatar(ctx, req.(*UpdateUserAvatarRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_GetUserAvatar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserAvatarRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).GetUserAvatar(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_GetUserAvatar_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).GetUserAvatar(ctx, req.(*GetUserAvatarRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -304,6 +406,18 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUserAchievements",
 			Handler:    _UserService_UpdateUserAchievements_Handler,
+		},
+		{
+			MethodName: "UploadUserAvatar",
+			Handler:    _UserService_UploadUserAvatar_Handler,
+		},
+		{
+			MethodName: "UpdateUserAvatar",
+			Handler:    _UserService_UpdateUserAvatar_Handler,
+		},
+		{
+			MethodName: "GetUserAvatar",
+			Handler:    _UserService_GetUserAvatar_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

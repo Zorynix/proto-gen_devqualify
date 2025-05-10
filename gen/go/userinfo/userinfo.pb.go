@@ -268,6 +268,7 @@ type User struct {
 	CompletedTestsCount   int32                  `protobuf:"varint,8,opt,name=completed_tests_count,json=completedTestsCount,proto3" json:"completed_tests_count,omitempty"`
 	AchievementsCount     int32                  `protobuf:"varint,9,opt,name=achievements_count,json=achievementsCount,proto3" json:"achievements_count,omitempty"`
 	Achievements          []*Achievement         `protobuf:"bytes,10,rep,name=achievements,proto3" json:"achievements,omitempty"`
+	AvatarUrl             string                 `protobuf:"bytes,11,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -370,6 +371,13 @@ func (x *User) GetAchievements() []*Achievement {
 		return x.Achievements
 	}
 	return nil
+}
+
+func (x *User) GetAvatarUrl() string {
+	if x != nil {
+		return x.AvatarUrl
+	}
+	return ""
 }
 
 type TestSummary struct {
@@ -1064,6 +1072,350 @@ func (x *UpdateUserAchievementsResponse) GetMessage() string {
 	return ""
 }
 
+type UploadUserAvatarRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	AvatarData    []byte                 `protobuf:"bytes,2,opt,name=avatar_data,json=avatarData,proto3" json:"avatar_data,omitempty"`
+	ContentType   string                 `protobuf:"bytes,3,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UploadUserAvatarRequest) Reset() {
+	*x = UploadUserAvatarRequest{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UploadUserAvatarRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadUserAvatarRequest) ProtoMessage() {}
+
+func (x *UploadUserAvatarRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadUserAvatarRequest.ProtoReflect.Descriptor instead.
+func (*UploadUserAvatarRequest) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *UploadUserAvatarRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UploadUserAvatarRequest) GetAvatarData() []byte {
+	if x != nil {
+		return x.AvatarData
+	}
+	return nil
+}
+
+func (x *UploadUserAvatarRequest) GetContentType() string {
+	if x != nil {
+		return x.ContentType
+	}
+	return ""
+}
+
+type UploadUserAvatarResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	AvatarUrl     string                 `protobuf:"bytes,2,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UploadUserAvatarResponse) Reset() {
+	*x = UploadUserAvatarResponse{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UploadUserAvatarResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UploadUserAvatarResponse) ProtoMessage() {}
+
+func (x *UploadUserAvatarResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UploadUserAvatarResponse.ProtoReflect.Descriptor instead.
+func (*UploadUserAvatarResponse) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *UploadUserAvatarResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *UploadUserAvatarResponse) GetAvatarUrl() string {
+	if x != nil {
+		return x.AvatarUrl
+	}
+	return ""
+}
+
+func (x *UploadUserAvatarResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type UpdateUserAvatarRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	AvatarData    []byte                 `protobuf:"bytes,2,opt,name=avatar_data,json=avatarData,proto3" json:"avatar_data,omitempty"`
+	ContentType   string                 `protobuf:"bytes,3,opt,name=content_type,json=contentType,proto3" json:"content_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserAvatarRequest) Reset() {
+	*x = UpdateUserAvatarRequest{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserAvatarRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserAvatarRequest) ProtoMessage() {}
+
+func (x *UpdateUserAvatarRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserAvatarRequest.ProtoReflect.Descriptor instead.
+func (*UpdateUserAvatarRequest) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *UpdateUserAvatarRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *UpdateUserAvatarRequest) GetAvatarData() []byte {
+	if x != nil {
+		return x.AvatarData
+	}
+	return nil
+}
+
+func (x *UpdateUserAvatarRequest) GetContentType() string {
+	if x != nil {
+		return x.ContentType
+	}
+	return ""
+}
+
+type UpdateUserAvatarResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	AvatarUrl     string                 `protobuf:"bytes,2,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserAvatarResponse) Reset() {
+	*x = UpdateUserAvatarResponse{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserAvatarResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserAvatarResponse) ProtoMessage() {}
+
+func (x *UpdateUserAvatarResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserAvatarResponse.ProtoReflect.Descriptor instead.
+func (*UpdateUserAvatarResponse) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *UpdateUserAvatarResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *UpdateUserAvatarResponse) GetAvatarUrl() string {
+	if x != nil {
+		return x.AvatarUrl
+	}
+	return ""
+}
+
+func (x *UpdateUserAvatarResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+type GetUserAvatarRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserAvatarRequest) Reset() {
+	*x = GetUserAvatarRequest{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserAvatarRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserAvatarRequest) ProtoMessage() {}
+
+func (x *GetUserAvatarRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserAvatarRequest.ProtoReflect.Descriptor instead.
+func (*GetUserAvatarRequest) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *GetUserAvatarRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+type GetUserAvatarResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	AvatarUrl     string                 `protobuf:"bytes,2,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserAvatarResponse) Reset() {
+	*x = GetUserAvatarResponse{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserAvatarResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserAvatarResponse) ProtoMessage() {}
+
+func (x *GetUserAvatarResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserAvatarResponse.ProtoReflect.Descriptor instead.
+func (*GetUserAvatarResponse) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *GetUserAvatarResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *GetUserAvatarResponse) GetAvatarUrl() string {
+	if x != nil {
+		return x.AvatarUrl
+	}
+	return ""
+}
+
+func (x *GetUserAvatarResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 var File_userinfo_userinfo_proto protoreflect.FileDescriptor
 
 const file_userinfo_userinfo_proto_rawDesc = "" +
@@ -1080,7 +1432,7 @@ const file_userinfo_userinfo_proto_rawDesc = "" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x19\n" +
 	"\bicon_url\x18\x04 \x01(\tR\aiconUrl\x12\x1f\n" +
 	"\vdate_earned\x18\x05 \x01(\tR\n" +
-	"dateEarned\"\xb5\x03\n" +
+	"dateEarned\"\xd4\x03\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x14\n" +
@@ -1092,7 +1444,9 @@ const file_userinfo_userinfo_proto_rawDesc = "" +
 	"\x15completed_tests_count\x18\b \x01(\x05R\x13completedTestsCount\x12-\n" +
 	"\x12achievements_count\x18\t \x01(\x05R\x11achievementsCount\x12<\n" +
 	"\fachievements\x18\n" +
-	" \x03(\v2\x18.userinfo.v1.AchievementR\fachievements\"\x95\x01\n" +
+	" \x03(\v2\x18.userinfo.v1.AchievementR\fachievements\x12\x1d\n" +
+	"\n" +
+	"avatar_url\x18\v \x01(\tR\tavatarUrl\"\x95\x01\n" +
 	"\vTestSummary\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12'\n" +
@@ -1137,6 +1491,33 @@ const file_userinfo_userinfo_proto_rawDesc = "" +
 	"\x1eUpdateUserAchievementsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12<\n" +
 	"\fachievements\x18\x02 \x03(\v2\x18.userinfo.v1.AchievementR\fachievements\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\"v\n" +
+	"\x17UploadUserAvatarRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
+	"\vavatar_data\x18\x02 \x01(\fR\n" +
+	"avatarData\x12!\n" +
+	"\fcontent_type\x18\x03 \x01(\tR\vcontentType\"m\n" +
+	"\x18UploadUserAvatarResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1d\n" +
+	"\n" +
+	"avatar_url\x18\x02 \x01(\tR\tavatarUrl\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\"v\n" +
+	"\x17UpdateUserAvatarRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x1f\n" +
+	"\vavatar_data\x18\x02 \x01(\fR\n" +
+	"avatarData\x12!\n" +
+	"\fcontent_type\x18\x03 \x01(\tR\vcontentType\"m\n" +
+	"\x18UpdateUserAvatarResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1d\n" +
+	"\n" +
+	"avatar_url\x18\x02 \x01(\tR\tavatarUrl\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\"/\n" +
+	"\x14GetUserAvatarRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"j\n" +
+	"\x15GetUserAvatarResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1d\n" +
+	"\n" +
+	"avatar_url\x18\x02 \x01(\tR\tavatarUrl\x12\x18\n" +
 	"\amessage\x18\x03 \x01(\tR\amessage*_\n" +
 	"\tDirection\x12\x19\n" +
 	"\x15DIRECTION_UNSPECIFIED\x10\x00\x12\v\n" +
@@ -1152,14 +1533,17 @@ const file_userinfo_userinfo_proto_rawDesc = "" +
 	"\n" +
 	"\x06MIDDLE\x10\x02\x12\n" +
 	"\n" +
-	"\x06SENIOR\x10\x032\xd6\x04\n" +
+	"\x06SENIOR\x10\x032\xf0\x06\n" +
 	"\vUserService\x12D\n" +
 	"\aGetUser\x12\x1b.userinfo.v1.GetUserRequest\x1a\x1c.userinfo.v1.GetUserResponse\x12b\n" +
 	"\x11UpdateUserProfile\x12%.userinfo.v1.UpdateUserProfileRequest\x1a&.userinfo.v1.UpdateUserProfileResponse\x12e\n" +
 	"\x12GetUserTestHistory\x12&.userinfo.v1.GetUserTestHistoryRequest\x1a'.userinfo.v1.GetUserTestHistoryResponse\x12h\n" +
 	"\x13GetUserAchievements\x12'.userinfo.v1.GetUserAchievementsRequest\x1a(.userinfo.v1.GetUserAchievementsResponse\x12Y\n" +
 	"\x0eGetLeaderboard\x12\".userinfo.v1.GetLeaderboardRequest\x1a#.userinfo.v1.GetLeaderboardResponse\x12q\n" +
-	"\x16UpdateUserAchievements\x12*.userinfo.v1.UpdateUserAchievementsRequest\x1a+.userinfo.v1.UpdateUserAchievementsResponseB Z\x1ediploma.userinfo.v1;userinfov1b\x06proto3"
+	"\x16UpdateUserAchievements\x12*.userinfo.v1.UpdateUserAchievementsRequest\x1a+.userinfo.v1.UpdateUserAchievementsResponse\x12_\n" +
+	"\x10UploadUserAvatar\x12$.userinfo.v1.UploadUserAvatarRequest\x1a%.userinfo.v1.UploadUserAvatarResponse\x12_\n" +
+	"\x10UpdateUserAvatar\x12$.userinfo.v1.UpdateUserAvatarRequest\x1a%.userinfo.v1.UpdateUserAvatarResponse\x12V\n" +
+	"\rGetUserAvatar\x12!.userinfo.v1.GetUserAvatarRequest\x1a\".userinfo.v1.GetUserAvatarResponseB Z\x1ediploma.userinfo.v1;userinfov1b\x06proto3"
 
 var (
 	file_userinfo_userinfo_proto_rawDescOnce sync.Once
@@ -1174,7 +1558,7 @@ func file_userinfo_userinfo_proto_rawDescGZIP() []byte {
 }
 
 var file_userinfo_userinfo_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_userinfo_userinfo_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_userinfo_userinfo_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_userinfo_userinfo_proto_goTypes = []any{
 	(Direction)(0),                         // 0: userinfo.v1.Direction
 	(Level)(0),                             // 1: userinfo.v1.Level
@@ -1194,6 +1578,12 @@ var file_userinfo_userinfo_proto_goTypes = []any{
 	(*GetLeaderboardResponse)(nil),         // 15: userinfo.v1.GetLeaderboardResponse
 	(*UpdateUserAchievementsRequest)(nil),  // 16: userinfo.v1.UpdateUserAchievementsRequest
 	(*UpdateUserAchievementsResponse)(nil), // 17: userinfo.v1.UpdateUserAchievementsResponse
+	(*UploadUserAvatarRequest)(nil),        // 18: userinfo.v1.UploadUserAvatarRequest
+	(*UploadUserAvatarResponse)(nil),       // 19: userinfo.v1.UploadUserAvatarResponse
+	(*UpdateUserAvatarRequest)(nil),        // 20: userinfo.v1.UpdateUserAvatarRequest
+	(*UpdateUserAvatarResponse)(nil),       // 21: userinfo.v1.UpdateUserAvatarResponse
+	(*GetUserAvatarRequest)(nil),           // 22: userinfo.v1.GetUserAvatarRequest
+	(*GetUserAvatarResponse)(nil),          // 23: userinfo.v1.GetUserAvatarResponse
 }
 var file_userinfo_userinfo_proto_depIdxs = []int32{
 	0,  // 0: userinfo.v1.User.direction:type_name -> userinfo.v1.Direction
@@ -1217,14 +1607,20 @@ var file_userinfo_userinfo_proto_depIdxs = []int32{
 	12, // 18: userinfo.v1.UserService.GetUserAchievements:input_type -> userinfo.v1.GetUserAchievementsRequest
 	14, // 19: userinfo.v1.UserService.GetLeaderboard:input_type -> userinfo.v1.GetLeaderboardRequest
 	16, // 20: userinfo.v1.UserService.UpdateUserAchievements:input_type -> userinfo.v1.UpdateUserAchievementsRequest
-	7,  // 21: userinfo.v1.UserService.GetUser:output_type -> userinfo.v1.GetUserResponse
-	9,  // 22: userinfo.v1.UserService.UpdateUserProfile:output_type -> userinfo.v1.UpdateUserProfileResponse
-	11, // 23: userinfo.v1.UserService.GetUserTestHistory:output_type -> userinfo.v1.GetUserTestHistoryResponse
-	13, // 24: userinfo.v1.UserService.GetUserAchievements:output_type -> userinfo.v1.GetUserAchievementsResponse
-	15, // 25: userinfo.v1.UserService.GetLeaderboard:output_type -> userinfo.v1.GetLeaderboardResponse
-	17, // 26: userinfo.v1.UserService.UpdateUserAchievements:output_type -> userinfo.v1.UpdateUserAchievementsResponse
-	21, // [21:27] is the sub-list for method output_type
-	15, // [15:21] is the sub-list for method input_type
+	18, // 21: userinfo.v1.UserService.UploadUserAvatar:input_type -> userinfo.v1.UploadUserAvatarRequest
+	20, // 22: userinfo.v1.UserService.UpdateUserAvatar:input_type -> userinfo.v1.UpdateUserAvatarRequest
+	22, // 23: userinfo.v1.UserService.GetUserAvatar:input_type -> userinfo.v1.GetUserAvatarRequest
+	7,  // 24: userinfo.v1.UserService.GetUser:output_type -> userinfo.v1.GetUserResponse
+	9,  // 25: userinfo.v1.UserService.UpdateUserProfile:output_type -> userinfo.v1.UpdateUserProfileResponse
+	11, // 26: userinfo.v1.UserService.GetUserTestHistory:output_type -> userinfo.v1.GetUserTestHistoryResponse
+	13, // 27: userinfo.v1.UserService.GetUserAchievements:output_type -> userinfo.v1.GetUserAchievementsResponse
+	15, // 28: userinfo.v1.UserService.GetLeaderboard:output_type -> userinfo.v1.GetLeaderboardResponse
+	17, // 29: userinfo.v1.UserService.UpdateUserAchievements:output_type -> userinfo.v1.UpdateUserAchievementsResponse
+	19, // 30: userinfo.v1.UserService.UploadUserAvatar:output_type -> userinfo.v1.UploadUserAvatarResponse
+	21, // 31: userinfo.v1.UserService.UpdateUserAvatar:output_type -> userinfo.v1.UpdateUserAvatarResponse
+	23, // 32: userinfo.v1.UserService.GetUserAvatar:output_type -> userinfo.v1.GetUserAvatarResponse
+	24, // [24:33] is the sub-list for method output_type
+	15, // [15:24] is the sub-list for method input_type
 	15, // [15:15] is the sub-list for extension type_name
 	15, // [15:15] is the sub-list for extension extendee
 	0,  // [0:15] is the sub-list for field type_name
@@ -1241,7 +1637,7 @@ func file_userinfo_userinfo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_userinfo_userinfo_proto_rawDesc), len(file_userinfo_userinfo_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   16,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
