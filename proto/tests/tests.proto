@@ -12,6 +12,13 @@ enum Direction {
   DATA_SCIENCE = 4;
 }
 
+message Technology {
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+  Direction direction = 4;
+}
+
 enum Level {
   LEVEL_UNSPECIFIED = 0;
   JUNIOR = 1;
@@ -37,6 +44,9 @@ message TestInfo {
   string description = 3;
   Direction direction = 4;
   Level level = 5;
+  int64 technology_id = 6;
+  string technology_name = 7;
+  bool is_published = 8;
 }
 
 service TestService {
@@ -48,6 +58,18 @@ service TestService {
     rpc UpdateTest (UpdateTestRequest) returns (UpdateTestResponse);
     rpc DeleteTest (DeleteTestRequest) returns (Pagination);
     rpc PublishTest (PublishTestRequest) returns (PublishTestResponse);
+    
+    rpc CreateTechnology (CreateTechnologyRequest) returns (CreateTechnologyResponse);
+    rpc GetTechnologies (GetTechnologiesRequest) returns (GetTechnologiesResponse);
+    rpc UpdateTechnology (UpdateTechnologyRequest) returns (UpdateTechnologyResponse);
+    rpc DeleteTechnology (DeleteTechnologyRequest) returns (DeleteTechnologyResponse);
+    
+    rpc GetTestsByTechnology (GetTestsByTechnologyRequest) returns (GetTestsResponse);
+
+    rpc StartTestSession (StartTestSessionRequest) returns (StartTestSessionResponse);
+    rpc GetTestSession (GetTestSessionRequest) returns (GetTestSessionResponse);
+    rpc SaveAnswer (SaveAnswerRequest) returns (SaveAnswerResponse);
+    rpc CompleteTestSession (CompleteTestSessionRequest) returns (CompleteTestSessionResponse);
 }
 
 message CreateTestRequest {
@@ -56,6 +78,7 @@ message CreateTestRequest {
     repeated Question questions = 3;
     Direction direction = 4;
     Level level = 5;
+    int64 technology_id = 6;
 }
 
 message Question {
@@ -66,6 +89,7 @@ message Question {
     repeated int32 correct_options = 5;
     string sample_code = 6;
     int32 points = 7;
+    string explanation = 8;
 }
 
 message CreateTestResponse {
@@ -77,6 +101,7 @@ message GetTestsRequest {
     Direction direction = 1;
     Level level = 2;
     Pagination pagination = 3;
+    bool include_unpublished = 4;
 }
 
 message GetTestsResponse {
@@ -108,6 +133,8 @@ message SubmitAnswersRequest {
 message Answer {
     int64 question_id = 1;
     repeated int32 selected_options = 2;
+    string text_answer = 3;
+    string code_answer = 4;
 }
 
 message SubmitAnswersResponse {
@@ -123,6 +150,15 @@ message GetTestResultsResponse {
     int32 score = 1;
     int32 total_points = 2;
     string feedback = 3;
+    repeated QuestionResult question_results = 4;
+}
+
+message QuestionResult {
+    int64 question_id = 1;
+    bool is_correct = 2;
+    int32 points_earned = 3;
+    string feedback = 4;
+    string correct_answer = 5;
 }
 
 message UpdateTestRequest {
@@ -130,6 +166,8 @@ message UpdateTestRequest {
     string title = 2;
     string description = 3;
     repeated Question questions = 4;
+    Level level = 5;
+    int64 technology_id = 6;
 }
 
 message UpdateTestResponse {
@@ -142,8 +180,111 @@ message DeleteTestRequest {
 
 message PublishTestRequest {
     int64 test_id = 1;
+    bool publish = 2;
 }
 
 message PublishTestResponse {
+    string message = 1;
+}
+
+message CreateTechnologyRequest {
+    string name = 1;
+    string description = 2;
+    Direction direction = 3;
+}
+
+message CreateTechnologyResponse {
+    int64 technology_id = 1;
+    string message = 2;
+}
+
+message GetTechnologiesRequest {
+    Direction direction = 1;
+    Pagination pagination = 2;
+}
+
+message GetTechnologiesResponse {
+    repeated Technology technologies = 1;
+    string next_page_token = 2;
+}
+
+message UpdateTechnologyRequest {
+    int64 technology_id = 1;
+    string name = 2;
+    string description = 3;
+    Direction direction = 4;
+}
+
+message UpdateTechnologyResponse {
+    string message = 1;
+}
+
+message DeleteTechnologyRequest {
+    int64 technology_id = 1;
+}
+
+message DeleteTechnologyResponse {
+    string message = 1;
+}
+
+message GetTestsByTechnologyRequest {
+    int64 technology_id = 1;
+    Level level = 2;
+    Pagination pagination = 3;
+    bool include_unpublished = 4;
+}
+
+message CodeQuestion {
+  string code_snippet = 1;
+  string language = 2;
+  string question_text = 3;
+  repeated string options = 4;
+  int32 correct_option = 5;
+  string explanation = 6;
+}
+
+message TestSession {
+  string session_id = 1;
+  int64 test_id = 2;
+  int64 user_id = 3;
+  string status = 4; // "started", "in_progress", "completed", "abandoned"
+  int64 start_time = 5;
+  int64 completion_time = 6;
+}
+
+message StartTestSessionRequest {
+    int64 test_id = 1;
+    int64 user_id = 2;
+}
+
+message StartTestSessionResponse {
+    string session_id = 1;
+    string message = 2;
+}
+
+message GetTestSessionRequest {
+    string session_id = 1;
+}
+
+message GetTestSessionResponse {
+    TestInfo test = 1;
+    repeated Question questions = 2;
+}
+
+message SaveAnswerRequest {
+    string session_id = 1;
+    int64 question_id = 2;
+    int32 selected_option = 3;
+}
+
+message SaveAnswerResponse {
+    string message = 1;
+}
+
+message CompleteTestSessionRequest {
+    string session_id = 1;
+}
+
+message CompleteTestSessionResponse {
     string message = 1;
 }

@@ -19,20 +19,49 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AnalyticsService_GetTestStatistics_FullMethodName = "/analytics.v1.AnalyticsService/GetTestStatistics"
-	AnalyticsService_GetUserStatistics_FullMethodName = "/analytics.v1.AnalyticsService/GetUserStatistics"
-	AnalyticsService_GenerateReport_FullMethodName    = "/analytics.v1.AnalyticsService/GenerateReport"
-	AnalyticsService_ListReports_FullMethodName       = "/analytics.v1.AnalyticsService/ListReports"
+	AnalyticsService_GetTestStatistics_FullMethodName              = "/analytics.v1.AnalyticsService/GetTestStatistics"
+	AnalyticsService_GetTestPerformanceTrend_FullMethodName        = "/analytics.v1.AnalyticsService/GetTestPerformanceTrend"
+	AnalyticsService_GetQuestionDifficultyAnalysis_FullMethodName  = "/analytics.v1.AnalyticsService/GetQuestionDifficultyAnalysis"
+	AnalyticsService_GetUserStatistics_FullMethodName              = "/analytics.v1.AnalyticsService/GetUserStatistics"
+	AnalyticsService_GetUserProgressReport_FullMethodName          = "/analytics.v1.AnalyticsService/GetUserProgressReport"
+	AnalyticsService_GetUserStrengthsWeaknesses_FullMethodName     = "/analytics.v1.AnalyticsService/GetUserStrengthsWeaknesses"
+	AnalyticsService_GetUserComparisonWithPeers_FullMethodName     = "/analytics.v1.AnalyticsService/GetUserComparisonWithPeers"
+	AnalyticsService_GetPlatformStatistics_FullMethodName          = "/analytics.v1.AnalyticsService/GetPlatformStatistics"
+	AnalyticsService_GetCategoryPopularityStats_FullMethodName     = "/analytics.v1.AnalyticsService/GetCategoryPopularityStats"
+	AnalyticsService_GetUserEngagementMetrics_FullMethodName       = "/analytics.v1.AnalyticsService/GetUserEngagementMetrics"
+	AnalyticsService_GetActiveUsersStats_FullMethodName            = "/analytics.v1.AnalyticsService/GetActiveUsersStats"
+	AnalyticsService_GenerateReport_FullMethodName                 = "/analytics.v1.AnalyticsService/GenerateReport"
+	AnalyticsService_ListReports_FullMethodName                    = "/analytics.v1.AnalyticsService/ListReports"
+	AnalyticsService_GetReport_FullMethodName                      = "/analytics.v1.AnalyticsService/GetReport"
+	AnalyticsService_GetLearningPathRecommendations_FullMethodName = "/analytics.v1.AnalyticsService/GetLearningPathRecommendations"
+	AnalyticsService_GetTestRecommendations_FullMethodName         = "/analytics.v1.AnalyticsService/GetTestRecommendations"
 )
 
 // AnalyticsServiceClient is the client API for AnalyticsService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AnalyticsServiceClient interface {
+	// Test Analytics
 	GetTestStatistics(ctx context.Context, in *GetTestStatisticsRequest, opts ...grpc.CallOption) (*GetTestStatisticsResponse, error)
+	GetTestPerformanceTrend(ctx context.Context, in *GetTestPerformanceTrendRequest, opts ...grpc.CallOption) (*GetTestPerformanceTrendResponse, error)
+	GetQuestionDifficultyAnalysis(ctx context.Context, in *GetQuestionDifficultyAnalysisRequest, opts ...grpc.CallOption) (*GetQuestionDifficultyAnalysisResponse, error)
+	// User Analytics
 	GetUserStatistics(ctx context.Context, in *GetUserStatisticsRequest, opts ...grpc.CallOption) (*GetUserStatisticsResponse, error)
+	GetUserProgressReport(ctx context.Context, in *GetUserProgressReportRequest, opts ...grpc.CallOption) (*GetUserProgressReportResponse, error)
+	GetUserStrengthsWeaknesses(ctx context.Context, in *GetUserStrengthsWeaknessesRequest, opts ...grpc.CallOption) (*GetUserStrengthsWeaknessesResponse, error)
+	GetUserComparisonWithPeers(ctx context.Context, in *GetUserComparisonWithPeersRequest, opts ...grpc.CallOption) (*GetUserComparisonWithPeersResponse, error)
+	// Platform Analytics
+	GetPlatformStatistics(ctx context.Context, in *GetPlatformStatisticsRequest, opts ...grpc.CallOption) (*GetPlatformStatisticsResponse, error)
+	GetCategoryPopularityStats(ctx context.Context, in *GetCategoryPopularityStatsRequest, opts ...grpc.CallOption) (*GetCategoryPopularityStatsResponse, error)
+	GetUserEngagementMetrics(ctx context.Context, in *GetUserEngagementMetricsRequest, opts ...grpc.CallOption) (*GetUserEngagementMetricsResponse, error)
+	GetActiveUsersStats(ctx context.Context, in *GetActiveUsersStatsRequest, opts ...grpc.CallOption) (*GetActiveUsersStatsResponse, error)
+	// Reports
 	GenerateReport(ctx context.Context, in *GenerateReportRequest, opts ...grpc.CallOption) (*GenerateReportResponse, error)
 	ListReports(ctx context.Context, in *ListReportsRequest, opts ...grpc.CallOption) (*ListReportsResponse, error)
+	GetReport(ctx context.Context, in *GetReportRequest, opts ...grpc.CallOption) (*GetReportResponse, error)
+	// Learning Recommendations
+	GetLearningPathRecommendations(ctx context.Context, in *GetLearningPathRecommendationsRequest, opts ...grpc.CallOption) (*GetLearningPathRecommendationsResponse, error)
+	GetTestRecommendations(ctx context.Context, in *GetTestRecommendationsRequest, opts ...grpc.CallOption) (*GetTestRecommendationsResponse, error)
 }
 
 type analyticsServiceClient struct {
@@ -53,10 +82,100 @@ func (c *analyticsServiceClient) GetTestStatistics(ctx context.Context, in *GetT
 	return out, nil
 }
 
+func (c *analyticsServiceClient) GetTestPerformanceTrend(ctx context.Context, in *GetTestPerformanceTrendRequest, opts ...grpc.CallOption) (*GetTestPerformanceTrendResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTestPerformanceTrendResponse)
+	err := c.cc.Invoke(ctx, AnalyticsService_GetTestPerformanceTrend_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *analyticsServiceClient) GetQuestionDifficultyAnalysis(ctx context.Context, in *GetQuestionDifficultyAnalysisRequest, opts ...grpc.CallOption) (*GetQuestionDifficultyAnalysisResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetQuestionDifficultyAnalysisResponse)
+	err := c.cc.Invoke(ctx, AnalyticsService_GetQuestionDifficultyAnalysis_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *analyticsServiceClient) GetUserStatistics(ctx context.Context, in *GetUserStatisticsRequest, opts ...grpc.CallOption) (*GetUserStatisticsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUserStatisticsResponse)
 	err := c.cc.Invoke(ctx, AnalyticsService_GetUserStatistics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *analyticsServiceClient) GetUserProgressReport(ctx context.Context, in *GetUserProgressReportRequest, opts ...grpc.CallOption) (*GetUserProgressReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserProgressReportResponse)
+	err := c.cc.Invoke(ctx, AnalyticsService_GetUserProgressReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *analyticsServiceClient) GetUserStrengthsWeaknesses(ctx context.Context, in *GetUserStrengthsWeaknessesRequest, opts ...grpc.CallOption) (*GetUserStrengthsWeaknessesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserStrengthsWeaknessesResponse)
+	err := c.cc.Invoke(ctx, AnalyticsService_GetUserStrengthsWeaknesses_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *analyticsServiceClient) GetUserComparisonWithPeers(ctx context.Context, in *GetUserComparisonWithPeersRequest, opts ...grpc.CallOption) (*GetUserComparisonWithPeersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserComparisonWithPeersResponse)
+	err := c.cc.Invoke(ctx, AnalyticsService_GetUserComparisonWithPeers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *analyticsServiceClient) GetPlatformStatistics(ctx context.Context, in *GetPlatformStatisticsRequest, opts ...grpc.CallOption) (*GetPlatformStatisticsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPlatformStatisticsResponse)
+	err := c.cc.Invoke(ctx, AnalyticsService_GetPlatformStatistics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *analyticsServiceClient) GetCategoryPopularityStats(ctx context.Context, in *GetCategoryPopularityStatsRequest, opts ...grpc.CallOption) (*GetCategoryPopularityStatsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCategoryPopularityStatsResponse)
+	err := c.cc.Invoke(ctx, AnalyticsService_GetCategoryPopularityStats_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *analyticsServiceClient) GetUserEngagementMetrics(ctx context.Context, in *GetUserEngagementMetricsRequest, opts ...grpc.CallOption) (*GetUserEngagementMetricsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserEngagementMetricsResponse)
+	err := c.cc.Invoke(ctx, AnalyticsService_GetUserEngagementMetrics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *analyticsServiceClient) GetActiveUsersStats(ctx context.Context, in *GetActiveUsersStatsRequest, opts ...grpc.CallOption) (*GetActiveUsersStatsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetActiveUsersStatsResponse)
+	err := c.cc.Invoke(ctx, AnalyticsService_GetActiveUsersStats_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -83,14 +202,61 @@ func (c *analyticsServiceClient) ListReports(ctx context.Context, in *ListReport
 	return out, nil
 }
 
+func (c *analyticsServiceClient) GetReport(ctx context.Context, in *GetReportRequest, opts ...grpc.CallOption) (*GetReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetReportResponse)
+	err := c.cc.Invoke(ctx, AnalyticsService_GetReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *analyticsServiceClient) GetLearningPathRecommendations(ctx context.Context, in *GetLearningPathRecommendationsRequest, opts ...grpc.CallOption) (*GetLearningPathRecommendationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLearningPathRecommendationsResponse)
+	err := c.cc.Invoke(ctx, AnalyticsService_GetLearningPathRecommendations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *analyticsServiceClient) GetTestRecommendations(ctx context.Context, in *GetTestRecommendationsRequest, opts ...grpc.CallOption) (*GetTestRecommendationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTestRecommendationsResponse)
+	err := c.cc.Invoke(ctx, AnalyticsService_GetTestRecommendations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AnalyticsServiceServer is the server API for AnalyticsService service.
 // All implementations must embed UnimplementedAnalyticsServiceServer
 // for forward compatibility.
 type AnalyticsServiceServer interface {
+	// Test Analytics
 	GetTestStatistics(context.Context, *GetTestStatisticsRequest) (*GetTestStatisticsResponse, error)
+	GetTestPerformanceTrend(context.Context, *GetTestPerformanceTrendRequest) (*GetTestPerformanceTrendResponse, error)
+	GetQuestionDifficultyAnalysis(context.Context, *GetQuestionDifficultyAnalysisRequest) (*GetQuestionDifficultyAnalysisResponse, error)
+	// User Analytics
 	GetUserStatistics(context.Context, *GetUserStatisticsRequest) (*GetUserStatisticsResponse, error)
+	GetUserProgressReport(context.Context, *GetUserProgressReportRequest) (*GetUserProgressReportResponse, error)
+	GetUserStrengthsWeaknesses(context.Context, *GetUserStrengthsWeaknessesRequest) (*GetUserStrengthsWeaknessesResponse, error)
+	GetUserComparisonWithPeers(context.Context, *GetUserComparisonWithPeersRequest) (*GetUserComparisonWithPeersResponse, error)
+	// Platform Analytics
+	GetPlatformStatistics(context.Context, *GetPlatformStatisticsRequest) (*GetPlatformStatisticsResponse, error)
+	GetCategoryPopularityStats(context.Context, *GetCategoryPopularityStatsRequest) (*GetCategoryPopularityStatsResponse, error)
+	GetUserEngagementMetrics(context.Context, *GetUserEngagementMetricsRequest) (*GetUserEngagementMetricsResponse, error)
+	GetActiveUsersStats(context.Context, *GetActiveUsersStatsRequest) (*GetActiveUsersStatsResponse, error)
+	// Reports
 	GenerateReport(context.Context, *GenerateReportRequest) (*GenerateReportResponse, error)
 	ListReports(context.Context, *ListReportsRequest) (*ListReportsResponse, error)
+	GetReport(context.Context, *GetReportRequest) (*GetReportResponse, error)
+	// Learning Recommendations
+	GetLearningPathRecommendations(context.Context, *GetLearningPathRecommendationsRequest) (*GetLearningPathRecommendationsResponse, error)
+	GetTestRecommendations(context.Context, *GetTestRecommendationsRequest) (*GetTestRecommendationsResponse, error)
 	mustEmbedUnimplementedAnalyticsServiceServer()
 }
 
@@ -104,14 +270,50 @@ type UnimplementedAnalyticsServiceServer struct{}
 func (UnimplementedAnalyticsServiceServer) GetTestStatistics(context.Context, *GetTestStatisticsRequest) (*GetTestStatisticsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTestStatistics not implemented")
 }
+func (UnimplementedAnalyticsServiceServer) GetTestPerformanceTrend(context.Context, *GetTestPerformanceTrendRequest) (*GetTestPerformanceTrendResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTestPerformanceTrend not implemented")
+}
+func (UnimplementedAnalyticsServiceServer) GetQuestionDifficultyAnalysis(context.Context, *GetQuestionDifficultyAnalysisRequest) (*GetQuestionDifficultyAnalysisResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetQuestionDifficultyAnalysis not implemented")
+}
 func (UnimplementedAnalyticsServiceServer) GetUserStatistics(context.Context, *GetUserStatisticsRequest) (*GetUserStatisticsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserStatistics not implemented")
+}
+func (UnimplementedAnalyticsServiceServer) GetUserProgressReport(context.Context, *GetUserProgressReportRequest) (*GetUserProgressReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserProgressReport not implemented")
+}
+func (UnimplementedAnalyticsServiceServer) GetUserStrengthsWeaknesses(context.Context, *GetUserStrengthsWeaknessesRequest) (*GetUserStrengthsWeaknessesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserStrengthsWeaknesses not implemented")
+}
+func (UnimplementedAnalyticsServiceServer) GetUserComparisonWithPeers(context.Context, *GetUserComparisonWithPeersRequest) (*GetUserComparisonWithPeersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserComparisonWithPeers not implemented")
+}
+func (UnimplementedAnalyticsServiceServer) GetPlatformStatistics(context.Context, *GetPlatformStatisticsRequest) (*GetPlatformStatisticsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPlatformStatistics not implemented")
+}
+func (UnimplementedAnalyticsServiceServer) GetCategoryPopularityStats(context.Context, *GetCategoryPopularityStatsRequest) (*GetCategoryPopularityStatsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCategoryPopularityStats not implemented")
+}
+func (UnimplementedAnalyticsServiceServer) GetUserEngagementMetrics(context.Context, *GetUserEngagementMetricsRequest) (*GetUserEngagementMetricsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserEngagementMetrics not implemented")
+}
+func (UnimplementedAnalyticsServiceServer) GetActiveUsersStats(context.Context, *GetActiveUsersStatsRequest) (*GetActiveUsersStatsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetActiveUsersStats not implemented")
 }
 func (UnimplementedAnalyticsServiceServer) GenerateReport(context.Context, *GenerateReportRequest) (*GenerateReportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GenerateReport not implemented")
 }
 func (UnimplementedAnalyticsServiceServer) ListReports(context.Context, *ListReportsRequest) (*ListReportsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListReports not implemented")
+}
+func (UnimplementedAnalyticsServiceServer) GetReport(context.Context, *GetReportRequest) (*GetReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetReport not implemented")
+}
+func (UnimplementedAnalyticsServiceServer) GetLearningPathRecommendations(context.Context, *GetLearningPathRecommendationsRequest) (*GetLearningPathRecommendationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLearningPathRecommendations not implemented")
+}
+func (UnimplementedAnalyticsServiceServer) GetTestRecommendations(context.Context, *GetTestRecommendationsRequest) (*GetTestRecommendationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTestRecommendations not implemented")
 }
 func (UnimplementedAnalyticsServiceServer) mustEmbedUnimplementedAnalyticsServiceServer() {}
 func (UnimplementedAnalyticsServiceServer) testEmbeddedByValue()                          {}
@@ -152,6 +354,42 @@ func _AnalyticsService_GetTestStatistics_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AnalyticsService_GetTestPerformanceTrend_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTestPerformanceTrendRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyticsServiceServer).GetTestPerformanceTrend(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AnalyticsService_GetTestPerformanceTrend_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyticsServiceServer).GetTestPerformanceTrend(ctx, req.(*GetTestPerformanceTrendRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AnalyticsService_GetQuestionDifficultyAnalysis_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetQuestionDifficultyAnalysisRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyticsServiceServer).GetQuestionDifficultyAnalysis(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AnalyticsService_GetQuestionDifficultyAnalysis_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyticsServiceServer).GetQuestionDifficultyAnalysis(ctx, req.(*GetQuestionDifficultyAnalysisRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AnalyticsService_GetUserStatistics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUserStatisticsRequest)
 	if err := dec(in); err != nil {
@@ -166,6 +404,132 @@ func _AnalyticsService_GetUserStatistics_Handler(srv interface{}, ctx context.Co
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AnalyticsServiceServer).GetUserStatistics(ctx, req.(*GetUserStatisticsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AnalyticsService_GetUserProgressReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserProgressReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyticsServiceServer).GetUserProgressReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AnalyticsService_GetUserProgressReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyticsServiceServer).GetUserProgressReport(ctx, req.(*GetUserProgressReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AnalyticsService_GetUserStrengthsWeaknesses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserStrengthsWeaknessesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyticsServiceServer).GetUserStrengthsWeaknesses(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AnalyticsService_GetUserStrengthsWeaknesses_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyticsServiceServer).GetUserStrengthsWeaknesses(ctx, req.(*GetUserStrengthsWeaknessesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AnalyticsService_GetUserComparisonWithPeers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserComparisonWithPeersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyticsServiceServer).GetUserComparisonWithPeers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AnalyticsService_GetUserComparisonWithPeers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyticsServiceServer).GetUserComparisonWithPeers(ctx, req.(*GetUserComparisonWithPeersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AnalyticsService_GetPlatformStatistics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPlatformStatisticsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyticsServiceServer).GetPlatformStatistics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AnalyticsService_GetPlatformStatistics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyticsServiceServer).GetPlatformStatistics(ctx, req.(*GetPlatformStatisticsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AnalyticsService_GetCategoryPopularityStats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCategoryPopularityStatsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyticsServiceServer).GetCategoryPopularityStats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AnalyticsService_GetCategoryPopularityStats_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyticsServiceServer).GetCategoryPopularityStats(ctx, req.(*GetCategoryPopularityStatsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AnalyticsService_GetUserEngagementMetrics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserEngagementMetricsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyticsServiceServer).GetUserEngagementMetrics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AnalyticsService_GetUserEngagementMetrics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyticsServiceServer).GetUserEngagementMetrics(ctx, req.(*GetUserEngagementMetricsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AnalyticsService_GetActiveUsersStats_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetActiveUsersStatsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyticsServiceServer).GetActiveUsersStats(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AnalyticsService_GetActiveUsersStats_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyticsServiceServer).GetActiveUsersStats(ctx, req.(*GetActiveUsersStatsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -206,6 +570,60 @@ func _AnalyticsService_ListReports_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AnalyticsService_GetReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyticsServiceServer).GetReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AnalyticsService_GetReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyticsServiceServer).GetReport(ctx, req.(*GetReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AnalyticsService_GetLearningPathRecommendations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLearningPathRecommendationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyticsServiceServer).GetLearningPathRecommendations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AnalyticsService_GetLearningPathRecommendations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyticsServiceServer).GetLearningPathRecommendations(ctx, req.(*GetLearningPathRecommendationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AnalyticsService_GetTestRecommendations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTestRecommendationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AnalyticsServiceServer).GetTestRecommendations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AnalyticsService_GetTestRecommendations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AnalyticsServiceServer).GetTestRecommendations(ctx, req.(*GetTestRecommendationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AnalyticsService_ServiceDesc is the grpc.ServiceDesc for AnalyticsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -218,8 +636,44 @@ var AnalyticsService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AnalyticsService_GetTestStatistics_Handler,
 		},
 		{
+			MethodName: "GetTestPerformanceTrend",
+			Handler:    _AnalyticsService_GetTestPerformanceTrend_Handler,
+		},
+		{
+			MethodName: "GetQuestionDifficultyAnalysis",
+			Handler:    _AnalyticsService_GetQuestionDifficultyAnalysis_Handler,
+		},
+		{
 			MethodName: "GetUserStatistics",
 			Handler:    _AnalyticsService_GetUserStatistics_Handler,
+		},
+		{
+			MethodName: "GetUserProgressReport",
+			Handler:    _AnalyticsService_GetUserProgressReport_Handler,
+		},
+		{
+			MethodName: "GetUserStrengthsWeaknesses",
+			Handler:    _AnalyticsService_GetUserStrengthsWeaknesses_Handler,
+		},
+		{
+			MethodName: "GetUserComparisonWithPeers",
+			Handler:    _AnalyticsService_GetUserComparisonWithPeers_Handler,
+		},
+		{
+			MethodName: "GetPlatformStatistics",
+			Handler:    _AnalyticsService_GetPlatformStatistics_Handler,
+		},
+		{
+			MethodName: "GetCategoryPopularityStats",
+			Handler:    _AnalyticsService_GetCategoryPopularityStats_Handler,
+		},
+		{
+			MethodName: "GetUserEngagementMetrics",
+			Handler:    _AnalyticsService_GetUserEngagementMetrics_Handler,
+		},
+		{
+			MethodName: "GetActiveUsersStats",
+			Handler:    _AnalyticsService_GetActiveUsersStats_Handler,
 		},
 		{
 			MethodName: "GenerateReport",
@@ -228,6 +682,18 @@ var AnalyticsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListReports",
 			Handler:    _AnalyticsService_ListReports_Handler,
+		},
+		{
+			MethodName: "GetReport",
+			Handler:    _AnalyticsService_GetReport_Handler,
+		},
+		{
+			MethodName: "GetLearningPathRecommendations",
+			Handler:    _AnalyticsService_GetLearningPathRecommendations_Handler,
+		},
+		{
+			MethodName: "GetTestRecommendations",
+			Handler:    _AnalyticsService_GetTestRecommendations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

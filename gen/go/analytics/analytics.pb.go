@@ -129,64 +129,15 @@ func (Level) EnumDescriptor() ([]byte, []int) {
 	return file_analytics_analytics_proto_rawDescGZIP(), []int{1}
 }
 
-type Difficulty int32
-
-const (
-	Difficulty_DIFFICULTY_UNSPECIFIED Difficulty = 0
-	Difficulty_EASY                   Difficulty = 1
-	Difficulty_MEDIUM                 Difficulty = 2
-	Difficulty_HARD                   Difficulty = 3
-)
-
-// Enum value maps for Difficulty.
-var (
-	Difficulty_name = map[int32]string{
-		0: "DIFFICULTY_UNSPECIFIED",
-		1: "EASY",
-		2: "MEDIUM",
-		3: "HARD",
-	}
-	Difficulty_value = map[string]int32{
-		"DIFFICULTY_UNSPECIFIED": 0,
-		"EASY":                   1,
-		"MEDIUM":                 2,
-		"HARD":                   3,
-	}
-)
-
-func (x Difficulty) Enum() *Difficulty {
-	p := new(Difficulty)
-	*p = x
-	return p
-}
-
-func (x Difficulty) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Difficulty) Descriptor() protoreflect.EnumDescriptor {
-	return file_analytics_analytics_proto_enumTypes[2].Descriptor()
-}
-
-func (Difficulty) Type() protoreflect.EnumType {
-	return &file_analytics_analytics_proto_enumTypes[2]
-}
-
-func (x Difficulty) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use Difficulty.Descriptor instead.
-func (Difficulty) EnumDescriptor() ([]byte, []int) {
-	return file_analytics_analytics_proto_rawDescGZIP(), []int{2}
-}
-
 type ReportType int32
 
 const (
 	ReportType_REPORT_TYPE_UNSPECIFIED ReportType = 0
 	ReportType_SUMMARY                 ReportType = 1
 	ReportType_DETAILED                ReportType = 2
+	ReportType_USER_PROGRESS           ReportType = 3
+	ReportType_PLATFORM_METRICS        ReportType = 4
+	ReportType_TEST_QUALITY            ReportType = 5
 )
 
 // Enum value maps for ReportType.
@@ -195,11 +146,17 @@ var (
 		0: "REPORT_TYPE_UNSPECIFIED",
 		1: "SUMMARY",
 		2: "DETAILED",
+		3: "USER_PROGRESS",
+		4: "PLATFORM_METRICS",
+		5: "TEST_QUALITY",
 	}
 	ReportType_value = map[string]int32{
 		"REPORT_TYPE_UNSPECIFIED": 0,
 		"SUMMARY":                 1,
 		"DETAILED":                2,
+		"USER_PROGRESS":           3,
+		"PLATFORM_METRICS":        4,
+		"TEST_QUALITY":            5,
 	}
 )
 
@@ -214,11 +171,11 @@ func (x ReportType) String() string {
 }
 
 func (ReportType) Descriptor() protoreflect.EnumDescriptor {
-	return file_analytics_analytics_proto_enumTypes[3].Descriptor()
+	return file_analytics_analytics_proto_enumTypes[2].Descriptor()
 }
 
 func (ReportType) Type() protoreflect.EnumType {
-	return &file_analytics_analytics_proto_enumTypes[3]
+	return &file_analytics_analytics_proto_enumTypes[2]
 }
 
 func (x ReportType) Number() protoreflect.EnumNumber {
@@ -227,6 +184,67 @@ func (x ReportType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ReportType.Descriptor instead.
 func (ReportType) EnumDescriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{2}
+}
+
+type TimeFrame int32
+
+const (
+	TimeFrame_TIME_FRAME_UNSPECIFIED TimeFrame = 0
+	TimeFrame_DAILY                  TimeFrame = 1
+	TimeFrame_WEEKLY                 TimeFrame = 2
+	TimeFrame_MONTHLY                TimeFrame = 3
+	TimeFrame_QUARTERLY              TimeFrame = 4
+	TimeFrame_YEARLY                 TimeFrame = 5
+	TimeFrame_CUSTOM                 TimeFrame = 6
+)
+
+// Enum value maps for TimeFrame.
+var (
+	TimeFrame_name = map[int32]string{
+		0: "TIME_FRAME_UNSPECIFIED",
+		1: "DAILY",
+		2: "WEEKLY",
+		3: "MONTHLY",
+		4: "QUARTERLY",
+		5: "YEARLY",
+		6: "CUSTOM",
+	}
+	TimeFrame_value = map[string]int32{
+		"TIME_FRAME_UNSPECIFIED": 0,
+		"DAILY":                  1,
+		"WEEKLY":                 2,
+		"MONTHLY":                3,
+		"QUARTERLY":              4,
+		"YEARLY":                 5,
+		"CUSTOM":                 6,
+	}
+)
+
+func (x TimeFrame) Enum() *TimeFrame {
+	p := new(TimeFrame)
+	*p = x
+	return p
+}
+
+func (x TimeFrame) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (TimeFrame) Descriptor() protoreflect.EnumDescriptor {
+	return file_analytics_analytics_proto_enumTypes[3].Descriptor()
+}
+
+func (TimeFrame) Type() protoreflect.EnumType {
+	return &file_analytics_analytics_proto_enumTypes[3]
+}
+
+func (x TimeFrame) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use TimeFrame.Descriptor instead.
+func (TimeFrame) EnumDescriptor() ([]byte, []int) {
 	return file_analytics_analytics_proto_rawDescGZIP(), []int{3}
 }
 
@@ -334,6 +352,7 @@ func (x *Pagination) GetPageToken() string {
 	return ""
 }
 
+// Test Analytics Messages
 type GetTestStatisticsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TestId        int64                  `protobuf:"varint,1,opt,name=test_id,json=testId,proto3" json:"test_id,omitempty"`
@@ -387,12 +406,16 @@ func (x *GetTestStatisticsRequest) GetTimeRange() *TimestampRange {
 }
 
 type GetTestStatisticsResponse struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	TotalSubmissions int32                  `protobuf:"varint,1,opt,name=total_submissions,json=totalSubmissions,proto3" json:"total_submissions,omitempty"`
-	AverageScore     float64                `protobuf:"fixed64,2,opt,name=average_score,json=averageScore,proto3" json:"average_score,omitempty"`
-	QuestionStats    []*QuestionStats       `protobuf:"bytes,3,rep,name=question_stats,json=questionStats,proto3" json:"question_stats,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	TotalAttempts           int32                  `protobuf:"varint,1,opt,name=total_attempts,json=totalAttempts,proto3" json:"total_attempts,omitempty"`
+	CompletedAttempts       int32                  `protobuf:"varint,2,opt,name=completed_attempts,json=completedAttempts,proto3" json:"completed_attempts,omitempty"`
+	CompletionRate          float64                `protobuf:"fixed64,3,opt,name=completion_rate,json=completionRate,proto3" json:"completion_rate,omitempty"`
+	AverageScore            float64                `protobuf:"fixed64,4,opt,name=average_score,json=averageScore,proto3" json:"average_score,omitempty"`
+	AverageTimeSpentSeconds float64                `protobuf:"fixed64,5,opt,name=average_time_spent_seconds,json=averageTimeSpentSeconds,proto3" json:"average_time_spent_seconds,omitempty"`
+	ScoreDistribution       *ScoreDistribution     `protobuf:"bytes,6,opt,name=score_distribution,json=scoreDistribution,proto3" json:"score_distribution,omitempty"`
+	QuestionStats           []*QuestionStats       `protobuf:"bytes,7,rep,name=question_stats,json=questionStats,proto3" json:"question_stats,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *GetTestStatisticsResponse) Reset() {
@@ -425,9 +448,23 @@ func (*GetTestStatisticsResponse) Descriptor() ([]byte, []int) {
 	return file_analytics_analytics_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *GetTestStatisticsResponse) GetTotalSubmissions() int32 {
+func (x *GetTestStatisticsResponse) GetTotalAttempts() int32 {
 	if x != nil {
-		return x.TotalSubmissions
+		return x.TotalAttempts
+	}
+	return 0
+}
+
+func (x *GetTestStatisticsResponse) GetCompletedAttempts() int32 {
+	if x != nil {
+		return x.CompletedAttempts
+	}
+	return 0
+}
+
+func (x *GetTestStatisticsResponse) GetCompletionRate() float64 {
+	if x != nil {
+		return x.CompletionRate
 	}
 	return 0
 }
@@ -439,6 +476,20 @@ func (x *GetTestStatisticsResponse) GetAverageScore() float64 {
 	return 0
 }
 
+func (x *GetTestStatisticsResponse) GetAverageTimeSpentSeconds() float64 {
+	if x != nil {
+		return x.AverageTimeSpentSeconds
+	}
+	return 0
+}
+
+func (x *GetTestStatisticsResponse) GetScoreDistribution() *ScoreDistribution {
+	if x != nil {
+		return x.ScoreDistribution
+	}
+	return nil
+}
+
 func (x *GetTestStatisticsResponse) GetQuestionStats() []*QuestionStats {
 	if x != nil {
 		return x.QuestionStats
@@ -446,18 +497,97 @@ func (x *GetTestStatisticsResponse) GetQuestionStats() []*QuestionStats {
 	return nil
 }
 
+type ScoreDistribution struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	ExcellentCount    int32                  `protobuf:"varint,1,opt,name=excellent_count,json=excellentCount,proto3" json:"excellent_count,omitempty"`            // 90-100%
+	GoodCount         int32                  `protobuf:"varint,2,opt,name=good_count,json=goodCount,proto3" json:"good_count,omitempty"`                           // 75-89%
+	AverageCount      int32                  `protobuf:"varint,3,opt,name=average_count,json=averageCount,proto3" json:"average_count,omitempty"`                  // 50-74%
+	BelowAverageCount int32                  `protobuf:"varint,4,opt,name=below_average_count,json=belowAverageCount,proto3" json:"below_average_count,omitempty"` // 25-49%
+	PoorCount         int32                  `protobuf:"varint,5,opt,name=poor_count,json=poorCount,proto3" json:"poor_count,omitempty"`                           // 0-24%
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *ScoreDistribution) Reset() {
+	*x = ScoreDistribution{}
+	mi := &file_analytics_analytics_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ScoreDistribution) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ScoreDistribution) ProtoMessage() {}
+
+func (x *ScoreDistribution) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ScoreDistribution.ProtoReflect.Descriptor instead.
+func (*ScoreDistribution) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ScoreDistribution) GetExcellentCount() int32 {
+	if x != nil {
+		return x.ExcellentCount
+	}
+	return 0
+}
+
+func (x *ScoreDistribution) GetGoodCount() int32 {
+	if x != nil {
+		return x.GoodCount
+	}
+	return 0
+}
+
+func (x *ScoreDistribution) GetAverageCount() int32 {
+	if x != nil {
+		return x.AverageCount
+	}
+	return 0
+}
+
+func (x *ScoreDistribution) GetBelowAverageCount() int32 {
+	if x != nil {
+		return x.BelowAverageCount
+	}
+	return 0
+}
+
+func (x *ScoreDistribution) GetPoorCount() int32 {
+	if x != nil {
+		return x.PoorCount
+	}
+	return 0
+}
+
 type QuestionStats struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	QuestionId    int64                  `protobuf:"varint,1,opt,name=question_id,json=questionId,proto3" json:"question_id,omitempty"`
-	Attempts      int32                  `protobuf:"varint,2,opt,name=attempts,proto3" json:"attempts,omitempty"`
-	AverageScore  float64                `protobuf:"fixed64,3,opt,name=average_score,json=averageScore,proto3" json:"average_score,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	QuestionId              int64                  `protobuf:"varint,1,opt,name=question_id,json=questionId,proto3" json:"question_id,omitempty"`
+	Attempts                int32                  `protobuf:"varint,2,opt,name=attempts,proto3" json:"attempts,omitempty"`
+	CorrectAnswers          int32                  `protobuf:"varint,3,opt,name=correct_answers,json=correctAnswers,proto3" json:"correct_answers,omitempty"`
+	SuccessRate             float64                `protobuf:"fixed64,4,opt,name=success_rate,json=successRate,proto3" json:"success_rate,omitempty"`
+	AverageTimeSpentSeconds float64                `protobuf:"fixed64,5,opt,name=average_time_spent_seconds,json=averageTimeSpentSeconds,proto3" json:"average_time_spent_seconds,omitempty"`
+	Points                  int32                  `protobuf:"varint,6,opt,name=points,proto3" json:"points,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *QuestionStats) Reset() {
 	*x = QuestionStats{}
-	mi := &file_analytics_analytics_proto_msgTypes[4]
+	mi := &file_analytics_analytics_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -469,7 +599,7 @@ func (x *QuestionStats) String() string {
 func (*QuestionStats) ProtoMessage() {}
 
 func (x *QuestionStats) ProtoReflect() protoreflect.Message {
-	mi := &file_analytics_analytics_proto_msgTypes[4]
+	mi := &file_analytics_analytics_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -482,7 +612,7 @@ func (x *QuestionStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuestionStats.ProtoReflect.Descriptor instead.
 func (*QuestionStats) Descriptor() ([]byte, []int) {
-	return file_analytics_analytics_proto_rawDescGZIP(), []int{4}
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *QuestionStats) GetQuestionId() int64 {
@@ -499,24 +629,360 @@ func (x *QuestionStats) GetAttempts() int32 {
 	return 0
 }
 
-func (x *QuestionStats) GetAverageScore() float64 {
+func (x *QuestionStats) GetCorrectAnswers() int32 {
+	if x != nil {
+		return x.CorrectAnswers
+	}
+	return 0
+}
+
+func (x *QuestionStats) GetSuccessRate() float64 {
+	if x != nil {
+		return x.SuccessRate
+	}
+	return 0
+}
+
+func (x *QuestionStats) GetAverageTimeSpentSeconds() float64 {
+	if x != nil {
+		return x.AverageTimeSpentSeconds
+	}
+	return 0
+}
+
+func (x *QuestionStats) GetPoints() int32 {
+	if x != nil {
+		return x.Points
+	}
+	return 0
+}
+
+type GetTestPerformanceTrendRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TestId        int64                  `protobuf:"varint,1,opt,name=test_id,json=testId,proto3" json:"test_id,omitempty"`
+	TimeRange     *TimestampRange        `protobuf:"bytes,2,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	TimeFrame     TimeFrame              `protobuf:"varint,3,opt,name=time_frame,json=timeFrame,proto3,enum=analytics.v1.TimeFrame" json:"time_frame,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTestPerformanceTrendRequest) Reset() {
+	*x = GetTestPerformanceTrendRequest{}
+	mi := &file_analytics_analytics_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTestPerformanceTrendRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTestPerformanceTrendRequest) ProtoMessage() {}
+
+func (x *GetTestPerformanceTrendRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTestPerformanceTrendRequest.ProtoReflect.Descriptor instead.
+func (*GetTestPerformanceTrendRequest) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetTestPerformanceTrendRequest) GetTestId() int64 {
+	if x != nil {
+		return x.TestId
+	}
+	return 0
+}
+
+func (x *GetTestPerformanceTrendRequest) GetTimeRange() *TimestampRange {
+	if x != nil {
+		return x.TimeRange
+	}
+	return nil
+}
+
+func (x *GetTestPerformanceTrendRequest) GetTimeFrame() TimeFrame {
+	if x != nil {
+		return x.TimeFrame
+	}
+	return TimeFrame_TIME_FRAME_UNSPECIFIED
+}
+
+type GetTestPerformanceTrendResponse struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	DataPoints    []*PerformanceDataPoint `protobuf:"bytes,1,rep,name=data_points,json=dataPoints,proto3" json:"data_points,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTestPerformanceTrendResponse) Reset() {
+	*x = GetTestPerformanceTrendResponse{}
+	mi := &file_analytics_analytics_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTestPerformanceTrendResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTestPerformanceTrendResponse) ProtoMessage() {}
+
+func (x *GetTestPerformanceTrendResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTestPerformanceTrendResponse.ProtoReflect.Descriptor instead.
+func (*GetTestPerformanceTrendResponse) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetTestPerformanceTrendResponse) GetDataPoints() []*PerformanceDataPoint {
+	if x != nil {
+		return x.DataPoints
+	}
+	return nil
+}
+
+type PerformanceDataPoint struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	AverageScore  float64                `protobuf:"fixed64,2,opt,name=average_score,json=averageScore,proto3" json:"average_score,omitempty"`
+	Attempts      int32                  `protobuf:"varint,3,opt,name=attempts,proto3" json:"attempts,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PerformanceDataPoint) Reset() {
+	*x = PerformanceDataPoint{}
+	mi := &file_analytics_analytics_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PerformanceDataPoint) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PerformanceDataPoint) ProtoMessage() {}
+
+func (x *PerformanceDataPoint) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PerformanceDataPoint.ProtoReflect.Descriptor instead.
+func (*PerformanceDataPoint) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *PerformanceDataPoint) GetTimestamp() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Timestamp
+	}
+	return nil
+}
+
+func (x *PerformanceDataPoint) GetAverageScore() float64 {
 	if x != nil {
 		return x.AverageScore
 	}
 	return 0
 }
 
+func (x *PerformanceDataPoint) GetAttempts() int32 {
+	if x != nil {
+		return x.Attempts
+	}
+	return 0
+}
+
+type GetQuestionDifficultyAnalysisRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TestId        int64                  `protobuf:"varint,1,opt,name=test_id,json=testId,proto3" json:"test_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetQuestionDifficultyAnalysisRequest) Reset() {
+	*x = GetQuestionDifficultyAnalysisRequest{}
+	mi := &file_analytics_analytics_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetQuestionDifficultyAnalysisRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetQuestionDifficultyAnalysisRequest) ProtoMessage() {}
+
+func (x *GetQuestionDifficultyAnalysisRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetQuestionDifficultyAnalysisRequest.ProtoReflect.Descriptor instead.
+func (*GetQuestionDifficultyAnalysisRequest) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *GetQuestionDifficultyAnalysisRequest) GetTestId() int64 {
+	if x != nil {
+		return x.TestId
+	}
+	return 0
+}
+
+type GetQuestionDifficultyAnalysisResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Questions     []*DifficultyAnalysis  `protobuf:"bytes,1,rep,name=questions,proto3" json:"questions,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetQuestionDifficultyAnalysisResponse) Reset() {
+	*x = GetQuestionDifficultyAnalysisResponse{}
+	mi := &file_analytics_analytics_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetQuestionDifficultyAnalysisResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetQuestionDifficultyAnalysisResponse) ProtoMessage() {}
+
+func (x *GetQuestionDifficultyAnalysisResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetQuestionDifficultyAnalysisResponse.ProtoReflect.Descriptor instead.
+func (*GetQuestionDifficultyAnalysisResponse) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *GetQuestionDifficultyAnalysisResponse) GetQuestions() []*DifficultyAnalysis {
+	if x != nil {
+		return x.Questions
+	}
+	return nil
+}
+
+type DifficultyAnalysis struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	QuestionId          int64                  `protobuf:"varint,1,opt,name=question_id,json=questionId,proto3" json:"question_id,omitempty"`
+	Reasoning           string                 `protobuf:"bytes,2,opt,name=reasoning,proto3" json:"reasoning,omitempty"`
+	DiscriminationIndex float64                `protobuf:"fixed64,3,opt,name=discrimination_index,json=discriminationIndex,proto3" json:"discrimination_index,omitempty"` // How well the question discriminates between high and low performers
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *DifficultyAnalysis) Reset() {
+	*x = DifficultyAnalysis{}
+	mi := &file_analytics_analytics_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DifficultyAnalysis) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DifficultyAnalysis) ProtoMessage() {}
+
+func (x *DifficultyAnalysis) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DifficultyAnalysis.ProtoReflect.Descriptor instead.
+func (*DifficultyAnalysis) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *DifficultyAnalysis) GetQuestionId() int64 {
+	if x != nil {
+		return x.QuestionId
+	}
+	return 0
+}
+
+func (x *DifficultyAnalysis) GetReasoning() string {
+	if x != nil {
+		return x.Reasoning
+	}
+	return ""
+}
+
+func (x *DifficultyAnalysis) GetDiscriminationIndex() float64 {
+	if x != nil {
+		return x.DiscriminationIndex
+	}
+	return 0
+}
+
+// User Analytics Messages
 type GetUserStatisticsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	TimeRange     *TimestampRange        `protobuf:"bytes,2,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	Direction     Direction              `protobuf:"varint,3,opt,name=direction,proto3,enum=analytics.v1.Direction" json:"direction,omitempty"`
+	Level         Level                  `protobuf:"varint,4,opt,name=level,proto3,enum=analytics.v1.Level" json:"level,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetUserStatisticsRequest) Reset() {
 	*x = GetUserStatisticsRequest{}
-	mi := &file_analytics_analytics_proto_msgTypes[5]
+	mi := &file_analytics_analytics_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -528,7 +994,7 @@ func (x *GetUserStatisticsRequest) String() string {
 func (*GetUserStatisticsRequest) ProtoMessage() {}
 
 func (x *GetUserStatisticsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_analytics_analytics_proto_msgTypes[5]
+	mi := &file_analytics_analytics_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -541,7 +1007,7 @@ func (x *GetUserStatisticsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserStatisticsRequest.ProtoReflect.Descriptor instead.
 func (*GetUserStatisticsRequest) Descriptor() ([]byte, []int) {
-	return file_analytics_analytics_proto_rawDescGZIP(), []int{5}
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetUserStatisticsRequest) GetUserId() int64 {
@@ -558,18 +1024,37 @@ func (x *GetUserStatisticsRequest) GetTimeRange() *TimestampRange {
 	return nil
 }
 
+func (x *GetUserStatisticsRequest) GetDirection() Direction {
+	if x != nil {
+		return x.Direction
+	}
+	return Direction_DIRECTION_UNSPECIFIED
+}
+
+func (x *GetUserStatisticsRequest) GetLevel() Level {
+	if x != nil {
+		return x.Level
+	}
+	return Level_LEVEL_UNSPECIFIED
+}
+
 type GetUserStatisticsResponse struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	TotalTestsTaken int32                  `protobuf:"varint,1,opt,name=total_tests_taken,json=totalTestsTaken,proto3" json:"total_tests_taken,omitempty"`
-	AverageScore    float64                `protobuf:"fixed64,2,opt,name=average_score,json=averageScore,proto3" json:"average_score,omitempty"`
-	TestStats       []*TestStats           `protobuf:"bytes,3,rep,name=test_stats,json=testStats,proto3" json:"test_stats,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                     protoimpl.MessageState `protogen:"open.v1"`
+	TotalTestsTaken           int32                  `protobuf:"varint,1,opt,name=total_tests_taken,json=totalTestsTaken,proto3" json:"total_tests_taken,omitempty"`
+	TotalTestsCompleted       int32                  `protobuf:"varint,2,opt,name=total_tests_completed,json=totalTestsCompleted,proto3" json:"total_tests_completed,omitempty"`
+	OverallAverageScore       float64                `protobuf:"fixed64,3,opt,name=overall_average_score,json=overallAverageScore,proto3" json:"overall_average_score,omitempty"`
+	TotalPointsEarned         int32                  `protobuf:"varint,4,opt,name=total_points_earned,json=totalPointsEarned,proto3" json:"total_points_earned,omitempty"`
+	TotalCorrectAnswers       int32                  `protobuf:"varint,5,opt,name=total_correct_answers,json=totalCorrectAnswers,proto3" json:"total_correct_answers,omitempty"`
+	TotalIncorrectAnswers     int32                  `protobuf:"varint,6,opt,name=total_incorrect_answers,json=totalIncorrectAnswers,proto3" json:"total_incorrect_answers,omitempty"`
+	AverageTimePerTestSeconds float64                `protobuf:"fixed64,7,opt,name=average_time_per_test_seconds,json=averageTimePerTestSeconds,proto3" json:"average_time_per_test_seconds,omitempty"`
+	TestStats                 []*TestStats           `protobuf:"bytes,8,rep,name=test_stats,json=testStats,proto3" json:"test_stats,omitempty"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *GetUserStatisticsResponse) Reset() {
 	*x = GetUserStatisticsResponse{}
-	mi := &file_analytics_analytics_proto_msgTypes[6]
+	mi := &file_analytics_analytics_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -581,7 +1066,7 @@ func (x *GetUserStatisticsResponse) String() string {
 func (*GetUserStatisticsResponse) ProtoMessage() {}
 
 func (x *GetUserStatisticsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_analytics_analytics_proto_msgTypes[6]
+	mi := &file_analytics_analytics_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -594,7 +1079,7 @@ func (x *GetUserStatisticsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserStatisticsResponse.ProtoReflect.Descriptor instead.
 func (*GetUserStatisticsResponse) Descriptor() ([]byte, []int) {
-	return file_analytics_analytics_proto_rawDescGZIP(), []int{6}
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetUserStatisticsResponse) GetTotalTestsTaken() int32 {
@@ -604,9 +1089,44 @@ func (x *GetUserStatisticsResponse) GetTotalTestsTaken() int32 {
 	return 0
 }
 
-func (x *GetUserStatisticsResponse) GetAverageScore() float64 {
+func (x *GetUserStatisticsResponse) GetTotalTestsCompleted() int32 {
 	if x != nil {
-		return x.AverageScore
+		return x.TotalTestsCompleted
+	}
+	return 0
+}
+
+func (x *GetUserStatisticsResponse) GetOverallAverageScore() float64 {
+	if x != nil {
+		return x.OverallAverageScore
+	}
+	return 0
+}
+
+func (x *GetUserStatisticsResponse) GetTotalPointsEarned() int32 {
+	if x != nil {
+		return x.TotalPointsEarned
+	}
+	return 0
+}
+
+func (x *GetUserStatisticsResponse) GetTotalCorrectAnswers() int32 {
+	if x != nil {
+		return x.TotalCorrectAnswers
+	}
+	return 0
+}
+
+func (x *GetUserStatisticsResponse) GetTotalIncorrectAnswers() int32 {
+	if x != nil {
+		return x.TotalIncorrectAnswers
+	}
+	return 0
+}
+
+func (x *GetUserStatisticsResponse) GetAverageTimePerTestSeconds() float64 {
+	if x != nil {
+		return x.AverageTimePerTestSeconds
 	}
 	return 0
 }
@@ -619,17 +1139,21 @@ func (x *GetUserStatisticsResponse) GetTestStats() []*TestStats {
 }
 
 type TestStats struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TestId        int64                  `protobuf:"varint,1,opt,name=test_id,json=testId,proto3" json:"test_id,omitempty"`
-	Attempts      int32                  `protobuf:"varint,2,opt,name=attempts,proto3" json:"attempts,omitempty"`
-	AverageScore  float64                `protobuf:"fixed64,3,opt,name=average_score,json=averageScore,proto3" json:"average_score,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	TestId          int64                  `protobuf:"varint,1,opt,name=test_id,json=testId,proto3" json:"test_id,omitempty"`
+	TestName        string                 `protobuf:"bytes,2,opt,name=test_name,json=testName,proto3" json:"test_name,omitempty"`
+	Attempts        int32                  `protobuf:"varint,3,opt,name=attempts,proto3" json:"attempts,omitempty"`
+	BestScore       float64                `protobuf:"fixed64,4,opt,name=best_score,json=bestScore,proto3" json:"best_score,omitempty"`
+	AverageScore    float64                `protobuf:"fixed64,5,opt,name=average_score,json=averageScore,proto3" json:"average_score,omitempty"`
+	LastAttempt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=last_attempt,json=lastAttempt,proto3" json:"last_attempt,omitempty"`
+	ImprovementRate float64                `protobuf:"fixed64,7,opt,name=improvement_rate,json=improvementRate,proto3" json:"improvement_rate,omitempty"` // Improvement between first and last attempt
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *TestStats) Reset() {
 	*x = TestStats{}
-	mi := &file_analytics_analytics_proto_msgTypes[7]
+	mi := &file_analytics_analytics_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -641,7 +1165,7 @@ func (x *TestStats) String() string {
 func (*TestStats) ProtoMessage() {}
 
 func (x *TestStats) ProtoReflect() protoreflect.Message {
-	mi := &file_analytics_analytics_proto_msgTypes[7]
+	mi := &file_analytics_analytics_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -654,7 +1178,7 @@ func (x *TestStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TestStats.ProtoReflect.Descriptor instead.
 func (*TestStats) Descriptor() ([]byte, []int) {
-	return file_analytics_analytics_proto_rawDescGZIP(), []int{7}
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *TestStats) GetTestId() int64 {
@@ -664,9 +1188,23 @@ func (x *TestStats) GetTestId() int64 {
 	return 0
 }
 
+func (x *TestStats) GetTestName() string {
+	if x != nil {
+		return x.TestName
+	}
+	return ""
+}
+
 func (x *TestStats) GetAttempts() int32 {
 	if x != nil {
 		return x.Attempts
+	}
+	return 0
+}
+
+func (x *TestStats) GetBestScore() float64 {
+	if x != nil {
+		return x.BestScore
 	}
 	return 0
 }
@@ -678,20 +1216,1448 @@ func (x *TestStats) GetAverageScore() float64 {
 	return 0
 }
 
+func (x *TestStats) GetLastAttempt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastAttempt
+	}
+	return nil
+}
+
+func (x *TestStats) GetImprovementRate() float64 {
+	if x != nil {
+		return x.ImprovementRate
+	}
+	return 0
+}
+
+type GetUserProgressReportRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	TimeRange     *TimestampRange        `protobuf:"bytes,2,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	Direction     Direction              `protobuf:"varint,3,opt,name=direction,proto3,enum=analytics.v1.Direction" json:"direction,omitempty"`
+	Level         Level                  `protobuf:"varint,4,opt,name=level,proto3,enum=analytics.v1.Level" json:"level,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserProgressReportRequest) Reset() {
+	*x = GetUserProgressReportRequest{}
+	mi := &file_analytics_analytics_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserProgressReportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserProgressReportRequest) ProtoMessage() {}
+
+func (x *GetUserProgressReportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserProgressReportRequest.ProtoReflect.Descriptor instead.
+func (*GetUserProgressReportRequest) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *GetUserProgressReportRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *GetUserProgressReportRequest) GetTimeRange() *TimestampRange {
+	if x != nil {
+		return x.TimeRange
+	}
+	return nil
+}
+
+func (x *GetUserProgressReportRequest) GetDirection() Direction {
+	if x != nil {
+		return x.Direction
+	}
+	return Direction_DIRECTION_UNSPECIFIED
+}
+
+func (x *GetUserProgressReportRequest) GetLevel() Level {
+	if x != nil {
+		return x.Level
+	}
+	return Level_LEVEL_UNSPECIFIED
+}
+
+type GetUserProgressReportResponse struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	ProgressData       []*ProgressDataPoint   `protobuf:"bytes,1,rep,name=progress_data,json=progressData,proto3" json:"progress_data,omitempty"`
+	TrendAnalysis      string                 `protobuf:"bytes,2,opt,name=trend_analysis,json=trendAnalysis,proto3" json:"trend_analysis,omitempty"`
+	OverallImprovement float64                `protobuf:"fixed64,3,opt,name=overall_improvement,json=overallImprovement,proto3" json:"overall_improvement,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *GetUserProgressReportResponse) Reset() {
+	*x = GetUserProgressReportResponse{}
+	mi := &file_analytics_analytics_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserProgressReportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserProgressReportResponse) ProtoMessage() {}
+
+func (x *GetUserProgressReportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserProgressReportResponse.ProtoReflect.Descriptor instead.
+func (*GetUserProgressReportResponse) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *GetUserProgressReportResponse) GetProgressData() []*ProgressDataPoint {
+	if x != nil {
+		return x.ProgressData
+	}
+	return nil
+}
+
+func (x *GetUserProgressReportResponse) GetTrendAnalysis() string {
+	if x != nil {
+		return x.TrendAnalysis
+	}
+	return ""
+}
+
+func (x *GetUserProgressReportResponse) GetOverallImprovement() float64 {
+	if x != nil {
+		return x.OverallImprovement
+	}
+	return 0
+}
+
+type ProgressDataPoint struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	Score         float64                `protobuf:"fixed64,2,opt,name=score,proto3" json:"score,omitempty"`
+	TestId        int64                  `protobuf:"varint,3,opt,name=test_id,json=testId,proto3" json:"test_id,omitempty"`
+	TestName      string                 `protobuf:"bytes,4,opt,name=test_name,json=testName,proto3" json:"test_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProgressDataPoint) Reset() {
+	*x = ProgressDataPoint{}
+	mi := &file_analytics_analytics_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProgressDataPoint) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProgressDataPoint) ProtoMessage() {}
+
+func (x *ProgressDataPoint) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProgressDataPoint.ProtoReflect.Descriptor instead.
+func (*ProgressDataPoint) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *ProgressDataPoint) GetTimestamp() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Timestamp
+	}
+	return nil
+}
+
+func (x *ProgressDataPoint) GetScore() float64 {
+	if x != nil {
+		return x.Score
+	}
+	return 0
+}
+
+func (x *ProgressDataPoint) GetTestId() int64 {
+	if x != nil {
+		return x.TestId
+	}
+	return 0
+}
+
+func (x *ProgressDataPoint) GetTestName() string {
+	if x != nil {
+		return x.TestName
+	}
+	return ""
+}
+
+type GetUserStrengthsWeaknessesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Direction     Direction              `protobuf:"varint,2,opt,name=direction,proto3,enum=analytics.v1.Direction" json:"direction,omitempty"`
+	Level         Level                  `protobuf:"varint,3,opt,name=level,proto3,enum=analytics.v1.Level" json:"level,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserStrengthsWeaknessesRequest) Reset() {
+	*x = GetUserStrengthsWeaknessesRequest{}
+	mi := &file_analytics_analytics_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserStrengthsWeaknessesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserStrengthsWeaknessesRequest) ProtoMessage() {}
+
+func (x *GetUserStrengthsWeaknessesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserStrengthsWeaknessesRequest.ProtoReflect.Descriptor instead.
+func (*GetUserStrengthsWeaknessesRequest) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *GetUserStrengthsWeaknessesRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *GetUserStrengthsWeaknessesRequest) GetDirection() Direction {
+	if x != nil {
+		return x.Direction
+	}
+	return Direction_DIRECTION_UNSPECIFIED
+}
+
+func (x *GetUserStrengthsWeaknessesRequest) GetLevel() Level {
+	if x != nil {
+		return x.Level
+	}
+	return Level_LEVEL_UNSPECIFIED
+}
+
+type GetUserStrengthsWeaknessesResponse struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Strengths      []*TopicStrength       `protobuf:"bytes,1,rep,name=strengths,proto3" json:"strengths,omitempty"`
+	Weaknesses     []*TopicWeakness       `protobuf:"bytes,2,rep,name=weaknesses,proto3" json:"weaknesses,omitempty"`
+	Recommendation string                 `protobuf:"bytes,3,opt,name=recommendation,proto3" json:"recommendation,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *GetUserStrengthsWeaknessesResponse) Reset() {
+	*x = GetUserStrengthsWeaknessesResponse{}
+	mi := &file_analytics_analytics_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserStrengthsWeaknessesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserStrengthsWeaknessesResponse) ProtoMessage() {}
+
+func (x *GetUserStrengthsWeaknessesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserStrengthsWeaknessesResponse.ProtoReflect.Descriptor instead.
+func (*GetUserStrengthsWeaknessesResponse) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *GetUserStrengthsWeaknessesResponse) GetStrengths() []*TopicStrength {
+	if x != nil {
+		return x.Strengths
+	}
+	return nil
+}
+
+func (x *GetUserStrengthsWeaknessesResponse) GetWeaknesses() []*TopicWeakness {
+	if x != nil {
+		return x.Weaknesses
+	}
+	return nil
+}
+
+func (x *GetUserStrengthsWeaknessesResponse) GetRecommendation() string {
+	if x != nil {
+		return x.Recommendation
+	}
+	return ""
+}
+
+type TopicStrength struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Topic                 string                 `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
+	ProficiencyPercentage float64                `protobuf:"fixed64,2,opt,name=proficiency_percentage,json=proficiencyPercentage,proto3" json:"proficiency_percentage,omitempty"`
+	QuestionsAnswered     int32                  `protobuf:"varint,3,opt,name=questions_answered,json=questionsAnswered,proto3" json:"questions_answered,omitempty"`
+	CorrectAnswers        int32                  `protobuf:"varint,4,opt,name=correct_answers,json=correctAnswers,proto3" json:"correct_answers,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *TopicStrength) Reset() {
+	*x = TopicStrength{}
+	mi := &file_analytics_analytics_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TopicStrength) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TopicStrength) ProtoMessage() {}
+
+func (x *TopicStrength) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TopicStrength.ProtoReflect.Descriptor instead.
+func (*TopicStrength) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *TopicStrength) GetTopic() string {
+	if x != nil {
+		return x.Topic
+	}
+	return ""
+}
+
+func (x *TopicStrength) GetProficiencyPercentage() float64 {
+	if x != nil {
+		return x.ProficiencyPercentage
+	}
+	return 0
+}
+
+func (x *TopicStrength) GetQuestionsAnswered() int32 {
+	if x != nil {
+		return x.QuestionsAnswered
+	}
+	return 0
+}
+
+func (x *TopicStrength) GetCorrectAnswers() int32 {
+	if x != nil {
+		return x.CorrectAnswers
+	}
+	return 0
+}
+
+type TopicWeakness struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Topic                 string                 `protobuf:"bytes,1,opt,name=topic,proto3" json:"topic,omitempty"`
+	ProficiencyPercentage float64                `protobuf:"fixed64,2,opt,name=proficiency_percentage,json=proficiencyPercentage,proto3" json:"proficiency_percentage,omitempty"`
+	QuestionsAnswered     int32                  `protobuf:"varint,3,opt,name=questions_answered,json=questionsAnswered,proto3" json:"questions_answered,omitempty"`
+	CorrectAnswers        int32                  `protobuf:"varint,4,opt,name=correct_answers,json=correctAnswers,proto3" json:"correct_answers,omitempty"`
+	RecommendedTestIds    []int64                `protobuf:"varint,5,rep,packed,name=recommended_test_ids,json=recommendedTestIds,proto3" json:"recommended_test_ids,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *TopicWeakness) Reset() {
+	*x = TopicWeakness{}
+	mi := &file_analytics_analytics_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TopicWeakness) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TopicWeakness) ProtoMessage() {}
+
+func (x *TopicWeakness) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TopicWeakness.ProtoReflect.Descriptor instead.
+func (*TopicWeakness) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *TopicWeakness) GetTopic() string {
+	if x != nil {
+		return x.Topic
+	}
+	return ""
+}
+
+func (x *TopicWeakness) GetProficiencyPercentage() float64 {
+	if x != nil {
+		return x.ProficiencyPercentage
+	}
+	return 0
+}
+
+func (x *TopicWeakness) GetQuestionsAnswered() int32 {
+	if x != nil {
+		return x.QuestionsAnswered
+	}
+	return 0
+}
+
+func (x *TopicWeakness) GetCorrectAnswers() int32 {
+	if x != nil {
+		return x.CorrectAnswers
+	}
+	return 0
+}
+
+func (x *TopicWeakness) GetRecommendedTestIds() []int64 {
+	if x != nil {
+		return x.RecommendedTestIds
+	}
+	return nil
+}
+
+type GetUserComparisonWithPeersRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Direction     Direction              `protobuf:"varint,2,opt,name=direction,proto3,enum=analytics.v1.Direction" json:"direction,omitempty"`
+	Level         Level                  `protobuf:"varint,3,opt,name=level,proto3,enum=analytics.v1.Level" json:"level,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserComparisonWithPeersRequest) Reset() {
+	*x = GetUserComparisonWithPeersRequest{}
+	mi := &file_analytics_analytics_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserComparisonWithPeersRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserComparisonWithPeersRequest) ProtoMessage() {}
+
+func (x *GetUserComparisonWithPeersRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserComparisonWithPeersRequest.ProtoReflect.Descriptor instead.
+func (*GetUserComparisonWithPeersRequest) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *GetUserComparisonWithPeersRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *GetUserComparisonWithPeersRequest) GetDirection() Direction {
+	if x != nil {
+		return x.Direction
+	}
+	return Direction_DIRECTION_UNSPECIFIED
+}
+
+func (x *GetUserComparisonWithPeersRequest) GetLevel() Level {
+	if x != nil {
+		return x.Level
+	}
+	return Level_LEVEL_UNSPECIFIED
+}
+
+type GetUserComparisonWithPeersResponse struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	UserPercentile    float64                `protobuf:"fixed64,1,opt,name=user_percentile,json=userPercentile,proto3" json:"user_percentile,omitempty"` // User's position in percentile rank
+	PeerAverageScore  float64                `protobuf:"fixed64,2,opt,name=peer_average_score,json=peerAverageScore,proto3" json:"peer_average_score,omitempty"`
+	UserAverageScore  float64                `protobuf:"fixed64,3,opt,name=user_average_score,json=userAverageScore,proto3" json:"user_average_score,omitempty"`
+	ComparisonMetrics []*ComparisonMetric    `protobuf:"bytes,4,rep,name=comparison_metrics,json=comparisonMetrics,proto3" json:"comparison_metrics,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *GetUserComparisonWithPeersResponse) Reset() {
+	*x = GetUserComparisonWithPeersResponse{}
+	mi := &file_analytics_analytics_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserComparisonWithPeersResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserComparisonWithPeersResponse) ProtoMessage() {}
+
+func (x *GetUserComparisonWithPeersResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserComparisonWithPeersResponse.ProtoReflect.Descriptor instead.
+func (*GetUserComparisonWithPeersResponse) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *GetUserComparisonWithPeersResponse) GetUserPercentile() float64 {
+	if x != nil {
+		return x.UserPercentile
+	}
+	return 0
+}
+
+func (x *GetUserComparisonWithPeersResponse) GetPeerAverageScore() float64 {
+	if x != nil {
+		return x.PeerAverageScore
+	}
+	return 0
+}
+
+func (x *GetUserComparisonWithPeersResponse) GetUserAverageScore() float64 {
+	if x != nil {
+		return x.UserAverageScore
+	}
+	return 0
+}
+
+func (x *GetUserComparisonWithPeersResponse) GetComparisonMetrics() []*ComparisonMetric {
+	if x != nil {
+		return x.ComparisonMetrics
+	}
+	return nil
+}
+
+type ComparisonMetric struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	MetricName        string                 `protobuf:"bytes,1,opt,name=metric_name,json=metricName,proto3" json:"metric_name,omitempty"` // e.g., "Tests completed", "Avg score", etc.
+	UserValue         float64                `protobuf:"fixed64,2,opt,name=user_value,json=userValue,proto3" json:"user_value,omitempty"`
+	PeerAverage       float64                `protobuf:"fixed64,3,opt,name=peer_average,json=peerAverage,proto3" json:"peer_average,omitempty"`
+	PeerTop_10Percent float64                `protobuf:"fixed64,4,opt,name=peer_top_10_percent,json=peerTop10Percent,proto3" json:"peer_top_10_percent,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *ComparisonMetric) Reset() {
+	*x = ComparisonMetric{}
+	mi := &file_analytics_analytics_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ComparisonMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ComparisonMetric) ProtoMessage() {}
+
+func (x *ComparisonMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ComparisonMetric.ProtoReflect.Descriptor instead.
+func (*ComparisonMetric) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *ComparisonMetric) GetMetricName() string {
+	if x != nil {
+		return x.MetricName
+	}
+	return ""
+}
+
+func (x *ComparisonMetric) GetUserValue() float64 {
+	if x != nil {
+		return x.UserValue
+	}
+	return 0
+}
+
+func (x *ComparisonMetric) GetPeerAverage() float64 {
+	if x != nil {
+		return x.PeerAverage
+	}
+	return 0
+}
+
+func (x *ComparisonMetric) GetPeerTop_10Percent() float64 {
+	if x != nil {
+		return x.PeerTop_10Percent
+	}
+	return 0
+}
+
+type GetPlatformStatisticsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TimeRange     *TimestampRange        `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetPlatformStatisticsRequest) Reset() {
+	*x = GetPlatformStatisticsRequest{}
+	mi := &file_analytics_analytics_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPlatformStatisticsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPlatformStatisticsRequest) ProtoMessage() {}
+
+func (x *GetPlatformStatisticsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPlatformStatisticsRequest.ProtoReflect.Descriptor instead.
+func (*GetPlatformStatisticsRequest) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *GetPlatformStatisticsRequest) GetTimeRange() *TimestampRange {
+	if x != nil {
+		return x.TimeRange
+	}
+	return nil
+}
+
+type GetPlatformStatisticsResponse struct {
+	state                        protoimpl.MessageState `protogen:"open.v1"`
+	TotalUsers                   int32                  `protobuf:"varint,1,opt,name=total_users,json=totalUsers,proto3" json:"total_users,omitempty"`
+	TotalTestsTaken              int32                  `protobuf:"varint,2,opt,name=total_tests_taken,json=totalTestsTaken,proto3" json:"total_tests_taken,omitempty"`
+	TotalTestsCompleted          int32                  `protobuf:"varint,3,opt,name=total_tests_completed,json=totalTestsCompleted,proto3" json:"total_tests_completed,omitempty"`
+	PlatformAverageScore         float64                `protobuf:"fixed64,4,opt,name=platform_average_score,json=platformAverageScore,proto3" json:"platform_average_score,omitempty"`
+	TotalQuestionsAnswered       int32                  `protobuf:"varint,5,opt,name=total_questions_answered,json=totalQuestionsAnswered,proto3" json:"total_questions_answered,omitempty"`
+	AverageCompletionTimeSeconds float64                `protobuf:"fixed64,6,opt,name=average_completion_time_seconds,json=averageCompletionTimeSeconds,proto3" json:"average_completion_time_seconds,omitempty"`
+	UsageStatistics              *UsageStatistics       `protobuf:"bytes,7,opt,name=usage_statistics,json=usageStatistics,proto3" json:"usage_statistics,omitempty"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
+}
+
+func (x *GetPlatformStatisticsResponse) Reset() {
+	*x = GetPlatformStatisticsResponse{}
+	mi := &file_analytics_analytics_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetPlatformStatisticsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPlatformStatisticsResponse) ProtoMessage() {}
+
+func (x *GetPlatformStatisticsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPlatformStatisticsResponse.ProtoReflect.Descriptor instead.
+func (*GetPlatformStatisticsResponse) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *GetPlatformStatisticsResponse) GetTotalUsers() int32 {
+	if x != nil {
+		return x.TotalUsers
+	}
+	return 0
+}
+
+func (x *GetPlatformStatisticsResponse) GetTotalTestsTaken() int32 {
+	if x != nil {
+		return x.TotalTestsTaken
+	}
+	return 0
+}
+
+func (x *GetPlatformStatisticsResponse) GetTotalTestsCompleted() int32 {
+	if x != nil {
+		return x.TotalTestsCompleted
+	}
+	return 0
+}
+
+func (x *GetPlatformStatisticsResponse) GetPlatformAverageScore() float64 {
+	if x != nil {
+		return x.PlatformAverageScore
+	}
+	return 0
+}
+
+func (x *GetPlatformStatisticsResponse) GetTotalQuestionsAnswered() int32 {
+	if x != nil {
+		return x.TotalQuestionsAnswered
+	}
+	return 0
+}
+
+func (x *GetPlatformStatisticsResponse) GetAverageCompletionTimeSeconds() float64 {
+	if x != nil {
+		return x.AverageCompletionTimeSeconds
+	}
+	return 0
+}
+
+func (x *GetPlatformStatisticsResponse) GetUsageStatistics() *UsageStatistics {
+	if x != nil {
+		return x.UsageStatistics
+	}
+	return nil
+}
+
+type UsageStatistics struct {
+	state              protoimpl.MessageState   `protogen:"open.v1"`
+	DailyActiveUsers   int32                    `protobuf:"varint,1,opt,name=daily_active_users,json=dailyActiveUsers,proto3" json:"daily_active_users,omitempty"`
+	WeeklyActiveUsers  int32                    `protobuf:"varint,2,opt,name=weekly_active_users,json=weeklyActiveUsers,proto3" json:"weekly_active_users,omitempty"`
+	MonthlyActiveUsers int32                    `protobuf:"varint,3,opt,name=monthly_active_users,json=monthlyActiveUsers,proto3" json:"monthly_active_users,omitempty"`
+	UserTrends         []*UserRegistrationTrend `protobuf:"bytes,4,rep,name=user_trends,json=userTrends,proto3" json:"user_trends,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *UsageStatistics) Reset() {
+	*x = UsageStatistics{}
+	mi := &file_analytics_analytics_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UsageStatistics) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UsageStatistics) ProtoMessage() {}
+
+func (x *UsageStatistics) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UsageStatistics.ProtoReflect.Descriptor instead.
+func (*UsageStatistics) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *UsageStatistics) GetDailyActiveUsers() int32 {
+	if x != nil {
+		return x.DailyActiveUsers
+	}
+	return 0
+}
+
+func (x *UsageStatistics) GetWeeklyActiveUsers() int32 {
+	if x != nil {
+		return x.WeeklyActiveUsers
+	}
+	return 0
+}
+
+func (x *UsageStatistics) GetMonthlyActiveUsers() int32 {
+	if x != nil {
+		return x.MonthlyActiveUsers
+	}
+	return 0
+}
+
+func (x *UsageStatistics) GetUserTrends() []*UserRegistrationTrend {
+	if x != nil {
+		return x.UserTrends
+	}
+	return nil
+}
+
+type UserRegistrationTrend struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Date          *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`
+	NewUsers      int32                  `protobuf:"varint,2,opt,name=new_users,json=newUsers,proto3" json:"new_users,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserRegistrationTrend) Reset() {
+	*x = UserRegistrationTrend{}
+	mi := &file_analytics_analytics_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserRegistrationTrend) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserRegistrationTrend) ProtoMessage() {}
+
+func (x *UserRegistrationTrend) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserRegistrationTrend.ProtoReflect.Descriptor instead.
+func (*UserRegistrationTrend) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *UserRegistrationTrend) GetDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Date
+	}
+	return nil
+}
+
+func (x *UserRegistrationTrend) GetNewUsers() int32 {
+	if x != nil {
+		return x.NewUsers
+	}
+	return 0
+}
+
+type GetCategoryPopularityStatsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TimeRange     *TimestampRange        `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetCategoryPopularityStatsRequest) Reset() {
+	*x = GetCategoryPopularityStatsRequest{}
+	mi := &file_analytics_analytics_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCategoryPopularityStatsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCategoryPopularityStatsRequest) ProtoMessage() {}
+
+func (x *GetCategoryPopularityStatsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCategoryPopularityStatsRequest.ProtoReflect.Descriptor instead.
+func (*GetCategoryPopularityStatsRequest) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *GetCategoryPopularityStatsRequest) GetTimeRange() *TimestampRange {
+	if x != nil {
+		return x.TimeRange
+	}
+	return nil
+}
+
+type GetCategoryPopularityStatsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Categories    []*CategoryStat        `protobuf:"bytes,1,rep,name=categories,proto3" json:"categories,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetCategoryPopularityStatsResponse) Reset() {
+	*x = GetCategoryPopularityStatsResponse{}
+	mi := &file_analytics_analytics_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetCategoryPopularityStatsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCategoryPopularityStatsResponse) ProtoMessage() {}
+
+func (x *GetCategoryPopularityStatsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCategoryPopularityStatsResponse.ProtoReflect.Descriptor instead.
+func (*GetCategoryPopularityStatsResponse) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *GetCategoryPopularityStatsResponse) GetCategories() []*CategoryStat {
+	if x != nil {
+		return x.Categories
+	}
+	return nil
+}
+
+type CategoryStat struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Direction             Direction              `protobuf:"varint,1,opt,name=direction,proto3,enum=analytics.v1.Direction" json:"direction,omitempty"`
+	Level                 Level                  `protobuf:"varint,2,opt,name=level,proto3,enum=analytics.v1.Level" json:"level,omitempty"`
+	TestAttempts          int32                  `protobuf:"varint,3,opt,name=test_attempts,json=testAttempts,proto3" json:"test_attempts,omitempty"`
+	UniqueUsers           int32                  `protobuf:"varint,4,opt,name=unique_users,json=uniqueUsers,proto3" json:"unique_users,omitempty"`
+	AverageCompletionRate float64                `protobuf:"fixed64,5,opt,name=average_completion_rate,json=averageCompletionRate,proto3" json:"average_completion_rate,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *CategoryStat) Reset() {
+	*x = CategoryStat{}
+	mi := &file_analytics_analytics_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CategoryStat) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CategoryStat) ProtoMessage() {}
+
+func (x *CategoryStat) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CategoryStat.ProtoReflect.Descriptor instead.
+func (*CategoryStat) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *CategoryStat) GetDirection() Direction {
+	if x != nil {
+		return x.Direction
+	}
+	return Direction_DIRECTION_UNSPECIFIED
+}
+
+func (x *CategoryStat) GetLevel() Level {
+	if x != nil {
+		return x.Level
+	}
+	return Level_LEVEL_UNSPECIFIED
+}
+
+func (x *CategoryStat) GetTestAttempts() int32 {
+	if x != nil {
+		return x.TestAttempts
+	}
+	return 0
+}
+
+func (x *CategoryStat) GetUniqueUsers() int32 {
+	if x != nil {
+		return x.UniqueUsers
+	}
+	return 0
+}
+
+func (x *CategoryStat) GetAverageCompletionRate() float64 {
+	if x != nil {
+		return x.AverageCompletionRate
+	}
+	return 0
+}
+
+type GetUserEngagementMetricsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TimeRange     *TimestampRange        `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	TimeFrame     TimeFrame              `protobuf:"varint,2,opt,name=time_frame,json=timeFrame,proto3,enum=analytics.v1.TimeFrame" json:"time_frame,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetUserEngagementMetricsRequest) Reset() {
+	*x = GetUserEngagementMetricsRequest{}
+	mi := &file_analytics_analytics_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserEngagementMetricsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserEngagementMetricsRequest) ProtoMessage() {}
+
+func (x *GetUserEngagementMetricsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserEngagementMetricsRequest.ProtoReflect.Descriptor instead.
+func (*GetUserEngagementMetricsRequest) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *GetUserEngagementMetricsRequest) GetTimeRange() *TimestampRange {
+	if x != nil {
+		return x.TimeRange
+	}
+	return nil
+}
+
+func (x *GetUserEngagementMetricsRequest) GetTimeFrame() TimeFrame {
+	if x != nil {
+		return x.TimeFrame
+	}
+	return TimeFrame_TIME_FRAME_UNSPECIFIED
+}
+
+type GetUserEngagementMetricsResponse struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	EngagementMetrics []*EngagementMetric    `protobuf:"bytes,1,rep,name=engagement_metrics,json=engagementMetrics,proto3" json:"engagement_metrics,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *GetUserEngagementMetricsResponse) Reset() {
+	*x = GetUserEngagementMetricsResponse{}
+	mi := &file_analytics_analytics_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetUserEngagementMetricsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUserEngagementMetricsResponse) ProtoMessage() {}
+
+func (x *GetUserEngagementMetricsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUserEngagementMetricsResponse.ProtoReflect.Descriptor instead.
+func (*GetUserEngagementMetricsResponse) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *GetUserEngagementMetricsResponse) GetEngagementMetrics() []*EngagementMetric {
+	if x != nil {
+		return x.EngagementMetrics
+	}
+	return nil
+}
+
+type EngagementMetric struct {
+	state                         protoimpl.MessageState `protogen:"open.v1"`
+	Timestamp                     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	AverageSessionDurationMinutes float64                `protobuf:"fixed64,2,opt,name=average_session_duration_minutes,json=averageSessionDurationMinutes,proto3" json:"average_session_duration_minutes,omitempty"`
+	TestsPerUser                  float64                `protobuf:"fixed64,3,opt,name=tests_per_user,json=testsPerUser,proto3" json:"tests_per_user,omitempty"`
+	QuestionsPerSession           float64                `protobuf:"fixed64,4,opt,name=questions_per_session,json=questionsPerSession,proto3" json:"questions_per_session,omitempty"`
+	ReturnRate                    float64                `protobuf:"fixed64,5,opt,name=return_rate,json=returnRate,proto3" json:"return_rate,omitempty"` // Percentage of users who returned within 7 days
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
+}
+
+func (x *EngagementMetric) Reset() {
+	*x = EngagementMetric{}
+	mi := &file_analytics_analytics_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EngagementMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EngagementMetric) ProtoMessage() {}
+
+func (x *EngagementMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EngagementMetric.ProtoReflect.Descriptor instead.
+func (*EngagementMetric) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *EngagementMetric) GetTimestamp() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Timestamp
+	}
+	return nil
+}
+
+func (x *EngagementMetric) GetAverageSessionDurationMinutes() float64 {
+	if x != nil {
+		return x.AverageSessionDurationMinutes
+	}
+	return 0
+}
+
+func (x *EngagementMetric) GetTestsPerUser() float64 {
+	if x != nil {
+		return x.TestsPerUser
+	}
+	return 0
+}
+
+func (x *EngagementMetric) GetQuestionsPerSession() float64 {
+	if x != nil {
+		return x.QuestionsPerSession
+	}
+	return 0
+}
+
+func (x *EngagementMetric) GetReturnRate() float64 {
+	if x != nil {
+		return x.ReturnRate
+	}
+	return 0
+}
+
+type GetActiveUsersStatsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TimeRange     *TimestampRange        `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	TimeFrame     TimeFrame              `protobuf:"varint,2,opt,name=time_frame,json=timeFrame,proto3,enum=analytics.v1.TimeFrame" json:"time_frame,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetActiveUsersStatsRequest) Reset() {
+	*x = GetActiveUsersStatsRequest{}
+	mi := &file_analytics_analytics_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetActiveUsersStatsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetActiveUsersStatsRequest) ProtoMessage() {}
+
+func (x *GetActiveUsersStatsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetActiveUsersStatsRequest.ProtoReflect.Descriptor instead.
+func (*GetActiveUsersStatsRequest) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *GetActiveUsersStatsRequest) GetTimeRange() *TimestampRange {
+	if x != nil {
+		return x.TimeRange
+	}
+	return nil
+}
+
+func (x *GetActiveUsersStatsRequest) GetTimeFrame() TimeFrame {
+	if x != nil {
+		return x.TimeFrame
+	}
+	return TimeFrame_TIME_FRAME_UNSPECIFIED
+}
+
+type GetActiveUsersStatsResponse struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	DataPoints    []*ActiveUsersDataPoint `protobuf:"bytes,1,rep,name=data_points,json=dataPoints,proto3" json:"data_points,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetActiveUsersStatsResponse) Reset() {
+	*x = GetActiveUsersStatsResponse{}
+	mi := &file_analytics_analytics_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetActiveUsersStatsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetActiveUsersStatsResponse) ProtoMessage() {}
+
+func (x *GetActiveUsersStatsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetActiveUsersStatsResponse.ProtoReflect.Descriptor instead.
+func (*GetActiveUsersStatsResponse) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *GetActiveUsersStatsResponse) GetDataPoints() []*ActiveUsersDataPoint {
+	if x != nil {
+		return x.DataPoints
+	}
+	return nil
+}
+
+type ActiveUsersDataPoint struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	Timestamp          *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	DailyActiveUsers   int32                  `protobuf:"varint,2,opt,name=daily_active_users,json=dailyActiveUsers,proto3" json:"daily_active_users,omitempty"`
+	WeeklyActiveUsers  int32                  `protobuf:"varint,3,opt,name=weekly_active_users,json=weeklyActiveUsers,proto3" json:"weekly_active_users,omitempty"`
+	MonthlyActiveUsers int32                  `protobuf:"varint,4,opt,name=monthly_active_users,json=monthlyActiveUsers,proto3" json:"monthly_active_users,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *ActiveUsersDataPoint) Reset() {
+	*x = ActiveUsersDataPoint{}
+	mi := &file_analytics_analytics_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ActiveUsersDataPoint) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ActiveUsersDataPoint) ProtoMessage() {}
+
+func (x *ActiveUsersDataPoint) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ActiveUsersDataPoint.ProtoReflect.Descriptor instead.
+func (*ActiveUsersDataPoint) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *ActiveUsersDataPoint) GetTimestamp() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Timestamp
+	}
+	return nil
+}
+
+func (x *ActiveUsersDataPoint) GetDailyActiveUsers() int32 {
+	if x != nil {
+		return x.DailyActiveUsers
+	}
+	return 0
+}
+
+func (x *ActiveUsersDataPoint) GetWeeklyActiveUsers() int32 {
+	if x != nil {
+		return x.WeeklyActiveUsers
+	}
+	return 0
+}
+
+func (x *ActiveUsersDataPoint) GetMonthlyActiveUsers() int32 {
+	if x != nil {
+		return x.MonthlyActiveUsers
+	}
+	return 0
+}
+
+// Report Messages
 type GenerateReportRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ReportType    ReportType             `protobuf:"varint,1,opt,name=report_type,json=reportType,proto3,enum=analytics.v1.ReportType" json:"report_type,omitempty"`
 	Direction     Direction              `protobuf:"varint,2,opt,name=direction,proto3,enum=analytics.v1.Direction" json:"direction,omitempty"`
 	Level         Level                  `protobuf:"varint,3,opt,name=level,proto3,enum=analytics.v1.Level" json:"level,omitempty"`
-	Difficulty    Difficulty             `protobuf:"varint,4,opt,name=difficulty,proto3,enum=analytics.v1.Difficulty" json:"difficulty,omitempty"`
-	TimeRange     *TimestampRange        `protobuf:"bytes,5,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	TimeRange     *TimestampRange        `protobuf:"bytes,4,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	UserId        int64                  `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // Optional, for user-specific reports
+	TestId        int64                  `protobuf:"varint,6,opt,name=test_id,json=testId,proto3" json:"test_id,omitempty"` // Optional, for test-specific reports
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GenerateReportRequest) Reset() {
 	*x = GenerateReportRequest{}
-	mi := &file_analytics_analytics_proto_msgTypes[8]
+	mi := &file_analytics_analytics_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -703,7 +2669,7 @@ func (x *GenerateReportRequest) String() string {
 func (*GenerateReportRequest) ProtoMessage() {}
 
 func (x *GenerateReportRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_analytics_analytics_proto_msgTypes[8]
+	mi := &file_analytics_analytics_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -716,7 +2682,7 @@ func (x *GenerateReportRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateReportRequest.ProtoReflect.Descriptor instead.
 func (*GenerateReportRequest) Descriptor() ([]byte, []int) {
-	return file_analytics_analytics_proto_rawDescGZIP(), []int{8}
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *GenerateReportRequest) GetReportType() ReportType {
@@ -740,13 +2706,6 @@ func (x *GenerateReportRequest) GetLevel() Level {
 	return Level_LEVEL_UNSPECIFIED
 }
 
-func (x *GenerateReportRequest) GetDifficulty() Difficulty {
-	if x != nil {
-		return x.Difficulty
-	}
-	return Difficulty_DIFFICULTY_UNSPECIFIED
-}
-
 func (x *GenerateReportRequest) GetTimeRange() *TimestampRange {
 	if x != nil {
 		return x.TimeRange
@@ -754,17 +2713,34 @@ func (x *GenerateReportRequest) GetTimeRange() *TimestampRange {
 	return nil
 }
 
+func (x *GenerateReportRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *GenerateReportRequest) GetTestId() int64 {
+	if x != nil {
+		return x.TestId
+	}
+	return 0
+}
+
 type GenerateReportResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ReportId      int64                  `protobuf:"varint,1,opt,name=report_id,json=reportId,proto3" json:"report_id,omitempty"`
 	ReportUrl     string                 `protobuf:"bytes,2,opt,name=report_url,json=reportUrl,proto3" json:"report_url,omitempty"`
+	ReportType    ReportType             `protobuf:"varint,3,opt,name=report_type,json=reportType,proto3,enum=analytics.v1.ReportType" json:"report_type,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	ExpiresAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GenerateReportResponse) Reset() {
 	*x = GenerateReportResponse{}
-	mi := &file_analytics_analytics_proto_msgTypes[9]
+	mi := &file_analytics_analytics_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -776,7 +2752,7 @@ func (x *GenerateReportResponse) String() string {
 func (*GenerateReportResponse) ProtoMessage() {}
 
 func (x *GenerateReportResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_analytics_analytics_proto_msgTypes[9]
+	mi := &file_analytics_analytics_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -789,7 +2765,7 @@ func (x *GenerateReportResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GenerateReportResponse.ProtoReflect.Descriptor instead.
 func (*GenerateReportResponse) Descriptor() ([]byte, []int) {
-	return file_analytics_analytics_proto_rawDescGZIP(), []int{9}
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *GenerateReportResponse) GetReportId() int64 {
@@ -806,17 +2782,39 @@ func (x *GenerateReportResponse) GetReportUrl() string {
 	return ""
 }
 
+func (x *GenerateReportResponse) GetReportType() ReportType {
+	if x != nil {
+		return x.ReportType
+	}
+	return ReportType_REPORT_TYPE_UNSPECIFIED
+}
+
+func (x *GenerateReportResponse) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *GenerateReportResponse) GetExpiresAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return nil
+}
+
 type ListReportsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Pagination    *Pagination            `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 	ReportType    ReportType             `protobuf:"varint,2,opt,name=report_type,json=reportType,proto3,enum=analytics.v1.ReportType" json:"report_type,omitempty"`
+	UserId        int64                  `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"` // Optional, for user-specific reports
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListReportsRequest) Reset() {
 	*x = ListReportsRequest{}
-	mi := &file_analytics_analytics_proto_msgTypes[10]
+	mi := &file_analytics_analytics_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -828,7 +2826,7 @@ func (x *ListReportsRequest) String() string {
 func (*ListReportsRequest) ProtoMessage() {}
 
 func (x *ListReportsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_analytics_analytics_proto_msgTypes[10]
+	mi := &file_analytics_analytics_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -841,7 +2839,7 @@ func (x *ListReportsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListReportsRequest.ProtoReflect.Descriptor instead.
 func (*ListReportsRequest) Descriptor() ([]byte, []int) {
-	return file_analytics_analytics_proto_rawDescGZIP(), []int{10}
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *ListReportsRequest) GetPagination() *Pagination {
@@ -858,17 +2856,24 @@ func (x *ListReportsRequest) GetReportType() ReportType {
 	return ReportType_REPORT_TYPE_UNSPECIFIED
 }
 
+func (x *ListReportsRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
 type ListReportsResponse struct {
-	state         protoimpl.MessageState    `protogen:"open.v1"`
-	Reports       []*GenerateReportResponse `protobuf:"bytes,1,rep,name=reports,proto3" json:"reports,omitempty"`
-	NextPageToken string                    `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Reports       []*ReportSummary       `protobuf:"bytes,1,rep,name=reports,proto3" json:"reports,omitempty"`
+	NextPageToken string                 `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListReportsResponse) Reset() {
 	*x = ListReportsResponse{}
-	mi := &file_analytics_analytics_proto_msgTypes[11]
+	mi := &file_analytics_analytics_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -880,7 +2885,7 @@ func (x *ListReportsResponse) String() string {
 func (*ListReportsResponse) ProtoMessage() {}
 
 func (x *ListReportsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_analytics_analytics_proto_msgTypes[11]
+	mi := &file_analytics_analytics_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -893,10 +2898,10 @@ func (x *ListReportsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListReportsResponse.ProtoReflect.Descriptor instead.
 func (*ListReportsResponse) Descriptor() ([]byte, []int) {
-	return file_analytics_analytics_proto_rawDescGZIP(), []int{11}
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{41}
 }
 
-func (x *ListReportsResponse) GetReports() []*GenerateReportResponse {
+func (x *ListReportsResponse) GetReports() []*ReportSummary {
 	if x != nil {
 		return x.Reports
 	}
@@ -906,6 +2911,579 @@ func (x *ListReportsResponse) GetReports() []*GenerateReportResponse {
 func (x *ListReportsResponse) GetNextPageToken() string {
 	if x != nil {
 		return x.NextPageToken
+	}
+	return ""
+}
+
+type ReportSummary struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ReportId      int64                  `protobuf:"varint,1,opt,name=report_id,json=reportId,proto3" json:"report_id,omitempty"`
+	ReportName    string                 `protobuf:"bytes,2,opt,name=report_name,json=reportName,proto3" json:"report_name,omitempty"`
+	ReportType    ReportType             `protobuf:"varint,3,opt,name=report_type,json=reportType,proto3,enum=analytics.v1.ReportType" json:"report_type,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	ReportUrl     string                 `protobuf:"bytes,5,opt,name=report_url,json=reportUrl,proto3" json:"report_url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ReportSummary) Reset() {
+	*x = ReportSummary{}
+	mi := &file_analytics_analytics_proto_msgTypes[42]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReportSummary) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReportSummary) ProtoMessage() {}
+
+func (x *ReportSummary) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[42]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReportSummary.ProtoReflect.Descriptor instead.
+func (*ReportSummary) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *ReportSummary) GetReportId() int64 {
+	if x != nil {
+		return x.ReportId
+	}
+	return 0
+}
+
+func (x *ReportSummary) GetReportName() string {
+	if x != nil {
+		return x.ReportName
+	}
+	return ""
+}
+
+func (x *ReportSummary) GetReportType() ReportType {
+	if x != nil {
+		return x.ReportType
+	}
+	return ReportType_REPORT_TYPE_UNSPECIFIED
+}
+
+func (x *ReportSummary) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *ReportSummary) GetReportUrl() string {
+	if x != nil {
+		return x.ReportUrl
+	}
+	return ""
+}
+
+type GetReportRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ReportId      int64                  `protobuf:"varint,1,opt,name=report_id,json=reportId,proto3" json:"report_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetReportRequest) Reset() {
+	*x = GetReportRequest{}
+	mi := &file_analytics_analytics_proto_msgTypes[43]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetReportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetReportRequest) ProtoMessage() {}
+
+func (x *GetReportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[43]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetReportRequest.ProtoReflect.Descriptor instead.
+func (*GetReportRequest) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{43}
+}
+
+func (x *GetReportRequest) GetReportId() int64 {
+	if x != nil {
+		return x.ReportId
+	}
+	return 0
+}
+
+type GetReportResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ReportId      int64                  `protobuf:"varint,1,opt,name=report_id,json=reportId,proto3" json:"report_id,omitempty"`
+	ReportName    string                 `protobuf:"bytes,2,opt,name=report_name,json=reportName,proto3" json:"report_name,omitempty"`
+	ReportType    ReportType             `protobuf:"varint,3,opt,name=report_type,json=reportType,proto3,enum=analytics.v1.ReportType" json:"report_type,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	ReportData    []byte                 `protobuf:"bytes,5,opt,name=report_data,json=reportData,proto3" json:"report_data,omitempty"`       // PDF or JSON data
+	ReportFormat  string                 `protobuf:"bytes,6,opt,name=report_format,json=reportFormat,proto3" json:"report_format,omitempty"` // "PDF", "JSON", etc.
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetReportResponse) Reset() {
+	*x = GetReportResponse{}
+	mi := &file_analytics_analytics_proto_msgTypes[44]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetReportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetReportResponse) ProtoMessage() {}
+
+func (x *GetReportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[44]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetReportResponse.ProtoReflect.Descriptor instead.
+func (*GetReportResponse) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *GetReportResponse) GetReportId() int64 {
+	if x != nil {
+		return x.ReportId
+	}
+	return 0
+}
+
+func (x *GetReportResponse) GetReportName() string {
+	if x != nil {
+		return x.ReportName
+	}
+	return ""
+}
+
+func (x *GetReportResponse) GetReportType() ReportType {
+	if x != nil {
+		return x.ReportType
+	}
+	return ReportType_REPORT_TYPE_UNSPECIFIED
+}
+
+func (x *GetReportResponse) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *GetReportResponse) GetReportData() []byte {
+	if x != nil {
+		return x.ReportData
+	}
+	return nil
+}
+
+func (x *GetReportResponse) GetReportFormat() string {
+	if x != nil {
+		return x.ReportFormat
+	}
+	return ""
+}
+
+// Learning Recommendations Messages
+type GetLearningPathRecommendationsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Direction     Direction              `protobuf:"varint,2,opt,name=direction,proto3,enum=analytics.v1.Direction" json:"direction,omitempty"`
+	Level         Level                  `protobuf:"varint,3,opt,name=level,proto3,enum=analytics.v1.Level" json:"level,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetLearningPathRecommendationsRequest) Reset() {
+	*x = GetLearningPathRecommendationsRequest{}
+	mi := &file_analytics_analytics_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLearningPathRecommendationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLearningPathRecommendationsRequest) ProtoMessage() {}
+
+func (x *GetLearningPathRecommendationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLearningPathRecommendationsRequest.ProtoReflect.Descriptor instead.
+func (*GetLearningPathRecommendationsRequest) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{45}
+}
+
+func (x *GetLearningPathRecommendationsRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *GetLearningPathRecommendationsRequest) GetDirection() Direction {
+	if x != nil {
+		return x.Direction
+	}
+	return Direction_DIRECTION_UNSPECIFIED
+}
+
+func (x *GetLearningPathRecommendationsRequest) GetLevel() Level {
+	if x != nil {
+		return x.Level
+	}
+	return Level_LEVEL_UNSPECIFIED
+}
+
+type GetLearningPathRecommendationsResponse struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	RecommendedPath []*LearningPathStep    `protobuf:"bytes,1,rep,name=recommended_path,json=recommendedPath,proto3" json:"recommended_path,omitempty"`
+	Explanation     string                 `protobuf:"bytes,2,opt,name=explanation,proto3" json:"explanation,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *GetLearningPathRecommendationsResponse) Reset() {
+	*x = GetLearningPathRecommendationsResponse{}
+	mi := &file_analytics_analytics_proto_msgTypes[46]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetLearningPathRecommendationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLearningPathRecommendationsResponse) ProtoMessage() {}
+
+func (x *GetLearningPathRecommendationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[46]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLearningPathRecommendationsResponse.ProtoReflect.Descriptor instead.
+func (*GetLearningPathRecommendationsResponse) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *GetLearningPathRecommendationsResponse) GetRecommendedPath() []*LearningPathStep {
+	if x != nil {
+		return x.RecommendedPath
+	}
+	return nil
+}
+
+func (x *GetLearningPathRecommendationsResponse) GetExplanation() string {
+	if x != nil {
+		return x.Explanation
+	}
+	return ""
+}
+
+type LearningPathStep struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	StepNumber         int32                  `protobuf:"varint,1,opt,name=step_number,json=stepNumber,proto3" json:"step_number,omitempty"`
+	Topic              string                 `protobuf:"bytes,2,opt,name=topic,proto3" json:"topic,omitempty"`
+	Description        string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	RecommendedTestIds []int64                `protobuf:"varint,4,rep,packed,name=recommended_test_ids,json=recommendedTestIds,proto3" json:"recommended_test_ids,omitempty"`
+	Resources          []string               `protobuf:"bytes,5,rep,name=resources,proto3" json:"resources,omitempty"` // Additional learning resources
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *LearningPathStep) Reset() {
+	*x = LearningPathStep{}
+	mi := &file_analytics_analytics_proto_msgTypes[47]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LearningPathStep) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LearningPathStep) ProtoMessage() {}
+
+func (x *LearningPathStep) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[47]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LearningPathStep.ProtoReflect.Descriptor instead.
+func (*LearningPathStep) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{47}
+}
+
+func (x *LearningPathStep) GetStepNumber() int32 {
+	if x != nil {
+		return x.StepNumber
+	}
+	return 0
+}
+
+func (x *LearningPathStep) GetTopic() string {
+	if x != nil {
+		return x.Topic
+	}
+	return ""
+}
+
+func (x *LearningPathStep) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *LearningPathStep) GetRecommendedTestIds() []int64 {
+	if x != nil {
+		return x.RecommendedTestIds
+	}
+	return nil
+}
+
+func (x *LearningPathStep) GetResources() []string {
+	if x != nil {
+		return x.Resources
+	}
+	return nil
+}
+
+type GetTestRecommendationsRequest struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	UserId             int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Direction          Direction              `protobuf:"varint,2,opt,name=direction,proto3,enum=analytics.v1.Direction" json:"direction,omitempty"`
+	Level              Level                  `protobuf:"varint,3,opt,name=level,proto3,enum=analytics.v1.Level" json:"level,omitempty"`
+	MaxRecommendations int32                  `protobuf:"varint,4,opt,name=max_recommendations,json=maxRecommendations,proto3" json:"max_recommendations,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *GetTestRecommendationsRequest) Reset() {
+	*x = GetTestRecommendationsRequest{}
+	mi := &file_analytics_analytics_proto_msgTypes[48]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTestRecommendationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTestRecommendationsRequest) ProtoMessage() {}
+
+func (x *GetTestRecommendationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[48]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTestRecommendationsRequest.ProtoReflect.Descriptor instead.
+func (*GetTestRecommendationsRequest) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *GetTestRecommendationsRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *GetTestRecommendationsRequest) GetDirection() Direction {
+	if x != nil {
+		return x.Direction
+	}
+	return Direction_DIRECTION_UNSPECIFIED
+}
+
+func (x *GetTestRecommendationsRequest) GetLevel() Level {
+	if x != nil {
+		return x.Level
+	}
+	return Level_LEVEL_UNSPECIFIED
+}
+
+func (x *GetTestRecommendationsRequest) GetMaxRecommendations() int32 {
+	if x != nil {
+		return x.MaxRecommendations
+	}
+	return 0
+}
+
+type GetTestRecommendationsResponse struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Recommendations []*TestRecommendation  `protobuf:"bytes,1,rep,name=recommendations,proto3" json:"recommendations,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *GetTestRecommendationsResponse) Reset() {
+	*x = GetTestRecommendationsResponse{}
+	mi := &file_analytics_analytics_proto_msgTypes[49]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTestRecommendationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTestRecommendationsResponse) ProtoMessage() {}
+
+func (x *GetTestRecommendationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[49]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTestRecommendationsResponse.ProtoReflect.Descriptor instead.
+func (*GetTestRecommendationsResponse) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *GetTestRecommendationsResponse) GetRecommendations() []*TestRecommendation {
+	if x != nil {
+		return x.Recommendations
+	}
+	return nil
+}
+
+type TestRecommendation struct {
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	TestId               int64                  `protobuf:"varint,1,opt,name=test_id,json=testId,proto3" json:"test_id,omitempty"`
+	TestName             string                 `protobuf:"bytes,2,opt,name=test_name,json=testName,proto3" json:"test_name,omitempty"`
+	RelevanceScore       float64                `protobuf:"fixed64,3,opt,name=relevance_score,json=relevanceScore,proto3" json:"relevance_score,omitempty"`                 // How relevant this test is for the user's growth
+	RecommendationReason string                 `protobuf:"bytes,4,opt,name=recommendation_reason,json=recommendationReason,proto3" json:"recommendation_reason,omitempty"` // Why this test was recommended
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *TestRecommendation) Reset() {
+	*x = TestRecommendation{}
+	mi := &file_analytics_analytics_proto_msgTypes[50]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TestRecommendation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TestRecommendation) ProtoMessage() {}
+
+func (x *TestRecommendation) ProtoReflect() protoreflect.Message {
+	mi := &file_analytics_analytics_proto_msgTypes[50]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TestRecommendation.ProtoReflect.Descriptor instead.
+func (*TestRecommendation) Descriptor() ([]byte, []int) {
+	return file_analytics_analytics_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *TestRecommendation) GetTestId() int64 {
+	if x != nil {
+		return x.TestId
+	}
+	return 0
+}
+
+func (x *TestRecommendation) GetTestName() string {
+	if x != nil {
+		return x.TestName
+	}
+	return ""
+}
+
+func (x *TestRecommendation) GetRelevanceScore() float64 {
+	if x != nil {
+		return x.RelevanceScore
+	}
+	return 0
+}
+
+func (x *TestRecommendation) GetRecommendationReason() string {
+	if x != nil {
+		return x.RecommendationReason
 	}
 	return ""
 }
@@ -926,52 +3504,269 @@ const file_analytics_analytics_proto_rawDesc = "" +
 	"\x18GetTestStatisticsRequest\x12\x17\n" +
 	"\atest_id\x18\x01 \x01(\x03R\x06testId\x12;\n" +
 	"\n" +
-	"time_range\x18\x02 \x01(\v2\x1c.analytics.v1.TimestampRangeR\ttimeRange\"\xb1\x01\n" +
-	"\x19GetTestStatisticsResponse\x12+\n" +
-	"\x11total_submissions\x18\x01 \x01(\x05R\x10totalSubmissions\x12#\n" +
-	"\raverage_score\x18\x02 \x01(\x01R\faverageScore\x12B\n" +
-	"\x0equestion_stats\x18\x03 \x03(\v2\x1b.analytics.v1.QuestionStatsR\rquestionStats\"q\n" +
+	"time_range\x18\x02 \x01(\v2\x1c.analytics.v1.TimestampRangeR\ttimeRange\"\x90\x03\n" +
+	"\x19GetTestStatisticsResponse\x12%\n" +
+	"\x0etotal_attempts\x18\x01 \x01(\x05R\rtotalAttempts\x12-\n" +
+	"\x12completed_attempts\x18\x02 \x01(\x05R\x11completedAttempts\x12'\n" +
+	"\x0fcompletion_rate\x18\x03 \x01(\x01R\x0ecompletionRate\x12#\n" +
+	"\raverage_score\x18\x04 \x01(\x01R\faverageScore\x12;\n" +
+	"\x1aaverage_time_spent_seconds\x18\x05 \x01(\x01R\x17averageTimeSpentSeconds\x12N\n" +
+	"\x12score_distribution\x18\x06 \x01(\v2\x1f.analytics.v1.ScoreDistributionR\x11scoreDistribution\x12B\n" +
+	"\x0equestion_stats\x18\a \x03(\v2\x1b.analytics.v1.QuestionStatsR\rquestionStats\"\xcf\x01\n" +
+	"\x11ScoreDistribution\x12'\n" +
+	"\x0fexcellent_count\x18\x01 \x01(\x05R\x0eexcellentCount\x12\x1d\n" +
+	"\n" +
+	"good_count\x18\x02 \x01(\x05R\tgoodCount\x12#\n" +
+	"\raverage_count\x18\x03 \x01(\x05R\faverageCount\x12.\n" +
+	"\x13below_average_count\x18\x04 \x01(\x05R\x11belowAverageCount\x12\x1d\n" +
+	"\n" +
+	"poor_count\x18\x05 \x01(\x05R\tpoorCount\"\xed\x01\n" +
 	"\rQuestionStats\x12\x1f\n" +
 	"\vquestion_id\x18\x01 \x01(\x03R\n" +
 	"questionId\x12\x1a\n" +
-	"\battempts\x18\x02 \x01(\x05R\battempts\x12#\n" +
-	"\raverage_score\x18\x03 \x01(\x01R\faverageScore\"p\n" +
+	"\battempts\x18\x02 \x01(\x05R\battempts\x12'\n" +
+	"\x0fcorrect_answers\x18\x03 \x01(\x05R\x0ecorrectAnswers\x12!\n" +
+	"\fsuccess_rate\x18\x04 \x01(\x01R\vsuccessRate\x12;\n" +
+	"\x1aaverage_time_spent_seconds\x18\x05 \x01(\x01R\x17averageTimeSpentSeconds\x12\x16\n" +
+	"\x06points\x18\x06 \x01(\x05R\x06points\"\xae\x01\n" +
+	"\x1eGetTestPerformanceTrendRequest\x12\x17\n" +
+	"\atest_id\x18\x01 \x01(\x03R\x06testId\x12;\n" +
+	"\n" +
+	"time_range\x18\x02 \x01(\v2\x1c.analytics.v1.TimestampRangeR\ttimeRange\x126\n" +
+	"\n" +
+	"time_frame\x18\x03 \x01(\x0e2\x17.analytics.v1.TimeFrameR\ttimeFrame\"f\n" +
+	"\x1fGetTestPerformanceTrendResponse\x12C\n" +
+	"\vdata_points\x18\x01 \x03(\v2\".analytics.v1.PerformanceDataPointR\n" +
+	"dataPoints\"\x91\x01\n" +
+	"\x14PerformanceDataPoint\x128\n" +
+	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12#\n" +
+	"\raverage_score\x18\x02 \x01(\x01R\faverageScore\x12\x1a\n" +
+	"\battempts\x18\x03 \x01(\x05R\battempts\"?\n" +
+	"$GetQuestionDifficultyAnalysisRequest\x12\x17\n" +
+	"\atest_id\x18\x01 \x01(\x03R\x06testId\"g\n" +
+	"%GetQuestionDifficultyAnalysisResponse\x12>\n" +
+	"\tquestions\x18\x01 \x03(\v2 .analytics.v1.DifficultyAnalysisR\tquestions\"\x86\x01\n" +
+	"\x12DifficultyAnalysis\x12\x1f\n" +
+	"\vquestion_id\x18\x01 \x01(\x03R\n" +
+	"questionId\x12\x1c\n" +
+	"\treasoning\x18\x02 \x01(\tR\treasoning\x121\n" +
+	"\x14discrimination_index\x18\x03 \x01(\x01R\x13discriminationIndex\"\xd2\x01\n" +
 	"\x18GetUserStatisticsRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12;\n" +
 	"\n" +
-	"time_range\x18\x02 \x01(\v2\x1c.analytics.v1.TimestampRangeR\ttimeRange\"\xa4\x01\n" +
+	"time_range\x18\x02 \x01(\v2\x1c.analytics.v1.TimestampRangeR\ttimeRange\x125\n" +
+	"\tdirection\x18\x03 \x01(\x0e2\x17.analytics.v1.DirectionR\tdirection\x12)\n" +
+	"\x05level\x18\x04 \x01(\x0e2\x13.analytics.v1.LevelR\x05level\"\xc5\x03\n" +
 	"\x19GetUserStatisticsResponse\x12*\n" +
-	"\x11total_tests_taken\x18\x01 \x01(\x05R\x0ftotalTestsTaken\x12#\n" +
-	"\raverage_score\x18\x02 \x01(\x01R\faverageScore\x126\n" +
+	"\x11total_tests_taken\x18\x01 \x01(\x05R\x0ftotalTestsTaken\x122\n" +
+	"\x15total_tests_completed\x18\x02 \x01(\x05R\x13totalTestsCompleted\x122\n" +
+	"\x15overall_average_score\x18\x03 \x01(\x01R\x13overallAverageScore\x12.\n" +
+	"\x13total_points_earned\x18\x04 \x01(\x05R\x11totalPointsEarned\x122\n" +
+	"\x15total_correct_answers\x18\x05 \x01(\x05R\x13totalCorrectAnswers\x126\n" +
+	"\x17total_incorrect_answers\x18\x06 \x01(\x05R\x15totalIncorrectAnswers\x12@\n" +
+	"\x1daverage_time_per_test_seconds\x18\a \x01(\x01R\x19averageTimePerTestSeconds\x126\n" +
 	"\n" +
-	"test_stats\x18\x03 \x03(\v2\x17.analytics.v1.TestStatsR\ttestStats\"e\n" +
+	"test_stats\x18\b \x03(\v2\x17.analytics.v1.TestStatsR\ttestStats\"\x8b\x02\n" +
 	"\tTestStats\x12\x17\n" +
-	"\atest_id\x18\x01 \x01(\x03R\x06testId\x12\x1a\n" +
-	"\battempts\x18\x02 \x01(\x05R\battempts\x12#\n" +
-	"\raverage_score\x18\x03 \x01(\x01R\faverageScore\"\xab\x02\n" +
+	"\atest_id\x18\x01 \x01(\x03R\x06testId\x12\x1b\n" +
+	"\ttest_name\x18\x02 \x01(\tR\btestName\x12\x1a\n" +
+	"\battempts\x18\x03 \x01(\x05R\battempts\x12\x1d\n" +
+	"\n" +
+	"best_score\x18\x04 \x01(\x01R\tbestScore\x12#\n" +
+	"\raverage_score\x18\x05 \x01(\x01R\faverageScore\x12=\n" +
+	"\flast_attempt\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\vlastAttempt\x12)\n" +
+	"\x10improvement_rate\x18\a \x01(\x01R\x0fimprovementRate\"\xd6\x01\n" +
+	"\x1cGetUserProgressReportRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12;\n" +
+	"\n" +
+	"time_range\x18\x02 \x01(\v2\x1c.analytics.v1.TimestampRangeR\ttimeRange\x125\n" +
+	"\tdirection\x18\x03 \x01(\x0e2\x17.analytics.v1.DirectionR\tdirection\x12)\n" +
+	"\x05level\x18\x04 \x01(\x0e2\x13.analytics.v1.LevelR\x05level\"\xbd\x01\n" +
+	"\x1dGetUserProgressReportResponse\x12D\n" +
+	"\rprogress_data\x18\x01 \x03(\v2\x1f.analytics.v1.ProgressDataPointR\fprogressData\x12%\n" +
+	"\x0etrend_analysis\x18\x02 \x01(\tR\rtrendAnalysis\x12/\n" +
+	"\x13overall_improvement\x18\x03 \x01(\x01R\x12overallImprovement\"\x99\x01\n" +
+	"\x11ProgressDataPoint\x128\n" +
+	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12\x14\n" +
+	"\x05score\x18\x02 \x01(\x01R\x05score\x12\x17\n" +
+	"\atest_id\x18\x03 \x01(\x03R\x06testId\x12\x1b\n" +
+	"\ttest_name\x18\x04 \x01(\tR\btestName\"\x9e\x01\n" +
+	"!GetUserStrengthsWeaknessesRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x125\n" +
+	"\tdirection\x18\x02 \x01(\x0e2\x17.analytics.v1.DirectionR\tdirection\x12)\n" +
+	"\x05level\x18\x03 \x01(\x0e2\x13.analytics.v1.LevelR\x05level\"\xc4\x01\n" +
+	"\"GetUserStrengthsWeaknessesResponse\x129\n" +
+	"\tstrengths\x18\x01 \x03(\v2\x1b.analytics.v1.TopicStrengthR\tstrengths\x12;\n" +
+	"\n" +
+	"weaknesses\x18\x02 \x03(\v2\x1b.analytics.v1.TopicWeaknessR\n" +
+	"weaknesses\x12&\n" +
+	"\x0erecommendation\x18\x03 \x01(\tR\x0erecommendation\"\xb4\x01\n" +
+	"\rTopicStrength\x12\x14\n" +
+	"\x05topic\x18\x01 \x01(\tR\x05topic\x125\n" +
+	"\x16proficiency_percentage\x18\x02 \x01(\x01R\x15proficiencyPercentage\x12-\n" +
+	"\x12questions_answered\x18\x03 \x01(\x05R\x11questionsAnswered\x12'\n" +
+	"\x0fcorrect_answers\x18\x04 \x01(\x05R\x0ecorrectAnswers\"\xe6\x01\n" +
+	"\rTopicWeakness\x12\x14\n" +
+	"\x05topic\x18\x01 \x01(\tR\x05topic\x125\n" +
+	"\x16proficiency_percentage\x18\x02 \x01(\x01R\x15proficiencyPercentage\x12-\n" +
+	"\x12questions_answered\x18\x03 \x01(\x05R\x11questionsAnswered\x12'\n" +
+	"\x0fcorrect_answers\x18\x04 \x01(\x05R\x0ecorrectAnswers\x120\n" +
+	"\x14recommended_test_ids\x18\x05 \x03(\x03R\x12recommendedTestIds\"\x9e\x01\n" +
+	"!GetUserComparisonWithPeersRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x125\n" +
+	"\tdirection\x18\x02 \x01(\x0e2\x17.analytics.v1.DirectionR\tdirection\x12)\n" +
+	"\x05level\x18\x03 \x01(\x0e2\x13.analytics.v1.LevelR\x05level\"\xf8\x01\n" +
+	"\"GetUserComparisonWithPeersResponse\x12'\n" +
+	"\x0fuser_percentile\x18\x01 \x01(\x01R\x0euserPercentile\x12,\n" +
+	"\x12peer_average_score\x18\x02 \x01(\x01R\x10peerAverageScore\x12,\n" +
+	"\x12user_average_score\x18\x03 \x01(\x01R\x10userAverageScore\x12M\n" +
+	"\x12comparison_metrics\x18\x04 \x03(\v2\x1e.analytics.v1.ComparisonMetricR\x11comparisonMetrics\"\xa4\x01\n" +
+	"\x10ComparisonMetric\x12\x1f\n" +
+	"\vmetric_name\x18\x01 \x01(\tR\n" +
+	"metricName\x12\x1d\n" +
+	"\n" +
+	"user_value\x18\x02 \x01(\x01R\tuserValue\x12!\n" +
+	"\fpeer_average\x18\x03 \x01(\x01R\vpeerAverage\x12-\n" +
+	"\x13peer_top_10_percent\x18\x04 \x01(\x01R\x10peerTop10Percent\"[\n" +
+	"\x1cGetPlatformStatisticsRequest\x12;\n" +
+	"\n" +
+	"time_range\x18\x01 \x01(\v2\x1c.analytics.v1.TimestampRangeR\ttimeRange\"\xa1\x03\n" +
+	"\x1dGetPlatformStatisticsResponse\x12\x1f\n" +
+	"\vtotal_users\x18\x01 \x01(\x05R\n" +
+	"totalUsers\x12*\n" +
+	"\x11total_tests_taken\x18\x02 \x01(\x05R\x0ftotalTestsTaken\x122\n" +
+	"\x15total_tests_completed\x18\x03 \x01(\x05R\x13totalTestsCompleted\x124\n" +
+	"\x16platform_average_score\x18\x04 \x01(\x01R\x14platformAverageScore\x128\n" +
+	"\x18total_questions_answered\x18\x05 \x01(\x05R\x16totalQuestionsAnswered\x12E\n" +
+	"\x1faverage_completion_time_seconds\x18\x06 \x01(\x01R\x1caverageCompletionTimeSeconds\x12H\n" +
+	"\x10usage_statistics\x18\a \x01(\v2\x1d.analytics.v1.UsageStatisticsR\x0fusageStatistics\"\xe7\x01\n" +
+	"\x0fUsageStatistics\x12,\n" +
+	"\x12daily_active_users\x18\x01 \x01(\x05R\x10dailyActiveUsers\x12.\n" +
+	"\x13weekly_active_users\x18\x02 \x01(\x05R\x11weeklyActiveUsers\x120\n" +
+	"\x14monthly_active_users\x18\x03 \x01(\x05R\x12monthlyActiveUsers\x12D\n" +
+	"\vuser_trends\x18\x04 \x03(\v2#.analytics.v1.UserRegistrationTrendR\n" +
+	"userTrends\"d\n" +
+	"\x15UserRegistrationTrend\x12.\n" +
+	"\x04date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04date\x12\x1b\n" +
+	"\tnew_users\x18\x02 \x01(\x05R\bnewUsers\"`\n" +
+	"!GetCategoryPopularityStatsRequest\x12;\n" +
+	"\n" +
+	"time_range\x18\x01 \x01(\v2\x1c.analytics.v1.TimestampRangeR\ttimeRange\"`\n" +
+	"\"GetCategoryPopularityStatsResponse\x12:\n" +
+	"\n" +
+	"categories\x18\x01 \x03(\v2\x1a.analytics.v1.CategoryStatR\n" +
+	"categories\"\xf0\x01\n" +
+	"\fCategoryStat\x125\n" +
+	"\tdirection\x18\x01 \x01(\x0e2\x17.analytics.v1.DirectionR\tdirection\x12)\n" +
+	"\x05level\x18\x02 \x01(\x0e2\x13.analytics.v1.LevelR\x05level\x12#\n" +
+	"\rtest_attempts\x18\x03 \x01(\x05R\ftestAttempts\x12!\n" +
+	"\funique_users\x18\x04 \x01(\x05R\vuniqueUsers\x126\n" +
+	"\x17average_completion_rate\x18\x05 \x01(\x01R\x15averageCompletionRate\"\x96\x01\n" +
+	"\x1fGetUserEngagementMetricsRequest\x12;\n" +
+	"\n" +
+	"time_range\x18\x01 \x01(\v2\x1c.analytics.v1.TimestampRangeR\ttimeRange\x126\n" +
+	"\n" +
+	"time_frame\x18\x02 \x01(\x0e2\x17.analytics.v1.TimeFrameR\ttimeFrame\"q\n" +
+	" GetUserEngagementMetricsResponse\x12M\n" +
+	"\x12engagement_metrics\x18\x01 \x03(\v2\x1e.analytics.v1.EngagementMetricR\x11engagementMetrics\"\x90\x02\n" +
+	"\x10EngagementMetric\x128\n" +
+	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12G\n" +
+	" average_session_duration_minutes\x18\x02 \x01(\x01R\x1daverageSessionDurationMinutes\x12$\n" +
+	"\x0etests_per_user\x18\x03 \x01(\x01R\ftestsPerUser\x122\n" +
+	"\x15questions_per_session\x18\x04 \x01(\x01R\x13questionsPerSession\x12\x1f\n" +
+	"\vreturn_rate\x18\x05 \x01(\x01R\n" +
+	"returnRate\"\x91\x01\n" +
+	"\x1aGetActiveUsersStatsRequest\x12;\n" +
+	"\n" +
+	"time_range\x18\x01 \x01(\v2\x1c.analytics.v1.TimestampRangeR\ttimeRange\x126\n" +
+	"\n" +
+	"time_frame\x18\x02 \x01(\x0e2\x17.analytics.v1.TimeFrameR\ttimeFrame\"b\n" +
+	"\x1bGetActiveUsersStatsResponse\x12C\n" +
+	"\vdata_points\x18\x01 \x03(\v2\".analytics.v1.ActiveUsersDataPointR\n" +
+	"dataPoints\"\xe0\x01\n" +
+	"\x14ActiveUsersDataPoint\x128\n" +
+	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12,\n" +
+	"\x12daily_active_users\x18\x02 \x01(\x05R\x10dailyActiveUsers\x12.\n" +
+	"\x13weekly_active_users\x18\x03 \x01(\x05R\x11weeklyActiveUsers\x120\n" +
+	"\x14monthly_active_users\x18\x04 \x01(\x05R\x12monthlyActiveUsers\"\xa3\x02\n" +
 	"\x15GenerateReportRequest\x129\n" +
 	"\vreport_type\x18\x01 \x01(\x0e2\x18.analytics.v1.ReportTypeR\n" +
 	"reportType\x125\n" +
 	"\tdirection\x18\x02 \x01(\x0e2\x17.analytics.v1.DirectionR\tdirection\x12)\n" +
-	"\x05level\x18\x03 \x01(\x0e2\x13.analytics.v1.LevelR\x05level\x128\n" +
+	"\x05level\x18\x03 \x01(\x0e2\x13.analytics.v1.LevelR\x05level\x12;\n" +
 	"\n" +
-	"difficulty\x18\x04 \x01(\x0e2\x18.analytics.v1.DifficultyR\n" +
-	"difficulty\x12;\n" +
-	"\n" +
-	"time_range\x18\x05 \x01(\v2\x1c.analytics.v1.TimestampRangeR\ttimeRange\"T\n" +
+	"time_range\x18\x04 \x01(\v2\x1c.analytics.v1.TimestampRangeR\ttimeRange\x12\x17\n" +
+	"\auser_id\x18\x05 \x01(\x03R\x06userId\x12\x17\n" +
+	"\atest_id\x18\x06 \x01(\x03R\x06testId\"\x85\x02\n" +
 	"\x16GenerateReportResponse\x12\x1b\n" +
 	"\treport_id\x18\x01 \x01(\x03R\breportId\x12\x1d\n" +
 	"\n" +
-	"report_url\x18\x02 \x01(\tR\treportUrl\"\x89\x01\n" +
+	"report_url\x18\x02 \x01(\tR\treportUrl\x129\n" +
+	"\vreport_type\x18\x03 \x01(\x0e2\x18.analytics.v1.ReportTypeR\n" +
+	"reportType\x129\n" +
+	"\n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"expires_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"\xa2\x01\n" +
 	"\x12ListReportsRequest\x128\n" +
 	"\n" +
 	"pagination\x18\x01 \x01(\v2\x18.analytics.v1.PaginationR\n" +
 	"pagination\x129\n" +
 	"\vreport_type\x18\x02 \x01(\x0e2\x18.analytics.v1.ReportTypeR\n" +
-	"reportType\"}\n" +
-	"\x13ListReportsResponse\x12>\n" +
-	"\areports\x18\x01 \x03(\v2$.analytics.v1.GenerateReportResponseR\areports\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken*_\n" +
+	"reportType\x12\x17\n" +
+	"\auser_id\x18\x03 \x01(\x03R\x06userId\"t\n" +
+	"\x13ListReportsResponse\x125\n" +
+	"\areports\x18\x01 \x03(\v2\x1b.analytics.v1.ReportSummaryR\areports\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xe2\x01\n" +
+	"\rReportSummary\x12\x1b\n" +
+	"\treport_id\x18\x01 \x01(\x03R\breportId\x12\x1f\n" +
+	"\vreport_name\x18\x02 \x01(\tR\n" +
+	"reportName\x129\n" +
+	"\vreport_type\x18\x03 \x01(\x0e2\x18.analytics.v1.ReportTypeR\n" +
+	"reportType\x129\n" +
+	"\n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"report_url\x18\x05 \x01(\tR\treportUrl\"/\n" +
+	"\x10GetReportRequest\x12\x1b\n" +
+	"\treport_id\x18\x01 \x01(\x03R\breportId\"\x8d\x02\n" +
+	"\x11GetReportResponse\x12\x1b\n" +
+	"\treport_id\x18\x01 \x01(\x03R\breportId\x12\x1f\n" +
+	"\vreport_name\x18\x02 \x01(\tR\n" +
+	"reportName\x129\n" +
+	"\vreport_type\x18\x03 \x01(\x0e2\x18.analytics.v1.ReportTypeR\n" +
+	"reportType\x129\n" +
+	"\n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1f\n" +
+	"\vreport_data\x18\x05 \x01(\fR\n" +
+	"reportData\x12#\n" +
+	"\rreport_format\x18\x06 \x01(\tR\freportFormat\"\xa2\x01\n" +
+	"%GetLearningPathRecommendationsRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x125\n" +
+	"\tdirection\x18\x02 \x01(\x0e2\x17.analytics.v1.DirectionR\tdirection\x12)\n" +
+	"\x05level\x18\x03 \x01(\x0e2\x13.analytics.v1.LevelR\x05level\"\x95\x01\n" +
+	"&GetLearningPathRecommendationsResponse\x12I\n" +
+	"\x10recommended_path\x18\x01 \x03(\v2\x1e.analytics.v1.LearningPathStepR\x0frecommendedPath\x12 \n" +
+	"\vexplanation\x18\x02 \x01(\tR\vexplanation\"\xbb\x01\n" +
+	"\x10LearningPathStep\x12\x1f\n" +
+	"\vstep_number\x18\x01 \x01(\x05R\n" +
+	"stepNumber\x12\x14\n" +
+	"\x05topic\x18\x02 \x01(\tR\x05topic\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x120\n" +
+	"\x14recommended_test_ids\x18\x04 \x03(\x03R\x12recommendedTestIds\x12\x1c\n" +
+	"\tresources\x18\x05 \x03(\tR\tresources\"\xcb\x01\n" +
+	"\x1dGetTestRecommendationsRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x125\n" +
+	"\tdirection\x18\x02 \x01(\x0e2\x17.analytics.v1.DirectionR\tdirection\x12)\n" +
+	"\x05level\x18\x03 \x01(\x0e2\x13.analytics.v1.LevelR\x05level\x12/\n" +
+	"\x13max_recommendations\x18\x04 \x01(\x05R\x12maxRecommendations\"l\n" +
+	"\x1eGetTestRecommendationsResponse\x12J\n" +
+	"\x0frecommendations\x18\x01 \x03(\v2 .analytics.v1.TestRecommendationR\x0frecommendations\"\xa8\x01\n" +
+	"\x12TestRecommendation\x12\x17\n" +
+	"\atest_id\x18\x01 \x01(\x03R\x06testId\x12\x1b\n" +
+	"\ttest_name\x18\x02 \x01(\tR\btestName\x12'\n" +
+	"\x0frelevance_score\x18\x03 \x01(\x01R\x0erelevanceScore\x123\n" +
+	"\x15recommendation_reason\x18\x04 \x01(\tR\x14recommendationReason*_\n" +
 	"\tDirection\x12\x19\n" +
 	"\x15DIRECTION_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aBACKEND\x10\x01\x12\f\n" +
@@ -986,24 +3781,43 @@ const file_analytics_analytics_proto_rawDesc = "" +
 	"\n" +
 	"\x06MIDDLE\x10\x02\x12\n" +
 	"\n" +
-	"\x06SENIOR\x10\x03*H\n" +
-	"\n" +
-	"Difficulty\x12\x1a\n" +
-	"\x16DIFFICULTY_UNSPECIFIED\x10\x00\x12\b\n" +
-	"\x04EASY\x10\x01\x12\n" +
-	"\n" +
-	"\x06MEDIUM\x10\x02\x12\b\n" +
-	"\x04HARD\x10\x03*D\n" +
+	"\x06SENIOR\x10\x03*\x7f\n" +
 	"\n" +
 	"ReportType\x12\x1b\n" +
 	"\x17REPORT_TYPE_UNSPECIFIED\x10\x00\x12\v\n" +
 	"\aSUMMARY\x10\x01\x12\f\n" +
-	"\bDETAILED\x10\x022\x8f\x03\n" +
+	"\bDETAILED\x10\x02\x12\x11\n" +
+	"\rUSER_PROGRESS\x10\x03\x12\x14\n" +
+	"\x10PLATFORM_METRICS\x10\x04\x12\x10\n" +
+	"\fTEST_QUALITY\x10\x05*r\n" +
+	"\tTimeFrame\x12\x1a\n" +
+	"\x16TIME_FRAME_UNSPECIFIED\x10\x00\x12\t\n" +
+	"\x05DAILY\x10\x01\x12\n" +
+	"\n" +
+	"\x06WEEKLY\x10\x02\x12\v\n" +
+	"\aMONTHLY\x10\x03\x12\r\n" +
+	"\tQUARTERLY\x10\x04\x12\n" +
+	"\n" +
+	"\x06YEARLY\x10\x05\x12\n" +
+	"\n" +
+	"\x06CUSTOM\x10\x062\xb1\x0e\n" +
 	"\x10AnalyticsService\x12d\n" +
-	"\x11GetTestStatistics\x12&.analytics.v1.GetTestStatisticsRequest\x1a'.analytics.v1.GetTestStatisticsResponse\x12d\n" +
-	"\x11GetUserStatistics\x12&.analytics.v1.GetUserStatisticsRequest\x1a'.analytics.v1.GetUserStatisticsResponse\x12[\n" +
+	"\x11GetTestStatistics\x12&.analytics.v1.GetTestStatisticsRequest\x1a'.analytics.v1.GetTestStatisticsResponse\x12v\n" +
+	"\x17GetTestPerformanceTrend\x12,.analytics.v1.GetTestPerformanceTrendRequest\x1a-.analytics.v1.GetTestPerformanceTrendResponse\x12\x88\x01\n" +
+	"\x1dGetQuestionDifficultyAnalysis\x122.analytics.v1.GetQuestionDifficultyAnalysisRequest\x1a3.analytics.v1.GetQuestionDifficultyAnalysisResponse\x12d\n" +
+	"\x11GetUserStatistics\x12&.analytics.v1.GetUserStatisticsRequest\x1a'.analytics.v1.GetUserStatisticsResponse\x12p\n" +
+	"\x15GetUserProgressReport\x12*.analytics.v1.GetUserProgressReportRequest\x1a+.analytics.v1.GetUserProgressReportResponse\x12\x7f\n" +
+	"\x1aGetUserStrengthsWeaknesses\x12/.analytics.v1.GetUserStrengthsWeaknessesRequest\x1a0.analytics.v1.GetUserStrengthsWeaknessesResponse\x12\x7f\n" +
+	"\x1aGetUserComparisonWithPeers\x12/.analytics.v1.GetUserComparisonWithPeersRequest\x1a0.analytics.v1.GetUserComparisonWithPeersResponse\x12p\n" +
+	"\x15GetPlatformStatistics\x12*.analytics.v1.GetPlatformStatisticsRequest\x1a+.analytics.v1.GetPlatformStatisticsResponse\x12\x7f\n" +
+	"\x1aGetCategoryPopularityStats\x12/.analytics.v1.GetCategoryPopularityStatsRequest\x1a0.analytics.v1.GetCategoryPopularityStatsResponse\x12y\n" +
+	"\x18GetUserEngagementMetrics\x12-.analytics.v1.GetUserEngagementMetricsRequest\x1a..analytics.v1.GetUserEngagementMetricsResponse\x12j\n" +
+	"\x13GetActiveUsersStats\x12(.analytics.v1.GetActiveUsersStatsRequest\x1a).analytics.v1.GetActiveUsersStatsResponse\x12[\n" +
 	"\x0eGenerateReport\x12#.analytics.v1.GenerateReportRequest\x1a$.analytics.v1.GenerateReportResponse\x12R\n" +
-	"\vListReports\x12 .analytics.v1.ListReportsRequest\x1a!.analytics.v1.ListReportsResponseB\"Z diploma.analytics.v1;analyticsv1b\x06proto3"
+	"\vListReports\x12 .analytics.v1.ListReportsRequest\x1a!.analytics.v1.ListReportsResponse\x12L\n" +
+	"\tGetReport\x12\x1e.analytics.v1.GetReportRequest\x1a\x1f.analytics.v1.GetReportResponse\x12\x8b\x01\n" +
+	"\x1eGetLearningPathRecommendations\x123.analytics.v1.GetLearningPathRecommendationsRequest\x1a4.analytics.v1.GetLearningPathRecommendationsResponse\x12s\n" +
+	"\x16GetTestRecommendations\x12+.analytics.v1.GetTestRecommendationsRequest\x1a,.analytics.v1.GetTestRecommendationsResponseB\"Z diploma.analytics.v1;analyticsv1b\x06proto3"
 
 var (
 	file_analytics_analytics_proto_rawDescOnce sync.Once
@@ -1018,54 +3832,166 @@ func file_analytics_analytics_proto_rawDescGZIP() []byte {
 }
 
 var file_analytics_analytics_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_analytics_analytics_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_analytics_analytics_proto_msgTypes = make([]protoimpl.MessageInfo, 51)
 var file_analytics_analytics_proto_goTypes = []any{
-	(Direction)(0),                    // 0: analytics.v1.Direction
-	(Level)(0),                        // 1: analytics.v1.Level
-	(Difficulty)(0),                   // 2: analytics.v1.Difficulty
-	(ReportType)(0),                   // 3: analytics.v1.ReportType
-	(*TimestampRange)(nil),            // 4: analytics.v1.TimestampRange
-	(*Pagination)(nil),                // 5: analytics.v1.Pagination
-	(*GetTestStatisticsRequest)(nil),  // 6: analytics.v1.GetTestStatisticsRequest
-	(*GetTestStatisticsResponse)(nil), // 7: analytics.v1.GetTestStatisticsResponse
-	(*QuestionStats)(nil),             // 8: analytics.v1.QuestionStats
-	(*GetUserStatisticsRequest)(nil),  // 9: analytics.v1.GetUserStatisticsRequest
-	(*GetUserStatisticsResponse)(nil), // 10: analytics.v1.GetUserStatisticsResponse
-	(*TestStats)(nil),                 // 11: analytics.v1.TestStats
-	(*GenerateReportRequest)(nil),     // 12: analytics.v1.GenerateReportRequest
-	(*GenerateReportResponse)(nil),    // 13: analytics.v1.GenerateReportResponse
-	(*ListReportsRequest)(nil),        // 14: analytics.v1.ListReportsRequest
-	(*ListReportsResponse)(nil),       // 15: analytics.v1.ListReportsResponse
-	(*timestamppb.Timestamp)(nil),     // 16: google.protobuf.Timestamp
+	(Direction)(0),                                 // 0: analytics.v1.Direction
+	(Level)(0),                                     // 1: analytics.v1.Level
+	(ReportType)(0),                                // 2: analytics.v1.ReportType
+	(TimeFrame)(0),                                 // 3: analytics.v1.TimeFrame
+	(*TimestampRange)(nil),                         // 4: analytics.v1.TimestampRange
+	(*Pagination)(nil),                             // 5: analytics.v1.Pagination
+	(*GetTestStatisticsRequest)(nil),               // 6: analytics.v1.GetTestStatisticsRequest
+	(*GetTestStatisticsResponse)(nil),              // 7: analytics.v1.GetTestStatisticsResponse
+	(*ScoreDistribution)(nil),                      // 8: analytics.v1.ScoreDistribution
+	(*QuestionStats)(nil),                          // 9: analytics.v1.QuestionStats
+	(*GetTestPerformanceTrendRequest)(nil),         // 10: analytics.v1.GetTestPerformanceTrendRequest
+	(*GetTestPerformanceTrendResponse)(nil),        // 11: analytics.v1.GetTestPerformanceTrendResponse
+	(*PerformanceDataPoint)(nil),                   // 12: analytics.v1.PerformanceDataPoint
+	(*GetQuestionDifficultyAnalysisRequest)(nil),   // 13: analytics.v1.GetQuestionDifficultyAnalysisRequest
+	(*GetQuestionDifficultyAnalysisResponse)(nil),  // 14: analytics.v1.GetQuestionDifficultyAnalysisResponse
+	(*DifficultyAnalysis)(nil),                     // 15: analytics.v1.DifficultyAnalysis
+	(*GetUserStatisticsRequest)(nil),               // 16: analytics.v1.GetUserStatisticsRequest
+	(*GetUserStatisticsResponse)(nil),              // 17: analytics.v1.GetUserStatisticsResponse
+	(*TestStats)(nil),                              // 18: analytics.v1.TestStats
+	(*GetUserProgressReportRequest)(nil),           // 19: analytics.v1.GetUserProgressReportRequest
+	(*GetUserProgressReportResponse)(nil),          // 20: analytics.v1.GetUserProgressReportResponse
+	(*ProgressDataPoint)(nil),                      // 21: analytics.v1.ProgressDataPoint
+	(*GetUserStrengthsWeaknessesRequest)(nil),      // 22: analytics.v1.GetUserStrengthsWeaknessesRequest
+	(*GetUserStrengthsWeaknessesResponse)(nil),     // 23: analytics.v1.GetUserStrengthsWeaknessesResponse
+	(*TopicStrength)(nil),                          // 24: analytics.v1.TopicStrength
+	(*TopicWeakness)(nil),                          // 25: analytics.v1.TopicWeakness
+	(*GetUserComparisonWithPeersRequest)(nil),      // 26: analytics.v1.GetUserComparisonWithPeersRequest
+	(*GetUserComparisonWithPeersResponse)(nil),     // 27: analytics.v1.GetUserComparisonWithPeersResponse
+	(*ComparisonMetric)(nil),                       // 28: analytics.v1.ComparisonMetric
+	(*GetPlatformStatisticsRequest)(nil),           // 29: analytics.v1.GetPlatformStatisticsRequest
+	(*GetPlatformStatisticsResponse)(nil),          // 30: analytics.v1.GetPlatformStatisticsResponse
+	(*UsageStatistics)(nil),                        // 31: analytics.v1.UsageStatistics
+	(*UserRegistrationTrend)(nil),                  // 32: analytics.v1.UserRegistrationTrend
+	(*GetCategoryPopularityStatsRequest)(nil),      // 33: analytics.v1.GetCategoryPopularityStatsRequest
+	(*GetCategoryPopularityStatsResponse)(nil),     // 34: analytics.v1.GetCategoryPopularityStatsResponse
+	(*CategoryStat)(nil),                           // 35: analytics.v1.CategoryStat
+	(*GetUserEngagementMetricsRequest)(nil),        // 36: analytics.v1.GetUserEngagementMetricsRequest
+	(*GetUserEngagementMetricsResponse)(nil),       // 37: analytics.v1.GetUserEngagementMetricsResponse
+	(*EngagementMetric)(nil),                       // 38: analytics.v1.EngagementMetric
+	(*GetActiveUsersStatsRequest)(nil),             // 39: analytics.v1.GetActiveUsersStatsRequest
+	(*GetActiveUsersStatsResponse)(nil),            // 40: analytics.v1.GetActiveUsersStatsResponse
+	(*ActiveUsersDataPoint)(nil),                   // 41: analytics.v1.ActiveUsersDataPoint
+	(*GenerateReportRequest)(nil),                  // 42: analytics.v1.GenerateReportRequest
+	(*GenerateReportResponse)(nil),                 // 43: analytics.v1.GenerateReportResponse
+	(*ListReportsRequest)(nil),                     // 44: analytics.v1.ListReportsRequest
+	(*ListReportsResponse)(nil),                    // 45: analytics.v1.ListReportsResponse
+	(*ReportSummary)(nil),                          // 46: analytics.v1.ReportSummary
+	(*GetReportRequest)(nil),                       // 47: analytics.v1.GetReportRequest
+	(*GetReportResponse)(nil),                      // 48: analytics.v1.GetReportResponse
+	(*GetLearningPathRecommendationsRequest)(nil),  // 49: analytics.v1.GetLearningPathRecommendationsRequest
+	(*GetLearningPathRecommendationsResponse)(nil), // 50: analytics.v1.GetLearningPathRecommendationsResponse
+	(*LearningPathStep)(nil),                       // 51: analytics.v1.LearningPathStep
+	(*GetTestRecommendationsRequest)(nil),          // 52: analytics.v1.GetTestRecommendationsRequest
+	(*GetTestRecommendationsResponse)(nil),         // 53: analytics.v1.GetTestRecommendationsResponse
+	(*TestRecommendation)(nil),                     // 54: analytics.v1.TestRecommendation
+	(*timestamppb.Timestamp)(nil),                  // 55: google.protobuf.Timestamp
 }
 var file_analytics_analytics_proto_depIdxs = []int32{
-	16, // 0: analytics.v1.TimestampRange.start:type_name -> google.protobuf.Timestamp
-	16, // 1: analytics.v1.TimestampRange.end:type_name -> google.protobuf.Timestamp
+	55, // 0: analytics.v1.TimestampRange.start:type_name -> google.protobuf.Timestamp
+	55, // 1: analytics.v1.TimestampRange.end:type_name -> google.protobuf.Timestamp
 	4,  // 2: analytics.v1.GetTestStatisticsRequest.time_range:type_name -> analytics.v1.TimestampRange
-	8,  // 3: analytics.v1.GetTestStatisticsResponse.question_stats:type_name -> analytics.v1.QuestionStats
-	4,  // 4: analytics.v1.GetUserStatisticsRequest.time_range:type_name -> analytics.v1.TimestampRange
-	11, // 5: analytics.v1.GetUserStatisticsResponse.test_stats:type_name -> analytics.v1.TestStats
-	3,  // 6: analytics.v1.GenerateReportRequest.report_type:type_name -> analytics.v1.ReportType
-	0,  // 7: analytics.v1.GenerateReportRequest.direction:type_name -> analytics.v1.Direction
-	1,  // 8: analytics.v1.GenerateReportRequest.level:type_name -> analytics.v1.Level
-	2,  // 9: analytics.v1.GenerateReportRequest.difficulty:type_name -> analytics.v1.Difficulty
-	4,  // 10: analytics.v1.GenerateReportRequest.time_range:type_name -> analytics.v1.TimestampRange
-	5,  // 11: analytics.v1.ListReportsRequest.pagination:type_name -> analytics.v1.Pagination
-	3,  // 12: analytics.v1.ListReportsRequest.report_type:type_name -> analytics.v1.ReportType
-	13, // 13: analytics.v1.ListReportsResponse.reports:type_name -> analytics.v1.GenerateReportResponse
-	6,  // 14: analytics.v1.AnalyticsService.GetTestStatistics:input_type -> analytics.v1.GetTestStatisticsRequest
-	9,  // 15: analytics.v1.AnalyticsService.GetUserStatistics:input_type -> analytics.v1.GetUserStatisticsRequest
-	12, // 16: analytics.v1.AnalyticsService.GenerateReport:input_type -> analytics.v1.GenerateReportRequest
-	14, // 17: analytics.v1.AnalyticsService.ListReports:input_type -> analytics.v1.ListReportsRequest
-	7,  // 18: analytics.v1.AnalyticsService.GetTestStatistics:output_type -> analytics.v1.GetTestStatisticsResponse
-	10, // 19: analytics.v1.AnalyticsService.GetUserStatistics:output_type -> analytics.v1.GetUserStatisticsResponse
-	13, // 20: analytics.v1.AnalyticsService.GenerateReport:output_type -> analytics.v1.GenerateReportResponse
-	15, // 21: analytics.v1.AnalyticsService.ListReports:output_type -> analytics.v1.ListReportsResponse
-	18, // [18:22] is the sub-list for method output_type
-	14, // [14:18] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	8,  // 3: analytics.v1.GetTestStatisticsResponse.score_distribution:type_name -> analytics.v1.ScoreDistribution
+	9,  // 4: analytics.v1.GetTestStatisticsResponse.question_stats:type_name -> analytics.v1.QuestionStats
+	4,  // 5: analytics.v1.GetTestPerformanceTrendRequest.time_range:type_name -> analytics.v1.TimestampRange
+	3,  // 6: analytics.v1.GetTestPerformanceTrendRequest.time_frame:type_name -> analytics.v1.TimeFrame
+	12, // 7: analytics.v1.GetTestPerformanceTrendResponse.data_points:type_name -> analytics.v1.PerformanceDataPoint
+	55, // 8: analytics.v1.PerformanceDataPoint.timestamp:type_name -> google.protobuf.Timestamp
+	15, // 9: analytics.v1.GetQuestionDifficultyAnalysisResponse.questions:type_name -> analytics.v1.DifficultyAnalysis
+	4,  // 10: analytics.v1.GetUserStatisticsRequest.time_range:type_name -> analytics.v1.TimestampRange
+	0,  // 11: analytics.v1.GetUserStatisticsRequest.direction:type_name -> analytics.v1.Direction
+	1,  // 12: analytics.v1.GetUserStatisticsRequest.level:type_name -> analytics.v1.Level
+	18, // 13: analytics.v1.GetUserStatisticsResponse.test_stats:type_name -> analytics.v1.TestStats
+	55, // 14: analytics.v1.TestStats.last_attempt:type_name -> google.protobuf.Timestamp
+	4,  // 15: analytics.v1.GetUserProgressReportRequest.time_range:type_name -> analytics.v1.TimestampRange
+	0,  // 16: analytics.v1.GetUserProgressReportRequest.direction:type_name -> analytics.v1.Direction
+	1,  // 17: analytics.v1.GetUserProgressReportRequest.level:type_name -> analytics.v1.Level
+	21, // 18: analytics.v1.GetUserProgressReportResponse.progress_data:type_name -> analytics.v1.ProgressDataPoint
+	55, // 19: analytics.v1.ProgressDataPoint.timestamp:type_name -> google.protobuf.Timestamp
+	0,  // 20: analytics.v1.GetUserStrengthsWeaknessesRequest.direction:type_name -> analytics.v1.Direction
+	1,  // 21: analytics.v1.GetUserStrengthsWeaknessesRequest.level:type_name -> analytics.v1.Level
+	24, // 22: analytics.v1.GetUserStrengthsWeaknessesResponse.strengths:type_name -> analytics.v1.TopicStrength
+	25, // 23: analytics.v1.GetUserStrengthsWeaknessesResponse.weaknesses:type_name -> analytics.v1.TopicWeakness
+	0,  // 24: analytics.v1.GetUserComparisonWithPeersRequest.direction:type_name -> analytics.v1.Direction
+	1,  // 25: analytics.v1.GetUserComparisonWithPeersRequest.level:type_name -> analytics.v1.Level
+	28, // 26: analytics.v1.GetUserComparisonWithPeersResponse.comparison_metrics:type_name -> analytics.v1.ComparisonMetric
+	4,  // 27: analytics.v1.GetPlatformStatisticsRequest.time_range:type_name -> analytics.v1.TimestampRange
+	31, // 28: analytics.v1.GetPlatformStatisticsResponse.usage_statistics:type_name -> analytics.v1.UsageStatistics
+	32, // 29: analytics.v1.UsageStatistics.user_trends:type_name -> analytics.v1.UserRegistrationTrend
+	55, // 30: analytics.v1.UserRegistrationTrend.date:type_name -> google.protobuf.Timestamp
+	4,  // 31: analytics.v1.GetCategoryPopularityStatsRequest.time_range:type_name -> analytics.v1.TimestampRange
+	35, // 32: analytics.v1.GetCategoryPopularityStatsResponse.categories:type_name -> analytics.v1.CategoryStat
+	0,  // 33: analytics.v1.CategoryStat.direction:type_name -> analytics.v1.Direction
+	1,  // 34: analytics.v1.CategoryStat.level:type_name -> analytics.v1.Level
+	4,  // 35: analytics.v1.GetUserEngagementMetricsRequest.time_range:type_name -> analytics.v1.TimestampRange
+	3,  // 36: analytics.v1.GetUserEngagementMetricsRequest.time_frame:type_name -> analytics.v1.TimeFrame
+	38, // 37: analytics.v1.GetUserEngagementMetricsResponse.engagement_metrics:type_name -> analytics.v1.EngagementMetric
+	55, // 38: analytics.v1.EngagementMetric.timestamp:type_name -> google.protobuf.Timestamp
+	4,  // 39: analytics.v1.GetActiveUsersStatsRequest.time_range:type_name -> analytics.v1.TimestampRange
+	3,  // 40: analytics.v1.GetActiveUsersStatsRequest.time_frame:type_name -> analytics.v1.TimeFrame
+	41, // 41: analytics.v1.GetActiveUsersStatsResponse.data_points:type_name -> analytics.v1.ActiveUsersDataPoint
+	55, // 42: analytics.v1.ActiveUsersDataPoint.timestamp:type_name -> google.protobuf.Timestamp
+	2,  // 43: analytics.v1.GenerateReportRequest.report_type:type_name -> analytics.v1.ReportType
+	0,  // 44: analytics.v1.GenerateReportRequest.direction:type_name -> analytics.v1.Direction
+	1,  // 45: analytics.v1.GenerateReportRequest.level:type_name -> analytics.v1.Level
+	4,  // 46: analytics.v1.GenerateReportRequest.time_range:type_name -> analytics.v1.TimestampRange
+	2,  // 47: analytics.v1.GenerateReportResponse.report_type:type_name -> analytics.v1.ReportType
+	55, // 48: analytics.v1.GenerateReportResponse.created_at:type_name -> google.protobuf.Timestamp
+	55, // 49: analytics.v1.GenerateReportResponse.expires_at:type_name -> google.protobuf.Timestamp
+	5,  // 50: analytics.v1.ListReportsRequest.pagination:type_name -> analytics.v1.Pagination
+	2,  // 51: analytics.v1.ListReportsRequest.report_type:type_name -> analytics.v1.ReportType
+	46, // 52: analytics.v1.ListReportsResponse.reports:type_name -> analytics.v1.ReportSummary
+	2,  // 53: analytics.v1.ReportSummary.report_type:type_name -> analytics.v1.ReportType
+	55, // 54: analytics.v1.ReportSummary.created_at:type_name -> google.protobuf.Timestamp
+	2,  // 55: analytics.v1.GetReportResponse.report_type:type_name -> analytics.v1.ReportType
+	55, // 56: analytics.v1.GetReportResponse.created_at:type_name -> google.protobuf.Timestamp
+	0,  // 57: analytics.v1.GetLearningPathRecommendationsRequest.direction:type_name -> analytics.v1.Direction
+	1,  // 58: analytics.v1.GetLearningPathRecommendationsRequest.level:type_name -> analytics.v1.Level
+	51, // 59: analytics.v1.GetLearningPathRecommendationsResponse.recommended_path:type_name -> analytics.v1.LearningPathStep
+	0,  // 60: analytics.v1.GetTestRecommendationsRequest.direction:type_name -> analytics.v1.Direction
+	1,  // 61: analytics.v1.GetTestRecommendationsRequest.level:type_name -> analytics.v1.Level
+	54, // 62: analytics.v1.GetTestRecommendationsResponse.recommendations:type_name -> analytics.v1.TestRecommendation
+	6,  // 63: analytics.v1.AnalyticsService.GetTestStatistics:input_type -> analytics.v1.GetTestStatisticsRequest
+	10, // 64: analytics.v1.AnalyticsService.GetTestPerformanceTrend:input_type -> analytics.v1.GetTestPerformanceTrendRequest
+	13, // 65: analytics.v1.AnalyticsService.GetQuestionDifficultyAnalysis:input_type -> analytics.v1.GetQuestionDifficultyAnalysisRequest
+	16, // 66: analytics.v1.AnalyticsService.GetUserStatistics:input_type -> analytics.v1.GetUserStatisticsRequest
+	19, // 67: analytics.v1.AnalyticsService.GetUserProgressReport:input_type -> analytics.v1.GetUserProgressReportRequest
+	22, // 68: analytics.v1.AnalyticsService.GetUserStrengthsWeaknesses:input_type -> analytics.v1.GetUserStrengthsWeaknessesRequest
+	26, // 69: analytics.v1.AnalyticsService.GetUserComparisonWithPeers:input_type -> analytics.v1.GetUserComparisonWithPeersRequest
+	29, // 70: analytics.v1.AnalyticsService.GetPlatformStatistics:input_type -> analytics.v1.GetPlatformStatisticsRequest
+	33, // 71: analytics.v1.AnalyticsService.GetCategoryPopularityStats:input_type -> analytics.v1.GetCategoryPopularityStatsRequest
+	36, // 72: analytics.v1.AnalyticsService.GetUserEngagementMetrics:input_type -> analytics.v1.GetUserEngagementMetricsRequest
+	39, // 73: analytics.v1.AnalyticsService.GetActiveUsersStats:input_type -> analytics.v1.GetActiveUsersStatsRequest
+	42, // 74: analytics.v1.AnalyticsService.GenerateReport:input_type -> analytics.v1.GenerateReportRequest
+	44, // 75: analytics.v1.AnalyticsService.ListReports:input_type -> analytics.v1.ListReportsRequest
+	47, // 76: analytics.v1.AnalyticsService.GetReport:input_type -> analytics.v1.GetReportRequest
+	49, // 77: analytics.v1.AnalyticsService.GetLearningPathRecommendations:input_type -> analytics.v1.GetLearningPathRecommendationsRequest
+	52, // 78: analytics.v1.AnalyticsService.GetTestRecommendations:input_type -> analytics.v1.GetTestRecommendationsRequest
+	7,  // 79: analytics.v1.AnalyticsService.GetTestStatistics:output_type -> analytics.v1.GetTestStatisticsResponse
+	11, // 80: analytics.v1.AnalyticsService.GetTestPerformanceTrend:output_type -> analytics.v1.GetTestPerformanceTrendResponse
+	14, // 81: analytics.v1.AnalyticsService.GetQuestionDifficultyAnalysis:output_type -> analytics.v1.GetQuestionDifficultyAnalysisResponse
+	17, // 82: analytics.v1.AnalyticsService.GetUserStatistics:output_type -> analytics.v1.GetUserStatisticsResponse
+	20, // 83: analytics.v1.AnalyticsService.GetUserProgressReport:output_type -> analytics.v1.GetUserProgressReportResponse
+	23, // 84: analytics.v1.AnalyticsService.GetUserStrengthsWeaknesses:output_type -> analytics.v1.GetUserStrengthsWeaknessesResponse
+	27, // 85: analytics.v1.AnalyticsService.GetUserComparisonWithPeers:output_type -> analytics.v1.GetUserComparisonWithPeersResponse
+	30, // 86: analytics.v1.AnalyticsService.GetPlatformStatistics:output_type -> analytics.v1.GetPlatformStatisticsResponse
+	34, // 87: analytics.v1.AnalyticsService.GetCategoryPopularityStats:output_type -> analytics.v1.GetCategoryPopularityStatsResponse
+	37, // 88: analytics.v1.AnalyticsService.GetUserEngagementMetrics:output_type -> analytics.v1.GetUserEngagementMetricsResponse
+	40, // 89: analytics.v1.AnalyticsService.GetActiveUsersStats:output_type -> analytics.v1.GetActiveUsersStatsResponse
+	43, // 90: analytics.v1.AnalyticsService.GenerateReport:output_type -> analytics.v1.GenerateReportResponse
+	45, // 91: analytics.v1.AnalyticsService.ListReports:output_type -> analytics.v1.ListReportsResponse
+	48, // 92: analytics.v1.AnalyticsService.GetReport:output_type -> analytics.v1.GetReportResponse
+	50, // 93: analytics.v1.AnalyticsService.GetLearningPathRecommendations:output_type -> analytics.v1.GetLearningPathRecommendationsResponse
+	53, // 94: analytics.v1.AnalyticsService.GetTestRecommendations:output_type -> analytics.v1.GetTestRecommendationsResponse
+	79, // [79:95] is the sub-list for method output_type
+	63, // [63:79] is the sub-list for method input_type
+	63, // [63:63] is the sub-list for extension type_name
+	63, // [63:63] is the sub-list for extension extendee
+	0,  // [0:63] is the sub-list for field type_name
 }
 
 func init() { file_analytics_analytics_proto_init() }
@@ -1079,7 +4005,7 @@ func file_analytics_analytics_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_analytics_analytics_proto_rawDesc), len(file_analytics_analytics_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   12,
+			NumMessages:   51,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

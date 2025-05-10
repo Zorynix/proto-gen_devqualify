@@ -19,14 +19,23 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TestService_CreateTest_FullMethodName     = "/test.v1.TestService/CreateTest"
-	TestService_GetTests_FullMethodName       = "/test.v1.TestService/GetTests"
-	TestService_GetTest_FullMethodName        = "/test.v1.TestService/GetTest"
-	TestService_SubmitAnswers_FullMethodName  = "/test.v1.TestService/SubmitAnswers"
-	TestService_GetTestResults_FullMethodName = "/test.v1.TestService/GetTestResults"
-	TestService_UpdateTest_FullMethodName     = "/test.v1.TestService/UpdateTest"
-	TestService_DeleteTest_FullMethodName     = "/test.v1.TestService/DeleteTest"
-	TestService_PublishTest_FullMethodName    = "/test.v1.TestService/PublishTest"
+	TestService_CreateTest_FullMethodName           = "/test.v1.TestService/CreateTest"
+	TestService_GetTests_FullMethodName             = "/test.v1.TestService/GetTests"
+	TestService_GetTest_FullMethodName              = "/test.v1.TestService/GetTest"
+	TestService_SubmitAnswers_FullMethodName        = "/test.v1.TestService/SubmitAnswers"
+	TestService_GetTestResults_FullMethodName       = "/test.v1.TestService/GetTestResults"
+	TestService_UpdateTest_FullMethodName           = "/test.v1.TestService/UpdateTest"
+	TestService_DeleteTest_FullMethodName           = "/test.v1.TestService/DeleteTest"
+	TestService_PublishTest_FullMethodName          = "/test.v1.TestService/PublishTest"
+	TestService_CreateTechnology_FullMethodName     = "/test.v1.TestService/CreateTechnology"
+	TestService_GetTechnologies_FullMethodName      = "/test.v1.TestService/GetTechnologies"
+	TestService_UpdateTechnology_FullMethodName     = "/test.v1.TestService/UpdateTechnology"
+	TestService_DeleteTechnology_FullMethodName     = "/test.v1.TestService/DeleteTechnology"
+	TestService_GetTestsByTechnology_FullMethodName = "/test.v1.TestService/GetTestsByTechnology"
+	TestService_StartTestSession_FullMethodName     = "/test.v1.TestService/StartTestSession"
+	TestService_GetTestSession_FullMethodName       = "/test.v1.TestService/GetTestSession"
+	TestService_SaveAnswer_FullMethodName           = "/test.v1.TestService/SaveAnswer"
+	TestService_CompleteTestSession_FullMethodName  = "/test.v1.TestService/CompleteTestSession"
 )
 
 // TestServiceClient is the client API for TestService service.
@@ -41,6 +50,15 @@ type TestServiceClient interface {
 	UpdateTest(ctx context.Context, in *UpdateTestRequest, opts ...grpc.CallOption) (*UpdateTestResponse, error)
 	DeleteTest(ctx context.Context, in *DeleteTestRequest, opts ...grpc.CallOption) (*Pagination, error)
 	PublishTest(ctx context.Context, in *PublishTestRequest, opts ...grpc.CallOption) (*PublishTestResponse, error)
+	CreateTechnology(ctx context.Context, in *CreateTechnologyRequest, opts ...grpc.CallOption) (*CreateTechnologyResponse, error)
+	GetTechnologies(ctx context.Context, in *GetTechnologiesRequest, opts ...grpc.CallOption) (*GetTechnologiesResponse, error)
+	UpdateTechnology(ctx context.Context, in *UpdateTechnologyRequest, opts ...grpc.CallOption) (*UpdateTechnologyResponse, error)
+	DeleteTechnology(ctx context.Context, in *DeleteTechnologyRequest, opts ...grpc.CallOption) (*DeleteTechnologyResponse, error)
+	GetTestsByTechnology(ctx context.Context, in *GetTestsByTechnologyRequest, opts ...grpc.CallOption) (*GetTestsResponse, error)
+	StartTestSession(ctx context.Context, in *StartTestSessionRequest, opts ...grpc.CallOption) (*StartTestSessionResponse, error)
+	GetTestSession(ctx context.Context, in *GetTestSessionRequest, opts ...grpc.CallOption) (*GetTestSessionResponse, error)
+	SaveAnswer(ctx context.Context, in *SaveAnswerRequest, opts ...grpc.CallOption) (*SaveAnswerResponse, error)
+	CompleteTestSession(ctx context.Context, in *CompleteTestSessionRequest, opts ...grpc.CallOption) (*CompleteTestSessionResponse, error)
 }
 
 type testServiceClient struct {
@@ -131,6 +149,96 @@ func (c *testServiceClient) PublishTest(ctx context.Context, in *PublishTestRequ
 	return out, nil
 }
 
+func (c *testServiceClient) CreateTechnology(ctx context.Context, in *CreateTechnologyRequest, opts ...grpc.CallOption) (*CreateTechnologyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateTechnologyResponse)
+	err := c.cc.Invoke(ctx, TestService_CreateTechnology_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *testServiceClient) GetTechnologies(ctx context.Context, in *GetTechnologiesRequest, opts ...grpc.CallOption) (*GetTechnologiesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTechnologiesResponse)
+	err := c.cc.Invoke(ctx, TestService_GetTechnologies_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *testServiceClient) UpdateTechnology(ctx context.Context, in *UpdateTechnologyRequest, opts ...grpc.CallOption) (*UpdateTechnologyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTechnologyResponse)
+	err := c.cc.Invoke(ctx, TestService_UpdateTechnology_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *testServiceClient) DeleteTechnology(ctx context.Context, in *DeleteTechnologyRequest, opts ...grpc.CallOption) (*DeleteTechnologyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteTechnologyResponse)
+	err := c.cc.Invoke(ctx, TestService_DeleteTechnology_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *testServiceClient) GetTestsByTechnology(ctx context.Context, in *GetTestsByTechnologyRequest, opts ...grpc.CallOption) (*GetTestsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTestsResponse)
+	err := c.cc.Invoke(ctx, TestService_GetTestsByTechnology_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *testServiceClient) StartTestSession(ctx context.Context, in *StartTestSessionRequest, opts ...grpc.CallOption) (*StartTestSessionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StartTestSessionResponse)
+	err := c.cc.Invoke(ctx, TestService_StartTestSession_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *testServiceClient) GetTestSession(ctx context.Context, in *GetTestSessionRequest, opts ...grpc.CallOption) (*GetTestSessionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTestSessionResponse)
+	err := c.cc.Invoke(ctx, TestService_GetTestSession_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *testServiceClient) SaveAnswer(ctx context.Context, in *SaveAnswerRequest, opts ...grpc.CallOption) (*SaveAnswerResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SaveAnswerResponse)
+	err := c.cc.Invoke(ctx, TestService_SaveAnswer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *testServiceClient) CompleteTestSession(ctx context.Context, in *CompleteTestSessionRequest, opts ...grpc.CallOption) (*CompleteTestSessionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CompleteTestSessionResponse)
+	err := c.cc.Invoke(ctx, TestService_CompleteTestSession_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TestServiceServer is the server API for TestService service.
 // All implementations must embed UnimplementedTestServiceServer
 // for forward compatibility.
@@ -143,6 +251,15 @@ type TestServiceServer interface {
 	UpdateTest(context.Context, *UpdateTestRequest) (*UpdateTestResponse, error)
 	DeleteTest(context.Context, *DeleteTestRequest) (*Pagination, error)
 	PublishTest(context.Context, *PublishTestRequest) (*PublishTestResponse, error)
+	CreateTechnology(context.Context, *CreateTechnologyRequest) (*CreateTechnologyResponse, error)
+	GetTechnologies(context.Context, *GetTechnologiesRequest) (*GetTechnologiesResponse, error)
+	UpdateTechnology(context.Context, *UpdateTechnologyRequest) (*UpdateTechnologyResponse, error)
+	DeleteTechnology(context.Context, *DeleteTechnologyRequest) (*DeleteTechnologyResponse, error)
+	GetTestsByTechnology(context.Context, *GetTestsByTechnologyRequest) (*GetTestsResponse, error)
+	StartTestSession(context.Context, *StartTestSessionRequest) (*StartTestSessionResponse, error)
+	GetTestSession(context.Context, *GetTestSessionRequest) (*GetTestSessionResponse, error)
+	SaveAnswer(context.Context, *SaveAnswerRequest) (*SaveAnswerResponse, error)
+	CompleteTestSession(context.Context, *CompleteTestSessionRequest) (*CompleteTestSessionResponse, error)
 	mustEmbedUnimplementedTestServiceServer()
 }
 
@@ -176,6 +293,33 @@ func (UnimplementedTestServiceServer) DeleteTest(context.Context, *DeleteTestReq
 }
 func (UnimplementedTestServiceServer) PublishTest(context.Context, *PublishTestRequest) (*PublishTestResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PublishTest not implemented")
+}
+func (UnimplementedTestServiceServer) CreateTechnology(context.Context, *CreateTechnologyRequest) (*CreateTechnologyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTechnology not implemented")
+}
+func (UnimplementedTestServiceServer) GetTechnologies(context.Context, *GetTechnologiesRequest) (*GetTechnologiesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTechnologies not implemented")
+}
+func (UnimplementedTestServiceServer) UpdateTechnology(context.Context, *UpdateTechnologyRequest) (*UpdateTechnologyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTechnology not implemented")
+}
+func (UnimplementedTestServiceServer) DeleteTechnology(context.Context, *DeleteTechnologyRequest) (*DeleteTechnologyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTechnology not implemented")
+}
+func (UnimplementedTestServiceServer) GetTestsByTechnology(context.Context, *GetTestsByTechnologyRequest) (*GetTestsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTestsByTechnology not implemented")
+}
+func (UnimplementedTestServiceServer) StartTestSession(context.Context, *StartTestSessionRequest) (*StartTestSessionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartTestSession not implemented")
+}
+func (UnimplementedTestServiceServer) GetTestSession(context.Context, *GetTestSessionRequest) (*GetTestSessionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTestSession not implemented")
+}
+func (UnimplementedTestServiceServer) SaveAnswer(context.Context, *SaveAnswerRequest) (*SaveAnswerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveAnswer not implemented")
+}
+func (UnimplementedTestServiceServer) CompleteTestSession(context.Context, *CompleteTestSessionRequest) (*CompleteTestSessionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CompleteTestSession not implemented")
 }
 func (UnimplementedTestServiceServer) mustEmbedUnimplementedTestServiceServer() {}
 func (UnimplementedTestServiceServer) testEmbeddedByValue()                     {}
@@ -342,6 +486,168 @@ func _TestService_PublishTest_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TestService_CreateTechnology_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTechnologyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TestServiceServer).CreateTechnology(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TestService_CreateTechnology_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TestServiceServer).CreateTechnology(ctx, req.(*CreateTechnologyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TestService_GetTechnologies_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTechnologiesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TestServiceServer).GetTechnologies(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TestService_GetTechnologies_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TestServiceServer).GetTechnologies(ctx, req.(*GetTechnologiesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TestService_UpdateTechnology_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTechnologyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TestServiceServer).UpdateTechnology(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TestService_UpdateTechnology_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TestServiceServer).UpdateTechnology(ctx, req.(*UpdateTechnologyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TestService_DeleteTechnology_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTechnologyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TestServiceServer).DeleteTechnology(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TestService_DeleteTechnology_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TestServiceServer).DeleteTechnology(ctx, req.(*DeleteTechnologyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TestService_GetTestsByTechnology_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTestsByTechnologyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TestServiceServer).GetTestsByTechnology(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TestService_GetTestsByTechnology_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TestServiceServer).GetTestsByTechnology(ctx, req.(*GetTestsByTechnologyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TestService_StartTestSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartTestSessionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TestServiceServer).StartTestSession(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TestService_StartTestSession_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TestServiceServer).StartTestSession(ctx, req.(*StartTestSessionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TestService_GetTestSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTestSessionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TestServiceServer).GetTestSession(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TestService_GetTestSession_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TestServiceServer).GetTestSession(ctx, req.(*GetTestSessionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TestService_SaveAnswer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveAnswerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TestServiceServer).SaveAnswer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TestService_SaveAnswer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TestServiceServer).SaveAnswer(ctx, req.(*SaveAnswerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _TestService_CompleteTestSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CompleteTestSessionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TestServiceServer).CompleteTestSession(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TestService_CompleteTestSession_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TestServiceServer).CompleteTestSession(ctx, req.(*CompleteTestSessionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TestService_ServiceDesc is the grpc.ServiceDesc for TestService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -380,6 +686,42 @@ var TestService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PublishTest",
 			Handler:    _TestService_PublishTest_Handler,
+		},
+		{
+			MethodName: "CreateTechnology",
+			Handler:    _TestService_CreateTechnology_Handler,
+		},
+		{
+			MethodName: "GetTechnologies",
+			Handler:    _TestService_GetTechnologies_Handler,
+		},
+		{
+			MethodName: "UpdateTechnology",
+			Handler:    _TestService_UpdateTechnology_Handler,
+		},
+		{
+			MethodName: "DeleteTechnology",
+			Handler:    _TestService_DeleteTechnology_Handler,
+		},
+		{
+			MethodName: "GetTestsByTechnology",
+			Handler:    _TestService_GetTestsByTechnology_Handler,
+		},
+		{
+			MethodName: "StartTestSession",
+			Handler:    _TestService_StartTestSession_Handler,
+		},
+		{
+			MethodName: "GetTestSession",
+			Handler:    _TestService_GetTestSession_Handler,
+		},
+		{
+			MethodName: "SaveAnswer",
+			Handler:    _TestService_SaveAnswer_Handler,
+		},
+		{
+			MethodName: "CompleteTestSession",
+			Handler:    _TestService_CompleteTestSession_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
