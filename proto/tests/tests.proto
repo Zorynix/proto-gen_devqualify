@@ -159,6 +159,7 @@ message QuestionResult {
     int32 points_earned = 3;
     string feedback = 4;
     string correct_answer = 5;
+    string user_answer = 6;
 }
 
 message UpdateTestRequest {

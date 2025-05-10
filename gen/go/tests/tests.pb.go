@@ -1211,6 +1211,7 @@ type QuestionResult struct {
 	PointsEarned  int32                  `protobuf:"varint,3,opt,name=points_earned,json=pointsEarned,proto3" json:"points_earned,omitempty"`
 	Feedback      string                 `protobuf:"bytes,4,opt,name=feedback,proto3" json:"feedback,omitempty"`
 	CorrectAnswer string                 `protobuf:"bytes,5,opt,name=correct_answer,json=correctAnswer,proto3" json:"correct_answer,omitempty"`
+	UserAnswer    string                 `protobuf:"bytes,6,opt,name=user_answer,json=userAnswer,proto3" json:"user_answer,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1276,6 +1277,13 @@ func (x *QuestionResult) GetFeedback() string {
 func (x *QuestionResult) GetCorrectAnswer() string {
 	if x != nil {
 		return x.CorrectAnswer
+	}
+	return ""
+}
+
+func (x *QuestionResult) GetUserAnswer() string {
+	if x != nil {
+		return x.UserAnswer
 	}
 	return ""
 }
@@ -2721,7 +2729,7 @@ const file_tests_tests_proto_rawDesc = "" +
 	"\x05score\x18\x01 \x01(\x05R\x05score\x12!\n" +
 	"\ftotal_points\x18\x02 \x01(\x05R\vtotalPoints\x12\x1a\n" +
 	"\bfeedback\x18\x03 \x01(\tR\bfeedback\x12B\n" +
-	"\x10question_results\x18\x04 \x03(\v2\x17.test.v1.QuestionResultR\x0fquestionResults\"\xb8\x01\n" +
+	"\x10question_results\x18\x04 \x03(\v2\x17.test.v1.QuestionResultR\x0fquestionResults\"\xd9\x01\n" +
 	"\x0eQuestionResult\x12\x1f\n" +
 	"\vquestion_id\x18\x01 \x01(\x03R\n" +
 	"questionId\x12\x1d\n" +
@@ -2729,7 +2737,9 @@ const file_tests_tests_proto_rawDesc = "" +
 	"is_correct\x18\x02 \x01(\bR\tisCorrect\x12#\n" +
 	"\rpoints_earned\x18\x03 \x01(\x05R\fpointsEarned\x12\x1a\n" +
 	"\bfeedback\x18\x04 \x01(\tR\bfeedback\x12%\n" +
-	"\x0ecorrect_answer\x18\x05 \x01(\tR\rcorrectAnswer\"\xe0\x01\n" +
+	"\x0ecorrect_answer\x18\x05 \x01(\tR\rcorrectAnswer\x12\x1f\n" +
+	"\vuser_answer\x18\x06 \x01(\tR\n" +
+	"userAnswer\"\xe0\x01\n" +
 	"\x11UpdateTestRequest\x12\x17\n" +
 	"\atest_id\x18\x01 \x01(\x03R\x06testId\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12 \n" +
