@@ -56,7 +56,7 @@ service TestService {
     rpc SubmitAnswers (SubmitAnswersRequest) returns (SubmitAnswersResponse);
     rpc GetTestResults (GetTestResultsRequest) returns (GetTestResultsResponse);
     rpc UpdateTest (UpdateTestRequest) returns (UpdateTestResponse);
-    rpc DeleteTest (DeleteTestRequest) returns (DeleteTestResponse);
+    rpc DeleteTest (DeleteTestRequest) returns (Pagination);
     rpc PublishTest (PublishTestRequest) returns (PublishTestResponse);
     
     rpc CreateTechnology (CreateTechnologyRequest) returns (CreateTechnologyResponse);
@@ -143,7 +143,7 @@ message SubmitAnswersResponse {
 }
 
 message GetTestResultsRequest {
-    int64 submission_id = 1;
+    string submission_id = 1;
 }
 
 message GetTestResultsResponse {
@@ -176,10 +176,6 @@ message UpdateTestResponse {
 
 message DeleteTestRequest {
     int64 test_id = 1;
-}
-
-message DeleteTestResponse {
-    string message = 1;
 }
 
 message PublishTestRequest {

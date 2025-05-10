@@ -1094,7 +1094,7 @@ func (x *SubmitAnswersResponse) GetMessage() string {
 
 type GetTestResultsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SubmissionId  int64                  `protobuf:"varint,1,opt,name=submission_id,json=submissionId,proto3" json:"submission_id,omitempty"`
+	SubmissionId  string                 `protobuf:"bytes,1,opt,name=submission_id,json=submissionId,proto3" json:"submission_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1129,11 +1129,11 @@ func (*GetTestResultsRequest) Descriptor() ([]byte, []int) {
 	return file_tests_tests_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *GetTestResultsRequest) GetSubmissionId() int64 {
+func (x *GetTestResultsRequest) GetSubmissionId() string {
 	if x != nil {
 		return x.SubmissionId
 	}
-	return 0
+	return ""
 }
 
 type GetTestResultsResponse struct {
@@ -1452,50 +1452,6 @@ func (x *DeleteTestRequest) GetTestId() int64 {
 	return 0
 }
 
-type DeleteTestResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *DeleteTestResponse) Reset() {
-	*x = DeleteTestResponse{}
-	mi := &file_tests_tests_proto_msgTypes[20]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DeleteTestResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DeleteTestResponse) ProtoMessage() {}
-
-func (x *DeleteTestResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[20]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use DeleteTestResponse.ProtoReflect.Descriptor instead.
-func (*DeleteTestResponse) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{20}
-}
-
-func (x *DeleteTestResponse) GetMessage() string {
-	if x != nil {
-		return x.Message
-	}
-	return ""
-}
-
 type PublishTestRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TestId        int64                  `protobuf:"varint,1,opt,name=test_id,json=testId,proto3" json:"test_id,omitempty"`
@@ -1506,7 +1462,7 @@ type PublishTestRequest struct {
 
 func (x *PublishTestRequest) Reset() {
 	*x = PublishTestRequest{}
-	mi := &file_tests_tests_proto_msgTypes[21]
+	mi := &file_tests_tests_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1518,7 +1474,7 @@ func (x *PublishTestRequest) String() string {
 func (*PublishTestRequest) ProtoMessage() {}
 
 func (x *PublishTestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[21]
+	mi := &file_tests_tests_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1531,7 +1487,7 @@ func (x *PublishTestRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PublishTestRequest.ProtoReflect.Descriptor instead.
 func (*PublishTestRequest) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{21}
+	return file_tests_tests_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *PublishTestRequest) GetTestId() int64 {
@@ -1557,7 +1513,7 @@ type PublishTestResponse struct {
 
 func (x *PublishTestResponse) Reset() {
 	*x = PublishTestResponse{}
-	mi := &file_tests_tests_proto_msgTypes[22]
+	mi := &file_tests_tests_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1569,7 +1525,7 @@ func (x *PublishTestResponse) String() string {
 func (*PublishTestResponse) ProtoMessage() {}
 
 func (x *PublishTestResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[22]
+	mi := &file_tests_tests_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1582,7 +1538,7 @@ func (x *PublishTestResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PublishTestResponse.ProtoReflect.Descriptor instead.
 func (*PublishTestResponse) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{22}
+	return file_tests_tests_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *PublishTestResponse) GetMessage() string {
@@ -1603,7 +1559,7 @@ type CreateTechnologyRequest struct {
 
 func (x *CreateTechnologyRequest) Reset() {
 	*x = CreateTechnologyRequest{}
-	mi := &file_tests_tests_proto_msgTypes[23]
+	mi := &file_tests_tests_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1615,7 +1571,7 @@ func (x *CreateTechnologyRequest) String() string {
 func (*CreateTechnologyRequest) ProtoMessage() {}
 
 func (x *CreateTechnologyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[23]
+	mi := &file_tests_tests_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1628,7 +1584,7 @@ func (x *CreateTechnologyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateTechnologyRequest.ProtoReflect.Descriptor instead.
 func (*CreateTechnologyRequest) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{23}
+	return file_tests_tests_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *CreateTechnologyRequest) GetName() string {
@@ -1662,7 +1618,7 @@ type CreateTechnologyResponse struct {
 
 func (x *CreateTechnologyResponse) Reset() {
 	*x = CreateTechnologyResponse{}
-	mi := &file_tests_tests_proto_msgTypes[24]
+	mi := &file_tests_tests_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1674,7 +1630,7 @@ func (x *CreateTechnologyResponse) String() string {
 func (*CreateTechnologyResponse) ProtoMessage() {}
 
 func (x *CreateTechnologyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[24]
+	mi := &file_tests_tests_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1687,7 +1643,7 @@ func (x *CreateTechnologyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateTechnologyResponse.ProtoReflect.Descriptor instead.
 func (*CreateTechnologyResponse) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{24}
+	return file_tests_tests_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *CreateTechnologyResponse) GetTechnologyId() int64 {
@@ -1714,7 +1670,7 @@ type GetTechnologiesRequest struct {
 
 func (x *GetTechnologiesRequest) Reset() {
 	*x = GetTechnologiesRequest{}
-	mi := &file_tests_tests_proto_msgTypes[25]
+	mi := &file_tests_tests_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1726,7 +1682,7 @@ func (x *GetTechnologiesRequest) String() string {
 func (*GetTechnologiesRequest) ProtoMessage() {}
 
 func (x *GetTechnologiesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[25]
+	mi := &file_tests_tests_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1739,7 +1695,7 @@ func (x *GetTechnologiesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTechnologiesRequest.ProtoReflect.Descriptor instead.
 func (*GetTechnologiesRequest) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{25}
+	return file_tests_tests_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *GetTechnologiesRequest) GetDirection() Direction {
@@ -1766,7 +1722,7 @@ type GetTechnologiesResponse struct {
 
 func (x *GetTechnologiesResponse) Reset() {
 	*x = GetTechnologiesResponse{}
-	mi := &file_tests_tests_proto_msgTypes[26]
+	mi := &file_tests_tests_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1778,7 +1734,7 @@ func (x *GetTechnologiesResponse) String() string {
 func (*GetTechnologiesResponse) ProtoMessage() {}
 
 func (x *GetTechnologiesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[26]
+	mi := &file_tests_tests_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1791,7 +1747,7 @@ func (x *GetTechnologiesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTechnologiesResponse.ProtoReflect.Descriptor instead.
 func (*GetTechnologiesResponse) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{26}
+	return file_tests_tests_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *GetTechnologiesResponse) GetTechnologies() []*Technology {
@@ -1820,7 +1776,7 @@ type UpdateTechnologyRequest struct {
 
 func (x *UpdateTechnologyRequest) Reset() {
 	*x = UpdateTechnologyRequest{}
-	mi := &file_tests_tests_proto_msgTypes[27]
+	mi := &file_tests_tests_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1832,7 +1788,7 @@ func (x *UpdateTechnologyRequest) String() string {
 func (*UpdateTechnologyRequest) ProtoMessage() {}
 
 func (x *UpdateTechnologyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[27]
+	mi := &file_tests_tests_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1845,7 +1801,7 @@ func (x *UpdateTechnologyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTechnologyRequest.ProtoReflect.Descriptor instead.
 func (*UpdateTechnologyRequest) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{27}
+	return file_tests_tests_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *UpdateTechnologyRequest) GetTechnologyId() int64 {
@@ -1885,7 +1841,7 @@ type UpdateTechnologyResponse struct {
 
 func (x *UpdateTechnologyResponse) Reset() {
 	*x = UpdateTechnologyResponse{}
-	mi := &file_tests_tests_proto_msgTypes[28]
+	mi := &file_tests_tests_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1897,7 +1853,7 @@ func (x *UpdateTechnologyResponse) String() string {
 func (*UpdateTechnologyResponse) ProtoMessage() {}
 
 func (x *UpdateTechnologyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[28]
+	mi := &file_tests_tests_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1910,7 +1866,7 @@ func (x *UpdateTechnologyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateTechnologyResponse.ProtoReflect.Descriptor instead.
 func (*UpdateTechnologyResponse) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{28}
+	return file_tests_tests_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *UpdateTechnologyResponse) GetMessage() string {
@@ -1929,7 +1885,7 @@ type DeleteTechnologyRequest struct {
 
 func (x *DeleteTechnologyRequest) Reset() {
 	*x = DeleteTechnologyRequest{}
-	mi := &file_tests_tests_proto_msgTypes[29]
+	mi := &file_tests_tests_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1941,7 +1897,7 @@ func (x *DeleteTechnologyRequest) String() string {
 func (*DeleteTechnologyRequest) ProtoMessage() {}
 
 func (x *DeleteTechnologyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[29]
+	mi := &file_tests_tests_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1954,7 +1910,7 @@ func (x *DeleteTechnologyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTechnologyRequest.ProtoReflect.Descriptor instead.
 func (*DeleteTechnologyRequest) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{29}
+	return file_tests_tests_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *DeleteTechnologyRequest) GetTechnologyId() int64 {
@@ -1973,7 +1929,7 @@ type DeleteTechnologyResponse struct {
 
 func (x *DeleteTechnologyResponse) Reset() {
 	*x = DeleteTechnologyResponse{}
-	mi := &file_tests_tests_proto_msgTypes[30]
+	mi := &file_tests_tests_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1985,7 +1941,7 @@ func (x *DeleteTechnologyResponse) String() string {
 func (*DeleteTechnologyResponse) ProtoMessage() {}
 
 func (x *DeleteTechnologyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[30]
+	mi := &file_tests_tests_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1998,7 +1954,7 @@ func (x *DeleteTechnologyResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTechnologyResponse.ProtoReflect.Descriptor instead.
 func (*DeleteTechnologyResponse) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{30}
+	return file_tests_tests_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *DeleteTechnologyResponse) GetMessage() string {
@@ -2020,7 +1976,7 @@ type GetTestsByTechnologyRequest struct {
 
 func (x *GetTestsByTechnologyRequest) Reset() {
 	*x = GetTestsByTechnologyRequest{}
-	mi := &file_tests_tests_proto_msgTypes[31]
+	mi := &file_tests_tests_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2032,7 +1988,7 @@ func (x *GetTestsByTechnologyRequest) String() string {
 func (*GetTestsByTechnologyRequest) ProtoMessage() {}
 
 func (x *GetTestsByTechnologyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[31]
+	mi := &file_tests_tests_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2045,7 +2001,7 @@ func (x *GetTestsByTechnologyRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTestsByTechnologyRequest.ProtoReflect.Descriptor instead.
 func (*GetTestsByTechnologyRequest) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{31}
+	return file_tests_tests_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *GetTestsByTechnologyRequest) GetTechnologyId() int64 {
@@ -2090,7 +2046,7 @@ type CodeQuestion struct {
 
 func (x *CodeQuestion) Reset() {
 	*x = CodeQuestion{}
-	mi := &file_tests_tests_proto_msgTypes[32]
+	mi := &file_tests_tests_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2102,7 +2058,7 @@ func (x *CodeQuestion) String() string {
 func (*CodeQuestion) ProtoMessage() {}
 
 func (x *CodeQuestion) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[32]
+	mi := &file_tests_tests_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2115,7 +2071,7 @@ func (x *CodeQuestion) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CodeQuestion.ProtoReflect.Descriptor instead.
 func (*CodeQuestion) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{32}
+	return file_tests_tests_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *CodeQuestion) GetCodeSnippet() string {
@@ -2174,7 +2130,7 @@ type TestSession struct {
 
 func (x *TestSession) Reset() {
 	*x = TestSession{}
-	mi := &file_tests_tests_proto_msgTypes[33]
+	mi := &file_tests_tests_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2186,7 +2142,7 @@ func (x *TestSession) String() string {
 func (*TestSession) ProtoMessage() {}
 
 func (x *TestSession) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[33]
+	mi := &file_tests_tests_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2199,7 +2155,7 @@ func (x *TestSession) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TestSession.ProtoReflect.Descriptor instead.
 func (*TestSession) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{33}
+	return file_tests_tests_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *TestSession) GetSessionId() string {
@@ -2254,7 +2210,7 @@ type StartTestSessionRequest struct {
 
 func (x *StartTestSessionRequest) Reset() {
 	*x = StartTestSessionRequest{}
-	mi := &file_tests_tests_proto_msgTypes[34]
+	mi := &file_tests_tests_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2266,7 +2222,7 @@ func (x *StartTestSessionRequest) String() string {
 func (*StartTestSessionRequest) ProtoMessage() {}
 
 func (x *StartTestSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[34]
+	mi := &file_tests_tests_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2279,7 +2235,7 @@ func (x *StartTestSessionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartTestSessionRequest.ProtoReflect.Descriptor instead.
 func (*StartTestSessionRequest) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{34}
+	return file_tests_tests_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *StartTestSessionRequest) GetTestId() int64 {
@@ -2306,7 +2262,7 @@ type StartTestSessionResponse struct {
 
 func (x *StartTestSessionResponse) Reset() {
 	*x = StartTestSessionResponse{}
-	mi := &file_tests_tests_proto_msgTypes[35]
+	mi := &file_tests_tests_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2318,7 +2274,7 @@ func (x *StartTestSessionResponse) String() string {
 func (*StartTestSessionResponse) ProtoMessage() {}
 
 func (x *StartTestSessionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[35]
+	mi := &file_tests_tests_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2331,7 +2287,7 @@ func (x *StartTestSessionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartTestSessionResponse.ProtoReflect.Descriptor instead.
 func (*StartTestSessionResponse) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{35}
+	return file_tests_tests_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *StartTestSessionResponse) GetSessionId() string {
@@ -2357,7 +2313,7 @@ type GetTestSessionRequest struct {
 
 func (x *GetTestSessionRequest) Reset() {
 	*x = GetTestSessionRequest{}
-	mi := &file_tests_tests_proto_msgTypes[36]
+	mi := &file_tests_tests_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2369,7 +2325,7 @@ func (x *GetTestSessionRequest) String() string {
 func (*GetTestSessionRequest) ProtoMessage() {}
 
 func (x *GetTestSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[36]
+	mi := &file_tests_tests_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2382,7 +2338,7 @@ func (x *GetTestSessionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTestSessionRequest.ProtoReflect.Descriptor instead.
 func (*GetTestSessionRequest) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{36}
+	return file_tests_tests_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *GetTestSessionRequest) GetSessionId() string {
@@ -2402,7 +2358,7 @@ type GetTestSessionResponse struct {
 
 func (x *GetTestSessionResponse) Reset() {
 	*x = GetTestSessionResponse{}
-	mi := &file_tests_tests_proto_msgTypes[37]
+	mi := &file_tests_tests_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2414,7 +2370,7 @@ func (x *GetTestSessionResponse) String() string {
 func (*GetTestSessionResponse) ProtoMessage() {}
 
 func (x *GetTestSessionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[37]
+	mi := &file_tests_tests_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2427,7 +2383,7 @@ func (x *GetTestSessionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTestSessionResponse.ProtoReflect.Descriptor instead.
 func (*GetTestSessionResponse) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{37}
+	return file_tests_tests_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *GetTestSessionResponse) GetTest() *TestInfo {
@@ -2455,7 +2411,7 @@ type SaveAnswerRequest struct {
 
 func (x *SaveAnswerRequest) Reset() {
 	*x = SaveAnswerRequest{}
-	mi := &file_tests_tests_proto_msgTypes[38]
+	mi := &file_tests_tests_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2467,7 +2423,7 @@ func (x *SaveAnswerRequest) String() string {
 func (*SaveAnswerRequest) ProtoMessage() {}
 
 func (x *SaveAnswerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[38]
+	mi := &file_tests_tests_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2480,7 +2436,7 @@ func (x *SaveAnswerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SaveAnswerRequest.ProtoReflect.Descriptor instead.
 func (*SaveAnswerRequest) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{38}
+	return file_tests_tests_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *SaveAnswerRequest) GetSessionId() string {
@@ -2513,7 +2469,7 @@ type SaveAnswerResponse struct {
 
 func (x *SaveAnswerResponse) Reset() {
 	*x = SaveAnswerResponse{}
-	mi := &file_tests_tests_proto_msgTypes[39]
+	mi := &file_tests_tests_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2525,7 +2481,7 @@ func (x *SaveAnswerResponse) String() string {
 func (*SaveAnswerResponse) ProtoMessage() {}
 
 func (x *SaveAnswerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[39]
+	mi := &file_tests_tests_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2538,7 +2494,7 @@ func (x *SaveAnswerResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SaveAnswerResponse.ProtoReflect.Descriptor instead.
 func (*SaveAnswerResponse) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{39}
+	return file_tests_tests_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *SaveAnswerResponse) GetMessage() string {
@@ -2557,7 +2513,7 @@ type CompleteTestSessionRequest struct {
 
 func (x *CompleteTestSessionRequest) Reset() {
 	*x = CompleteTestSessionRequest{}
-	mi := &file_tests_tests_proto_msgTypes[40]
+	mi := &file_tests_tests_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2569,7 +2525,7 @@ func (x *CompleteTestSessionRequest) String() string {
 func (*CompleteTestSessionRequest) ProtoMessage() {}
 
 func (x *CompleteTestSessionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[40]
+	mi := &file_tests_tests_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2582,7 +2538,7 @@ func (x *CompleteTestSessionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CompleteTestSessionRequest.ProtoReflect.Descriptor instead.
 func (*CompleteTestSessionRequest) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{40}
+	return file_tests_tests_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *CompleteTestSessionRequest) GetSessionId() string {
@@ -2601,7 +2557,7 @@ type CompleteTestSessionResponse struct {
 
 func (x *CompleteTestSessionResponse) Reset() {
 	*x = CompleteTestSessionResponse{}
-	mi := &file_tests_tests_proto_msgTypes[41]
+	mi := &file_tests_tests_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2613,7 +2569,7 @@ func (x *CompleteTestSessionResponse) String() string {
 func (*CompleteTestSessionResponse) ProtoMessage() {}
 
 func (x *CompleteTestSessionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tests_tests_proto_msgTypes[41]
+	mi := &file_tests_tests_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2626,7 +2582,7 @@ func (x *CompleteTestSessionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CompleteTestSessionResponse.ProtoReflect.Descriptor instead.
 func (*CompleteTestSessionResponse) Descriptor() ([]byte, []int) {
-	return file_tests_tests_proto_rawDescGZIP(), []int{41}
+	return file_tests_tests_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *CompleteTestSessionResponse) GetMessage() string {
@@ -2716,7 +2672,7 @@ const file_tests_tests_proto_rawDesc = "" +
 	"\rsubmission_id\x18\x01 \x01(\x03R\fsubmissionId\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"<\n" +
 	"\x15GetTestResultsRequest\x12#\n" +
-	"\rsubmission_id\x18\x01 \x01(\x03R\fsubmissionId\"\xb1\x01\n" +
+	"\rsubmission_id\x18\x01 \x01(\tR\fsubmissionId\"\xb1\x01\n" +
 	"\x16GetTestResultsResponse\x12\x14\n" +
 	"\x05score\x18\x01 \x01(\x05R\x05score\x12!\n" +
 	"\ftotal_points\x18\x02 \x01(\x05R\vtotalPoints\x12\x1a\n" +
@@ -2740,9 +2696,7 @@ const file_tests_tests_proto_rawDesc = "" +
 	"\x12UpdateTestResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\",\n" +
 	"\x11DeleteTestRequest\x12\x17\n" +
-	"\atest_id\x18\x01 \x01(\x03R\x06testId\".\n" +
-	"\x12DeleteTestResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"G\n" +
+	"\atest_id\x18\x01 \x01(\x03R\x06testId\"G\n" +
 	"\x12PublishTestRequest\x12\x17\n" +
 	"\atest_id\x18\x01 \x01(\x03R\x06testId\x12\x18\n" +
 	"\apublish\x18\x02 \x01(\bR\apublish\"/\n" +
@@ -2842,7 +2796,7 @@ const file_tests_tests_proto_rawDesc = "" +
 	"\x19QUESTION_TYPE_UNSPECIFIED\x10\x00\x12\a\n" +
 	"\x03MCQ\x10\x01\x12\b\n" +
 	"\x04TEXT\x10\x02\x12\b\n" +
-	"\x04CODE\x10\x032\xdd\n" +
+	"\x04CODE\x10\x032\xd5\n" +
 	"\n" +
 	"\vTestService\x12E\n" +
 	"\n" +
@@ -2852,9 +2806,9 @@ const file_tests_tests_proto_rawDesc = "" +
 	"\rSubmitAnswers\x12\x1d.test.v1.SubmitAnswersRequest\x1a\x1e.test.v1.SubmitAnswersResponse\x12Q\n" +
 	"\x0eGetTestResults\x12\x1e.test.v1.GetTestResultsRequest\x1a\x1f.test.v1.GetTestResultsResponse\x12E\n" +
 	"\n" +
-	"UpdateTest\x12\x1a.test.v1.UpdateTestRequest\x1a\x1b.test.v1.UpdateTestResponse\x12E\n" +
+	"UpdateTest\x12\x1a.test.v1.UpdateTestRequest\x1a\x1b.test.v1.UpdateTestResponse\x12=\n" +
 	"\n" +
-	"DeleteTest\x12\x1a.test.v1.DeleteTestRequest\x1a\x1b.test.v1.DeleteTestResponse\x12H\n" +
+	"DeleteTest\x12\x1a.test.v1.DeleteTestRequest\x1a\x13.test.v1.Pagination\x12H\n" +
 	"\vPublishTest\x12\x1b.test.v1.PublishTestRequest\x1a\x1c.test.v1.PublishTestResponse\x12W\n" +
 	"\x10CreateTechnology\x12 .test.v1.CreateTechnologyRequest\x1a!.test.v1.CreateTechnologyResponse\x12T\n" +
 	"\x0fGetTechnologies\x12\x1f.test.v1.GetTechnologiesRequest\x1a .test.v1.GetTechnologiesResponse\x12W\n" +
@@ -2880,7 +2834,7 @@ func file_tests_tests_proto_rawDescGZIP() []byte {
 }
 
 var file_tests_tests_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_tests_tests_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
+var file_tests_tests_proto_msgTypes = make([]protoimpl.MessageInfo, 41)
 var file_tests_tests_proto_goTypes = []any{
 	(Direction)(0),                      // 0: test.v1.Direction
 	(Level)(0),                          // 1: test.v1.Level
@@ -2905,28 +2859,27 @@ var file_tests_tests_proto_goTypes = []any{
 	(*UpdateTestRequest)(nil),           // 20: test.v1.UpdateTestRequest
 	(*UpdateTestResponse)(nil),          // 21: test.v1.UpdateTestResponse
 	(*DeleteTestRequest)(nil),           // 22: test.v1.DeleteTestRequest
-	(*DeleteTestResponse)(nil),          // 23: test.v1.DeleteTestResponse
-	(*PublishTestRequest)(nil),          // 24: test.v1.PublishTestRequest
-	(*PublishTestResponse)(nil),         // 25: test.v1.PublishTestResponse
-	(*CreateTechnologyRequest)(nil),     // 26: test.v1.CreateTechnologyRequest
-	(*CreateTechnologyResponse)(nil),    // 27: test.v1.CreateTechnologyResponse
-	(*GetTechnologiesRequest)(nil),      // 28: test.v1.GetTechnologiesRequest
-	(*GetTechnologiesResponse)(nil),     // 29: test.v1.GetTechnologiesResponse
-	(*UpdateTechnologyRequest)(nil),     // 30: test.v1.UpdateTechnologyRequest
-	(*UpdateTechnologyResponse)(nil),    // 31: test.v1.UpdateTechnologyResponse
-	(*DeleteTechnologyRequest)(nil),     // 32: test.v1.DeleteTechnologyRequest
-	(*DeleteTechnologyResponse)(nil),    // 33: test.v1.DeleteTechnologyResponse
-	(*GetTestsByTechnologyRequest)(nil), // 34: test.v1.GetTestsByTechnologyRequest
-	(*CodeQuestion)(nil),                // 35: test.v1.CodeQuestion
-	(*TestSession)(nil),                 // 36: test.v1.TestSession
-	(*StartTestSessionRequest)(nil),     // 37: test.v1.StartTestSessionRequest
-	(*StartTestSessionResponse)(nil),    // 38: test.v1.StartTestSessionResponse
-	(*GetTestSessionRequest)(nil),       // 39: test.v1.GetTestSessionRequest
-	(*GetTestSessionResponse)(nil),      // 40: test.v1.GetTestSessionResponse
-	(*SaveAnswerRequest)(nil),           // 41: test.v1.SaveAnswerRequest
-	(*SaveAnswerResponse)(nil),          // 42: test.v1.SaveAnswerResponse
-	(*CompleteTestSessionRequest)(nil),  // 43: test.v1.CompleteTestSessionRequest
-	(*CompleteTestSessionResponse)(nil), // 44: test.v1.CompleteTestSessionResponse
+	(*PublishTestRequest)(nil),          // 23: test.v1.PublishTestRequest
+	(*PublishTestResponse)(nil),         // 24: test.v1.PublishTestResponse
+	(*CreateTechnologyRequest)(nil),     // 25: test.v1.CreateTechnologyRequest
+	(*CreateTechnologyResponse)(nil),    // 26: test.v1.CreateTechnologyResponse
+	(*GetTechnologiesRequest)(nil),      // 27: test.v1.GetTechnologiesRequest
+	(*GetTechnologiesResponse)(nil),     // 28: test.v1.GetTechnologiesResponse
+	(*UpdateTechnologyRequest)(nil),     // 29: test.v1.UpdateTechnologyRequest
+	(*UpdateTechnologyResponse)(nil),    // 30: test.v1.UpdateTechnologyResponse
+	(*DeleteTechnologyRequest)(nil),     // 31: test.v1.DeleteTechnologyRequest
+	(*DeleteTechnologyResponse)(nil),    // 32: test.v1.DeleteTechnologyResponse
+	(*GetTestsByTechnologyRequest)(nil), // 33: test.v1.GetTestsByTechnologyRequest
+	(*CodeQuestion)(nil),                // 34: test.v1.CodeQuestion
+	(*TestSession)(nil),                 // 35: test.v1.TestSession
+	(*StartTestSessionRequest)(nil),     // 36: test.v1.StartTestSessionRequest
+	(*StartTestSessionResponse)(nil),    // 37: test.v1.StartTestSessionResponse
+	(*GetTestSessionRequest)(nil),       // 38: test.v1.GetTestSessionRequest
+	(*GetTestSessionResponse)(nil),      // 39: test.v1.GetTestSessionResponse
+	(*SaveAnswerRequest)(nil),           // 40: test.v1.SaveAnswerRequest
+	(*SaveAnswerResponse)(nil),          // 41: test.v1.SaveAnswerResponse
+	(*CompleteTestSessionRequest)(nil),  // 42: test.v1.CompleteTestSessionRequest
+	(*CompleteTestSessionResponse)(nil), // 43: test.v1.CompleteTestSessionResponse
 }
 var file_tests_tests_proto_depIdxs = []int32{
 	0,  // 0: test.v1.Technology.direction:type_name -> test.v1.Direction
@@ -2962,33 +2915,33 @@ var file_tests_tests_proto_depIdxs = []int32{
 	17, // 30: test.v1.TestService.GetTestResults:input_type -> test.v1.GetTestResultsRequest
 	20, // 31: test.v1.TestService.UpdateTest:input_type -> test.v1.UpdateTestRequest
 	22, // 32: test.v1.TestService.DeleteTest:input_type -> test.v1.DeleteTestRequest
-	24, // 33: test.v1.TestService.PublishTest:input_type -> test.v1.PublishTestRequest
-	26, // 34: test.v1.TestService.CreateTechnology:input_type -> test.v1.CreateTechnologyRequest
-	28, // 35: test.v1.TestService.GetTechnologies:input_type -> test.v1.GetTechnologiesRequest
-	30, // 36: test.v1.TestService.UpdateTechnology:input_type -> test.v1.UpdateTechnologyRequest
-	32, // 37: test.v1.TestService.DeleteTechnology:input_type -> test.v1.DeleteTechnologyRequest
-	34, // 38: test.v1.TestService.GetTestsByTechnology:input_type -> test.v1.GetTestsByTechnologyRequest
-	37, // 39: test.v1.TestService.StartTestSession:input_type -> test.v1.StartTestSessionRequest
-	39, // 40: test.v1.TestService.GetTestSession:input_type -> test.v1.GetTestSessionRequest
-	41, // 41: test.v1.TestService.SaveAnswer:input_type -> test.v1.SaveAnswerRequest
-	43, // 42: test.v1.TestService.CompleteTestSession:input_type -> test.v1.CompleteTestSessionRequest
+	23, // 33: test.v1.TestService.PublishTest:input_type -> test.v1.PublishTestRequest
+	25, // 34: test.v1.TestService.CreateTechnology:input_type -> test.v1.CreateTechnologyRequest
+	27, // 35: test.v1.TestService.GetTechnologies:input_type -> test.v1.GetTechnologiesRequest
+	29, // 36: test.v1.TestService.UpdateTechnology:input_type -> test.v1.UpdateTechnologyRequest
+	31, // 37: test.v1.TestService.DeleteTechnology:input_type -> test.v1.DeleteTechnologyRequest
+	33, // 38: test.v1.TestService.GetTestsByTechnology:input_type -> test.v1.GetTestsByTechnologyRequest
+	36, // 39: test.v1.TestService.StartTestSession:input_type -> test.v1.StartTestSessionRequest
+	38, // 40: test.v1.TestService.GetTestSession:input_type -> test.v1.GetTestSessionRequest
+	40, // 41: test.v1.TestService.SaveAnswer:input_type -> test.v1.SaveAnswerRequest
+	42, // 42: test.v1.TestService.CompleteTestSession:input_type -> test.v1.CompleteTestSessionRequest
 	8,  // 43: test.v1.TestService.CreateTest:output_type -> test.v1.CreateTestResponse
 	10, // 44: test.v1.TestService.GetTests:output_type -> test.v1.GetTestsResponse
 	13, // 45: test.v1.TestService.GetTest:output_type -> test.v1.GetTestResponse
 	16, // 46: test.v1.TestService.SubmitAnswers:output_type -> test.v1.SubmitAnswersResponse
 	18, // 47: test.v1.TestService.GetTestResults:output_type -> test.v1.GetTestResultsResponse
 	21, // 48: test.v1.TestService.UpdateTest:output_type -> test.v1.UpdateTestResponse
-	23, // 49: test.v1.TestService.DeleteTest:output_type -> test.v1.DeleteTestResponse
-	25, // 50: test.v1.TestService.PublishTest:output_type -> test.v1.PublishTestResponse
-	27, // 51: test.v1.TestService.CreateTechnology:output_type -> test.v1.CreateTechnologyResponse
-	29, // 52: test.v1.TestService.GetTechnologies:output_type -> test.v1.GetTechnologiesResponse
-	31, // 53: test.v1.TestService.UpdateTechnology:output_type -> test.v1.UpdateTechnologyResponse
-	33, // 54: test.v1.TestService.DeleteTechnology:output_type -> test.v1.DeleteTechnologyResponse
+	4,  // 49: test.v1.TestService.DeleteTest:output_type -> test.v1.Pagination
+	24, // 50: test.v1.TestService.PublishTest:output_type -> test.v1.PublishTestResponse
+	26, // 51: test.v1.TestService.CreateTechnology:output_type -> test.v1.CreateTechnologyResponse
+	28, // 52: test.v1.TestService.GetTechnologies:output_type -> test.v1.GetTechnologiesResponse
+	30, // 53: test.v1.TestService.UpdateTechnology:output_type -> test.v1.UpdateTechnologyResponse
+	32, // 54: test.v1.TestService.DeleteTechnology:output_type -> test.v1.DeleteTechnologyResponse
 	10, // 55: test.v1.TestService.GetTestsByTechnology:output_type -> test.v1.GetTestsResponse
-	38, // 56: test.v1.TestService.StartTestSession:output_type -> test.v1.StartTestSessionResponse
-	40, // 57: test.v1.TestService.GetTestSession:output_type -> test.v1.GetTestSessionResponse
-	42, // 58: test.v1.TestService.SaveAnswer:output_type -> test.v1.SaveAnswerResponse
-	44, // 59: test.v1.TestService.CompleteTestSession:output_type -> test.v1.CompleteTestSessionResponse
+	37, // 56: test.v1.TestService.StartTestSession:output_type -> test.v1.StartTestSessionResponse
+	39, // 57: test.v1.TestService.GetTestSession:output_type -> test.v1.GetTestSessionResponse
+	41, // 58: test.v1.TestService.SaveAnswer:output_type -> test.v1.SaveAnswerResponse
+	43, // 59: test.v1.TestService.CompleteTestSession:output_type -> test.v1.CompleteTestSessionResponse
 	43, // [43:60] is the sub-list for method output_type
 	26, // [26:43] is the sub-list for method input_type
 	26, // [26:26] is the sub-list for extension type_name
@@ -3007,7 +2960,7 @@ func file_tests_tests_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tests_tests_proto_rawDesc), len(file_tests_tests_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   42,
+			NumMessages:   41,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

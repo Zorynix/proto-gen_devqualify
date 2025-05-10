@@ -48,7 +48,7 @@ type TestServiceClient interface {
 	SubmitAnswers(ctx context.Context, in *SubmitAnswersRequest, opts ...grpc.CallOption) (*SubmitAnswersResponse, error)
 	GetTestResults(ctx context.Context, in *GetTestResultsRequest, opts ...grpc.CallOption) (*GetTestResultsResponse, error)
 	UpdateTest(ctx context.Context, in *UpdateTestRequest, opts ...grpc.CallOption) (*UpdateTestResponse, error)
-	DeleteTest(ctx context.Context, in *DeleteTestRequest, opts ...grpc.CallOption) (*DeleteTestResponse, error)
+	DeleteTest(ctx context.Context, in *DeleteTestRequest, opts ...grpc.CallOption) (*Pagination, error)
 	PublishTest(ctx context.Context, in *PublishTestRequest, opts ...grpc.CallOption) (*PublishTestResponse, error)
 	CreateTechnology(ctx context.Context, in *CreateTechnologyRequest, opts ...grpc.CallOption) (*CreateTechnologyResponse, error)
 	GetTechnologies(ctx context.Context, in *GetTechnologiesRequest, opts ...grpc.CallOption) (*GetTechnologiesResponse, error)
@@ -129,9 +129,9 @@ func (c *testServiceClient) UpdateTest(ctx context.Context, in *UpdateTestReques
 	return out, nil
 }
 
-func (c *testServiceClient) DeleteTest(ctx context.Context, in *DeleteTestRequest, opts ...grpc.CallOption) (*DeleteTestResponse, error) {
+func (c *testServiceClient) DeleteTest(ctx context.Context, in *DeleteTestRequest, opts ...grpc.CallOption) (*Pagination, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteTestResponse)
+	out := new(Pagination)
 	err := c.cc.Invoke(ctx, TestService_DeleteTest_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -249,7 +249,7 @@ type TestServiceServer interface {
 	SubmitAnswers(context.Context, *SubmitAnswersRequest) (*SubmitAnswersResponse, error)
 	GetTestResults(context.Context, *GetTestResultsRequest) (*GetTestResultsResponse, error)
 	UpdateTest(context.Context, *UpdateTestRequest) (*UpdateTestResponse, error)
-	DeleteTest(context.Context, *DeleteTestRequest) (*DeleteTestResponse, error)
+	DeleteTest(context.Context, *DeleteTestRequest) (*Pagination, error)
 	PublishTest(context.Context, *PublishTestRequest) (*PublishTestResponse, error)
 	CreateTechnology(context.Context, *CreateTechnologyRequest) (*CreateTechnologyResponse, error)
 	GetTechnologies(context.Context, *GetTechnologiesRequest) (*GetTechnologiesResponse, error)
@@ -288,7 +288,7 @@ func (UnimplementedTestServiceServer) GetTestResults(context.Context, *GetTestRe
 func (UnimplementedTestServiceServer) UpdateTest(context.Context, *UpdateTestRequest) (*UpdateTestResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTest not implemented")
 }
-func (UnimplementedTestServiceServer) DeleteTest(context.Context, *DeleteTestRequest) (*DeleteTestResponse, error) {
+func (UnimplementedTestServiceServer) DeleteTest(context.Context, *DeleteTestRequest) (*Pagination, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTest not implemented")
 }
 func (UnimplementedTestServiceServer) PublishTest(context.Context, *PublishTestRequest) (*PublishTestResponse, error) {
