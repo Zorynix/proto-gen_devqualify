@@ -1416,6 +1416,110 @@ func (x *GetUserAvatarResponse) GetMessage() string {
 	return ""
 }
 
+type CheckUserAchievementsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckUserAchievementsRequest) Reset() {
+	*x = CheckUserAchievementsRequest{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckUserAchievementsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckUserAchievementsRequest) ProtoMessage() {}
+
+func (x *CheckUserAchievementsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckUserAchievementsRequest.ProtoReflect.Descriptor instead.
+func (*CheckUserAchievementsRequest) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *CheckUserAchievementsRequest) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+type CheckUserAchievementsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Achievements  []*Achievement         `protobuf:"bytes,2,rep,name=achievements,proto3" json:"achievements,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CheckUserAchievementsResponse) Reset() {
+	*x = CheckUserAchievementsResponse{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CheckUserAchievementsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CheckUserAchievementsResponse) ProtoMessage() {}
+
+func (x *CheckUserAchievementsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CheckUserAchievementsResponse.ProtoReflect.Descriptor instead.
+func (*CheckUserAchievementsResponse) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *CheckUserAchievementsResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *CheckUserAchievementsResponse) GetAchievements() []*Achievement {
+	if x != nil {
+		return x.Achievements
+	}
+	return nil
+}
+
+func (x *CheckUserAchievementsResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 var File_userinfo_userinfo_proto protoreflect.FileDescriptor
 
 const file_userinfo_userinfo_proto_rawDesc = "" +
@@ -1518,6 +1622,12 @@ const file_userinfo_userinfo_proto_rawDesc = "" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1d\n" +
 	"\n" +
 	"avatar_url\x18\x02 \x01(\tR\tavatarUrl\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\"7\n" +
+	"\x1cCheckUserAchievementsRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\"\x91\x01\n" +
+	"\x1dCheckUserAchievementsResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12<\n" +
+	"\fachievements\x18\x02 \x03(\v2\x18.userinfo.v1.AchievementR\fachievements\x12\x18\n" +
 	"\amessage\x18\x03 \x01(\tR\amessage*_\n" +
 	"\tDirection\x12\x19\n" +
 	"\x15DIRECTION_UNSPECIFIED\x10\x00\x12\v\n" +
@@ -1533,14 +1643,15 @@ const file_userinfo_userinfo_proto_rawDesc = "" +
 	"\n" +
 	"\x06MIDDLE\x10\x02\x12\n" +
 	"\n" +
-	"\x06SENIOR\x10\x032\xf0\x06\n" +
+	"\x06SENIOR\x10\x032\xe0\a\n" +
 	"\vUserService\x12D\n" +
 	"\aGetUser\x12\x1b.userinfo.v1.GetUserRequest\x1a\x1c.userinfo.v1.GetUserResponse\x12b\n" +
 	"\x11UpdateUserProfile\x12%.userinfo.v1.UpdateUserProfileRequest\x1a&.userinfo.v1.UpdateUserProfileResponse\x12e\n" +
 	"\x12GetUserTestHistory\x12&.userinfo.v1.GetUserTestHistoryRequest\x1a'.userinfo.v1.GetUserTestHistoryResponse\x12h\n" +
 	"\x13GetUserAchievements\x12'.userinfo.v1.GetUserAchievementsRequest\x1a(.userinfo.v1.GetUserAchievementsResponse\x12Y\n" +
 	"\x0eGetLeaderboard\x12\".userinfo.v1.GetLeaderboardRequest\x1a#.userinfo.v1.GetLeaderboardResponse\x12q\n" +
-	"\x16UpdateUserAchievements\x12*.userinfo.v1.UpdateUserAchievementsRequest\x1a+.userinfo.v1.UpdateUserAchievementsResponse\x12_\n" +
+	"\x16UpdateUserAchievements\x12*.userinfo.v1.UpdateUserAchievementsRequest\x1a+.userinfo.v1.UpdateUserAchievementsResponse\x12n\n" +
+	"\x15CheckUserAchievements\x12).userinfo.v1.CheckUserAchievementsRequest\x1a*.userinfo.v1.CheckUserAchievementsResponse\x12_\n" +
 	"\x10UploadUserAvatar\x12$.userinfo.v1.UploadUserAvatarRequest\x1a%.userinfo.v1.UploadUserAvatarResponse\x12_\n" +
 	"\x10UpdateUserAvatar\x12$.userinfo.v1.UpdateUserAvatarRequest\x1a%.userinfo.v1.UpdateUserAvatarResponse\x12V\n" +
 	"\rGetUserAvatar\x12!.userinfo.v1.GetUserAvatarRequest\x1a\".userinfo.v1.GetUserAvatarResponseB Z\x1ediploma.userinfo.v1;userinfov1b\x06proto3"
@@ -1558,7 +1669,7 @@ func file_userinfo_userinfo_proto_rawDescGZIP() []byte {
 }
 
 var file_userinfo_userinfo_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_userinfo_userinfo_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_userinfo_userinfo_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_userinfo_userinfo_proto_goTypes = []any{
 	(Direction)(0),                         // 0: userinfo.v1.Direction
 	(Level)(0),                             // 1: userinfo.v1.Level
@@ -1584,6 +1695,8 @@ var file_userinfo_userinfo_proto_goTypes = []any{
 	(*UpdateUserAvatarResponse)(nil),       // 21: userinfo.v1.UpdateUserAvatarResponse
 	(*GetUserAvatarRequest)(nil),           // 22: userinfo.v1.GetUserAvatarRequest
 	(*GetUserAvatarResponse)(nil),          // 23: userinfo.v1.GetUserAvatarResponse
+	(*CheckUserAchievementsRequest)(nil),   // 24: userinfo.v1.CheckUserAchievementsRequest
+	(*CheckUserAchievementsResponse)(nil),  // 25: userinfo.v1.CheckUserAchievementsResponse
 }
 var file_userinfo_userinfo_proto_depIdxs = []int32{
 	0,  // 0: userinfo.v1.User.direction:type_name -> userinfo.v1.Direction
@@ -1601,29 +1714,32 @@ var file_userinfo_userinfo_proto_depIdxs = []int32{
 	2,  // 12: userinfo.v1.GetLeaderboardRequest.pagination:type_name -> userinfo.v1.Pagination
 	4,  // 13: userinfo.v1.GetLeaderboardResponse.users:type_name -> userinfo.v1.User
 	3,  // 14: userinfo.v1.UpdateUserAchievementsResponse.achievements:type_name -> userinfo.v1.Achievement
-	6,  // 15: userinfo.v1.UserService.GetUser:input_type -> userinfo.v1.GetUserRequest
-	8,  // 16: userinfo.v1.UserService.UpdateUserProfile:input_type -> userinfo.v1.UpdateUserProfileRequest
-	10, // 17: userinfo.v1.UserService.GetUserTestHistory:input_type -> userinfo.v1.GetUserTestHistoryRequest
-	12, // 18: userinfo.v1.UserService.GetUserAchievements:input_type -> userinfo.v1.GetUserAchievementsRequest
-	14, // 19: userinfo.v1.UserService.GetLeaderboard:input_type -> userinfo.v1.GetLeaderboardRequest
-	16, // 20: userinfo.v1.UserService.UpdateUserAchievements:input_type -> userinfo.v1.UpdateUserAchievementsRequest
-	18, // 21: userinfo.v1.UserService.UploadUserAvatar:input_type -> userinfo.v1.UploadUserAvatarRequest
-	20, // 22: userinfo.v1.UserService.UpdateUserAvatar:input_type -> userinfo.v1.UpdateUserAvatarRequest
-	22, // 23: userinfo.v1.UserService.GetUserAvatar:input_type -> userinfo.v1.GetUserAvatarRequest
-	7,  // 24: userinfo.v1.UserService.GetUser:output_type -> userinfo.v1.GetUserResponse
-	9,  // 25: userinfo.v1.UserService.UpdateUserProfile:output_type -> userinfo.v1.UpdateUserProfileResponse
-	11, // 26: userinfo.v1.UserService.GetUserTestHistory:output_type -> userinfo.v1.GetUserTestHistoryResponse
-	13, // 27: userinfo.v1.UserService.GetUserAchievements:output_type -> userinfo.v1.GetUserAchievementsResponse
-	15, // 28: userinfo.v1.UserService.GetLeaderboard:output_type -> userinfo.v1.GetLeaderboardResponse
-	17, // 29: userinfo.v1.UserService.UpdateUserAchievements:output_type -> userinfo.v1.UpdateUserAchievementsResponse
-	19, // 30: userinfo.v1.UserService.UploadUserAvatar:output_type -> userinfo.v1.UploadUserAvatarResponse
-	21, // 31: userinfo.v1.UserService.UpdateUserAvatar:output_type -> userinfo.v1.UpdateUserAvatarResponse
-	23, // 32: userinfo.v1.UserService.GetUserAvatar:output_type -> userinfo.v1.GetUserAvatarResponse
-	24, // [24:33] is the sub-list for method output_type
-	15, // [15:24] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	3,  // 15: userinfo.v1.CheckUserAchievementsResponse.achievements:type_name -> userinfo.v1.Achievement
+	6,  // 16: userinfo.v1.UserService.GetUser:input_type -> userinfo.v1.GetUserRequest
+	8,  // 17: userinfo.v1.UserService.UpdateUserProfile:input_type -> userinfo.v1.UpdateUserProfileRequest
+	10, // 18: userinfo.v1.UserService.GetUserTestHistory:input_type -> userinfo.v1.GetUserTestHistoryRequest
+	12, // 19: userinfo.v1.UserService.GetUserAchievements:input_type -> userinfo.v1.GetUserAchievementsRequest
+	14, // 20: userinfo.v1.UserService.GetLeaderboard:input_type -> userinfo.v1.GetLeaderboardRequest
+	16, // 21: userinfo.v1.UserService.UpdateUserAchievements:input_type -> userinfo.v1.UpdateUserAchievementsRequest
+	24, // 22: userinfo.v1.UserService.CheckUserAchievements:input_type -> userinfo.v1.CheckUserAchievementsRequest
+	18, // 23: userinfo.v1.UserService.UploadUserAvatar:input_type -> userinfo.v1.UploadUserAvatarRequest
+	20, // 24: userinfo.v1.UserService.UpdateUserAvatar:input_type -> userinfo.v1.UpdateUserAvatarRequest
+	22, // 25: userinfo.v1.UserService.GetUserAvatar:input_type -> userinfo.v1.GetUserAvatarRequest
+	7,  // 26: userinfo.v1.UserService.GetUser:output_type -> userinfo.v1.GetUserResponse
+	9,  // 27: userinfo.v1.UserService.UpdateUserProfile:output_type -> userinfo.v1.UpdateUserProfileResponse
+	11, // 28: userinfo.v1.UserService.GetUserTestHistory:output_type -> userinfo.v1.GetUserTestHistoryResponse
+	13, // 29: userinfo.v1.UserService.GetUserAchievements:output_type -> userinfo.v1.GetUserAchievementsResponse
+	15, // 30: userinfo.v1.UserService.GetLeaderboard:output_type -> userinfo.v1.GetLeaderboardResponse
+	17, // 31: userinfo.v1.UserService.UpdateUserAchievements:output_type -> userinfo.v1.UpdateUserAchievementsResponse
+	25, // 32: userinfo.v1.UserService.CheckUserAchievements:output_type -> userinfo.v1.CheckUserAchievementsResponse
+	19, // 33: userinfo.v1.UserService.UploadUserAvatar:output_type -> userinfo.v1.UploadUserAvatarResponse
+	21, // 34: userinfo.v1.UserService.UpdateUserAvatar:output_type -> userinfo.v1.UpdateUserAvatarResponse
+	23, // 35: userinfo.v1.UserService.GetUserAvatar:output_type -> userinfo.v1.GetUserAvatarResponse
+	26, // [26:36] is the sub-list for method output_type
+	16, // [16:26] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_userinfo_userinfo_proto_init() }
@@ -1637,7 +1753,7 @@ func file_userinfo_userinfo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_userinfo_userinfo_proto_rawDesc), len(file_userinfo_userinfo_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   22,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -60,6 +60,7 @@ service UserService {
   rpc GetUserAchievements(GetUserAchievementsRequest) returns (GetUserAchievementsResponse);
   rpc GetLeaderboard(GetLeaderboardRequest) returns (GetLeaderboardResponse);
   rpc UpdateUserAchievements(UpdateUserAchievementsRequest) returns (UpdateUserAchievementsResponse);
+  rpc CheckUserAchievements(CheckUserAchievementsRequest) returns (CheckUserAchievementsResponse);
   
   rpc UploadUserAvatar(UploadUserAvatarRequest) returns (UploadUserAvatarResponse);
   rpc UpdateUserAvatar(UpdateUserAvatarRequest) returns (UpdateUserAvatarResponse);
@@ -156,5 +157,15 @@ message GetUserAvatarRequest {
 message GetUserAvatarResponse {
   bool success = 1;
   string avatar_url = 2;
+  string message = 3;
+}
+
+message CheckUserAchievementsRequest {
+  int64 user_id = 1;
+}
+
+message CheckUserAchievementsResponse {
+  bool success = 1;
+  repeated Achievement achievements = 2;
   string message = 3;
 }
