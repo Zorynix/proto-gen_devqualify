@@ -1042,7 +1042,7 @@ func (x *Answer) GetCodeAnswer() string {
 
 type SubmitAnswersResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SubmissionId  int64                  `protobuf:"varint,1,opt,name=submission_id,json=submissionId,proto3" json:"submission_id,omitempty"`
+	SubmissionId  string                 `protobuf:"bytes,1,opt,name=submission_id,json=submissionId,proto3" json:"submission_id,omitempty"`
 	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1078,11 +1078,11 @@ func (*SubmitAnswersResponse) Descriptor() ([]byte, []int) {
 	return file_tests_tests_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *SubmitAnswersResponse) GetSubmissionId() int64 {
+func (x *SubmitAnswersResponse) GetSubmissionId() string {
 	if x != nil {
 		return x.SubmissionId
 	}
-	return 0
+	return ""
 }
 
 func (x *SubmitAnswersResponse) GetMessage() string {
@@ -2721,7 +2721,7 @@ const file_tests_tests_proto_rawDesc = "" +
 	"\vcode_answer\x18\x04 \x01(\tR\n" +
 	"codeAnswer\"V\n" +
 	"\x15SubmitAnswersResponse\x12#\n" +
-	"\rsubmission_id\x18\x01 \x01(\x03R\fsubmissionId\x12\x18\n" +
+	"\rsubmission_id\x18\x01 \x01(\tR\fsubmissionId\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"<\n" +
 	"\x15GetTestResultsRequest\x12#\n" +
 	"\rsubmission_id\x18\x01 \x01(\tR\fsubmissionId\"\xb1\x01\n" +
