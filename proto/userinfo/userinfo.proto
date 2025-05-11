@@ -46,7 +46,7 @@ message User {
 }
 
 message TestSummary {
-  int64 id = 1;
+  string id = 1;
   string title = 2;
   string completion_date = 3;
   int32 score = 4;

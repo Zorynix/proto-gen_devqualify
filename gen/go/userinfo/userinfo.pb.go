@@ -382,7 +382,7 @@ func (x *User) GetAvatarUrl() string {
 
 type TestSummary struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	Id             int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id             string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Title          string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
 	CompletionDate string                 `protobuf:"bytes,3,opt,name=completion_date,json=completionDate,proto3" json:"completion_date,omitempty"`
 	Score          int32                  `protobuf:"varint,4,opt,name=score,proto3" json:"score,omitempty"`
@@ -421,11 +421,11 @@ func (*TestSummary) Descriptor() ([]byte, []int) {
 	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *TestSummary) GetId() int64 {
+func (x *TestSummary) GetId() string {
 	if x != nil {
 		return x.Id
 	}
-	return 0
+	return ""
 }
 
 func (x *TestSummary) GetTitle() string {
@@ -1448,7 +1448,7 @@ const file_userinfo_userinfo_proto_rawDesc = "" +
 	"\n" +
 	"avatar_url\x18\v \x01(\tR\tavatarUrl\"\x95\x01\n" +
 	"\vTestSummary\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12'\n" +
 	"\x0fcompletion_date\x18\x03 \x01(\tR\x0ecompletionDate\x12\x14\n" +
 	"\x05score\x18\x04 \x01(\x05R\x05score\x12!\n" +
