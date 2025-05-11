@@ -138,7 +138,7 @@ message Answer {
 }
 
 message SubmitAnswersResponse {
-    int64 submission_id = 1;
+    string submission_id = 1;
     string message = 2;
 }
 
