@@ -28,9 +28,10 @@ enum Level {
 
 enum QuestionType {
   QUESTION_TYPE_UNSPECIFIED = 0;
-  MCQ = 1;
-  TEXT = 2;
-  CODE = 3;
+  MULTIPLE_CHOICE = 1;
+  SINGLE_CHOICE = 2;
+  TEXT = 3;
+  CODE = 4;
 }
 
 message Pagination {
