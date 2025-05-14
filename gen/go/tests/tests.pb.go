@@ -132,24 +132,27 @@ type QuestionType int32
 
 const (
 	QuestionType_QUESTION_TYPE_UNSPECIFIED QuestionType = 0
-	QuestionType_MCQ                       QuestionType = 1
-	QuestionType_TEXT                      QuestionType = 2
-	QuestionType_CODE                      QuestionType = 3
+	QuestionType_MULTIPLE_CHOICE           QuestionType = 1
+	QuestionType_SINGLE_CHOICE             QuestionType = 2
+	QuestionType_TEXT                      QuestionType = 3
+	QuestionType_CODE                      QuestionType = 4
 )
 
 // Enum value maps for QuestionType.
 var (
 	QuestionType_name = map[int32]string{
 		0: "QUESTION_TYPE_UNSPECIFIED",
-		1: "MCQ",
-		2: "TEXT",
-		3: "CODE",
+		1: "MULTIPLE_CHOICE",
+		2: "SINGLE_CHOICE",
+		3: "TEXT",
+		4: "CODE",
 	}
 	QuestionType_value = map[string]int32{
 		"QUESTION_TYPE_UNSPECIFIED": 0,
-		"MCQ":                       1,
-		"TEXT":                      2,
-		"CODE":                      3,
+		"MULTIPLE_CHOICE":           1,
+		"SINGLE_CHOICE":             2,
+		"TEXT":                      3,
+		"CODE":                      4,
 	}
 )
 
@@ -310,6 +313,7 @@ type TestInfo struct {
 	TechnologyId   int64                  `protobuf:"varint,6,opt,name=technology_id,json=technologyId,proto3" json:"technology_id,omitempty"`
 	TechnologyName string                 `protobuf:"bytes,7,opt,name=technology_name,json=technologyName,proto3" json:"technology_name,omitempty"`
 	IsPublished    bool                   `protobuf:"varint,8,opt,name=is_published,json=isPublished,proto3" json:"is_published,omitempty"`
+	QuestionsCount int32                  `protobuf:"varint,9,opt,name=questions_count,json=questionsCount,proto3" json:"questions_count,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -398,6 +402,13 @@ func (x *TestInfo) GetIsPublished() bool {
 		return x.IsPublished
 	}
 	return false
+}
+
+func (x *TestInfo) GetQuestionsCount() int32 {
+	if x != nil {
+		return x.QuestionsCount
+	}
+	return 0
 }
 
 type CreateTestRequest struct {
@@ -2659,7 +2670,7 @@ const file_tests_tests_proto_rawDesc = "" +
 	"Pagination\x12\x1b\n" +
 	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tR\tpageToken\"\x9b\x02\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\xc4\x02\n" +
 	"\bTestInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12 \n" +
@@ -2668,7 +2679,8 @@ const file_tests_tests_proto_rawDesc = "" +
 	"\x05level\x18\x05 \x01(\x0e2\x0e.test.v1.LevelR\x05level\x12#\n" +
 	"\rtechnology_id\x18\x06 \x01(\x03R\ftechnologyId\x12'\n" +
 	"\x0ftechnology_name\x18\a \x01(\tR\x0etechnologyName\x12!\n" +
-	"\fis_published\x18\b \x01(\bR\visPublished\"\xf9\x01\n" +
+	"\fis_published\x18\b \x01(\bR\visPublished\x12'\n" +
+	"\x0fquestions_count\x18\t \x01(\x05R\x0equestionsCount\"\xf9\x01\n" +
 	"\x11CreateTestRequest\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12/\n" +
@@ -2847,12 +2859,13 @@ const file_tests_tests_proto_rawDesc = "" +
 	"\n" +
 	"\x06MIDDLE\x10\x02\x12\n" +
 	"\n" +
-	"\x06SENIOR\x10\x03*J\n" +
+	"\x06SENIOR\x10\x03*i\n" +
 	"\fQuestionType\x12\x1d\n" +
-	"\x19QUESTION_TYPE_UNSPECIFIED\x10\x00\x12\a\n" +
-	"\x03MCQ\x10\x01\x12\b\n" +
-	"\x04TEXT\x10\x02\x12\b\n" +
-	"\x04CODE\x10\x032\xdd\n" +
+	"\x19QUESTION_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
+	"\x0fMULTIPLE_CHOICE\x10\x01\x12\x11\n" +
+	"\rSINGLE_CHOICE\x10\x02\x12\b\n" +
+	"\x04TEXT\x10\x03\x12\b\n" +
+	"\x04CODE\x10\x042\xdd\n" +
 	"\n" +
 	"\vTestService\x12E\n" +
 	"\n" +
