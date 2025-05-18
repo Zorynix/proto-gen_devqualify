@@ -27,6 +27,7 @@ const (
 	AuthService_IsAdmin_FullMethodName              = "/auth.AuthService/IsAdmin"
 	AuthService_ConfirmEmail_FullMethodName         = "/auth.AuthService/ConfirmEmail"
 	AuthService_SendConfirmationCode_FullMethodName = "/auth.AuthService/SendConfirmationCode"
+	AuthService_GetConfirmedUsers_FullMethodName    = "/auth.AuthService/GetConfirmedUsers"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -41,6 +42,7 @@ type AuthServiceClient interface {
 	IsAdmin(ctx context.Context, in *IsAdminRequest, opts ...grpc.CallOption) (*IsAdminResponse, error)
 	ConfirmEmail(ctx context.Context, in *ConfirmEmailRequest, opts ...grpc.CallOption) (*ConfirmEmailResponse, error)
 	SendConfirmationCode(ctx context.Context, in *SendConfirmationCodeRequest, opts ...grpc.CallOption) (*SendConfirmationCodeResponse, error)
+	GetConfirmedUsers(ctx context.Context, in *GetConfirmedUsersRequest, opts ...grpc.CallOption) (*GetConfirmedUsersResponse, error)
 }
 
 type authServiceClient struct {
@@ -131,6 +133,16 @@ func (c *authServiceClient) SendConfirmationCode(ctx context.Context, in *SendCo
 	return out, nil
 }
 
+func (c *authServiceClient) GetConfirmedUsers(ctx context.Context, in *GetConfirmedUsersRequest, opts ...grpc.CallOption) (*GetConfirmedUsersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetConfirmedUsersResponse)
+	err := c.cc.Invoke(ctx, AuthService_GetConfirmedUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AuthServiceServer is the server API for AuthService service.
 // All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility.
@@ -143,6 +155,7 @@ type AuthServiceServer interface {
 	IsAdmin(context.Context, *IsAdminRequest) (*IsAdminResponse, error)
 	ConfirmEmail(context.Context, *ConfirmEmailRequest) (*ConfirmEmailResponse, error)
 	SendConfirmationCode(context.Context, *SendConfirmationCodeRequest) (*SendConfirmationCodeResponse, error)
+	GetConfirmedUsers(context.Context, *GetConfirmedUsersRequest) (*GetConfirmedUsersResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
 
@@ -176,6 +189,9 @@ func (UnimplementedAuthServiceServer) ConfirmEmail(context.Context, *ConfirmEmai
 }
 func (UnimplementedAuthServiceServer) SendConfirmationCode(context.Context, *SendConfirmationCodeRequest) (*SendConfirmationCodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendConfirmationCode not implemented")
+}
+func (UnimplementedAuthServiceServer) GetConfirmedUsers(context.Context, *GetConfirmedUsersRequest) (*GetConfirmedUsersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetConfirmedUsers not implemented")
 }
 func (UnimplementedAuthServiceServer) mustEmbedUnimplementedAuthServiceServer() {}
 func (UnimplementedAuthServiceServer) testEmbeddedByValue()                     {}
@@ -342,6 +358,24 @@ func _AuthService_SendConfirmationCode_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthService_GetConfirmedUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConfirmedUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).GetConfirmedUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_GetConfirmedUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).GetConfirmedUsers(ctx, req.(*GetConfirmedUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AuthService_ServiceDesc is the grpc.ServiceDesc for AuthService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -380,6 +414,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendConfirmationCode",
 			Handler:    _AuthService_SendConfirmationCode_Handler,
+		},
+		{
+			MethodName: "GetConfirmedUsers",
+			Handler:    _AuthService_GetConfirmedUsers_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
