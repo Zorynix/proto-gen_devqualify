@@ -53,6 +53,24 @@ message TestSummary {
   int32 total_points = 5;
 }
 
+message GetConfirmedUsersWithoutProfilesRequest {
+  string correlation_id = 1;
+  string requester_service = 2;
+  int64 timestamp = 3;
+}
+
+message ConfirmedUser {
+  int64 user_id = 1;
+  string email = 2;
+  bool is_admin = 3;
+  string created_at = 4;
+}
+
+message GetConfirmedUsersWithoutProfilesResponse {
+  string correlation_id = 1;
+  repeated ConfirmedUser users = 2;
+}
+
 service UserService {
   rpc GetUser(GetUserRequest) returns (GetUserResponse);
   rpc UpdateUserProfile(UpdateUserProfileRequest) returns (UpdateUserProfileResponse);

@@ -456,6 +456,186 @@ func (x *TestSummary) GetTotalPoints() int32 {
 	return 0
 }
 
+type GetConfirmedUsersWithoutProfilesRequest struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	CorrelationId    string                 `protobuf:"bytes,1,opt,name=correlation_id,json=correlationId,proto3" json:"correlation_id,omitempty"`
+	RequesterService string                 `protobuf:"bytes,2,opt,name=requester_service,json=requesterService,proto3" json:"requester_service,omitempty"`
+	Timestamp        int64                  `protobuf:"varint,3,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *GetConfirmedUsersWithoutProfilesRequest) Reset() {
+	*x = GetConfirmedUsersWithoutProfilesRequest{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetConfirmedUsersWithoutProfilesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetConfirmedUsersWithoutProfilesRequest) ProtoMessage() {}
+
+func (x *GetConfirmedUsersWithoutProfilesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetConfirmedUsersWithoutProfilesRequest.ProtoReflect.Descriptor instead.
+func (*GetConfirmedUsersWithoutProfilesRequest) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetConfirmedUsersWithoutProfilesRequest) GetCorrelationId() string {
+	if x != nil {
+		return x.CorrelationId
+	}
+	return ""
+}
+
+func (x *GetConfirmedUsersWithoutProfilesRequest) GetRequesterService() string {
+	if x != nil {
+		return x.RequesterService
+	}
+	return ""
+}
+
+func (x *GetConfirmedUsersWithoutProfilesRequest) GetTimestamp() int64 {
+	if x != nil {
+		return x.Timestamp
+	}
+	return 0
+}
+
+type ConfirmedUser struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
+	IsAdmin       bool                   `protobuf:"varint,3,opt,name=is_admin,json=isAdmin,proto3" json:"is_admin,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ConfirmedUser) Reset() {
+	*x = ConfirmedUser{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ConfirmedUser) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ConfirmedUser) ProtoMessage() {}
+
+func (x *ConfirmedUser) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ConfirmedUser.ProtoReflect.Descriptor instead.
+func (*ConfirmedUser) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *ConfirmedUser) GetUserId() int64 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *ConfirmedUser) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *ConfirmedUser) GetIsAdmin() bool {
+	if x != nil {
+		return x.IsAdmin
+	}
+	return false
+}
+
+func (x *ConfirmedUser) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+type GetConfirmedUsersWithoutProfilesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CorrelationId string                 `protobuf:"bytes,1,opt,name=correlation_id,json=correlationId,proto3" json:"correlation_id,omitempty"`
+	Users         []*ConfirmedUser       `protobuf:"bytes,2,rep,name=users,proto3" json:"users,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetConfirmedUsersWithoutProfilesResponse) Reset() {
+	*x = GetConfirmedUsersWithoutProfilesResponse{}
+	mi := &file_userinfo_userinfo_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetConfirmedUsersWithoutProfilesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetConfirmedUsersWithoutProfilesResponse) ProtoMessage() {}
+
+func (x *GetConfirmedUsersWithoutProfilesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_userinfo_userinfo_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetConfirmedUsersWithoutProfilesResponse.ProtoReflect.Descriptor instead.
+func (*GetConfirmedUsersWithoutProfilesResponse) Descriptor() ([]byte, []int) {
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *GetConfirmedUsersWithoutProfilesResponse) GetCorrelationId() string {
+	if x != nil {
+		return x.CorrelationId
+	}
+	return ""
+}
+
+func (x *GetConfirmedUsersWithoutProfilesResponse) GetUsers() []*ConfirmedUser {
+	if x != nil {
+		return x.Users
+	}
+	return nil
+}
+
 type GetUserRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int64                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
@@ -465,7 +645,7 @@ type GetUserRequest struct {
 
 func (x *GetUserRequest) Reset() {
 	*x = GetUserRequest{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[4]
+	mi := &file_userinfo_userinfo_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -477,7 +657,7 @@ func (x *GetUserRequest) String() string {
 func (*GetUserRequest) ProtoMessage() {}
 
 func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[4]
+	mi := &file_userinfo_userinfo_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -490,7 +670,7 @@ func (x *GetUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserRequest.ProtoReflect.Descriptor instead.
 func (*GetUserRequest) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{4}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *GetUserRequest) GetUserId() int64 {
@@ -509,7 +689,7 @@ type GetUserResponse struct {
 
 func (x *GetUserResponse) Reset() {
 	*x = GetUserResponse{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[5]
+	mi := &file_userinfo_userinfo_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -521,7 +701,7 @@ func (x *GetUserResponse) String() string {
 func (*GetUserResponse) ProtoMessage() {}
 
 func (x *GetUserResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[5]
+	mi := &file_userinfo_userinfo_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -534,7 +714,7 @@ func (x *GetUserResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserResponse.ProtoReflect.Descriptor instead.
 func (*GetUserResponse) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{5}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetUserResponse) GetUser() *User {
@@ -556,7 +736,7 @@ type UpdateUserProfileRequest struct {
 
 func (x *UpdateUserProfileRequest) Reset() {
 	*x = UpdateUserProfileRequest{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[6]
+	mi := &file_userinfo_userinfo_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -568,7 +748,7 @@ func (x *UpdateUserProfileRequest) String() string {
 func (*UpdateUserProfileRequest) ProtoMessage() {}
 
 func (x *UpdateUserProfileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[6]
+	mi := &file_userinfo_userinfo_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -581,7 +761,7 @@ func (x *UpdateUserProfileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserProfileRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserProfileRequest) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{6}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *UpdateUserProfileRequest) GetUserId() int64 {
@@ -621,7 +801,7 @@ type UpdateUserProfileResponse struct {
 
 func (x *UpdateUserProfileResponse) Reset() {
 	*x = UpdateUserProfileResponse{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[7]
+	mi := &file_userinfo_userinfo_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -633,7 +813,7 @@ func (x *UpdateUserProfileResponse) String() string {
 func (*UpdateUserProfileResponse) ProtoMessage() {}
 
 func (x *UpdateUserProfileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[7]
+	mi := &file_userinfo_userinfo_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -646,7 +826,7 @@ func (x *UpdateUserProfileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserProfileResponse.ProtoReflect.Descriptor instead.
 func (*UpdateUserProfileResponse) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{7}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *UpdateUserProfileResponse) GetUser() *User {
@@ -666,7 +846,7 @@ type GetUserTestHistoryRequest struct {
 
 func (x *GetUserTestHistoryRequest) Reset() {
 	*x = GetUserTestHistoryRequest{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[8]
+	mi := &file_userinfo_userinfo_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -678,7 +858,7 @@ func (x *GetUserTestHistoryRequest) String() string {
 func (*GetUserTestHistoryRequest) ProtoMessage() {}
 
 func (x *GetUserTestHistoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[8]
+	mi := &file_userinfo_userinfo_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -691,7 +871,7 @@ func (x *GetUserTestHistoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserTestHistoryRequest.ProtoReflect.Descriptor instead.
 func (*GetUserTestHistoryRequest) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{8}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetUserTestHistoryRequest) GetUserId() int64 {
@@ -718,7 +898,7 @@ type GetUserTestHistoryResponse struct {
 
 func (x *GetUserTestHistoryResponse) Reset() {
 	*x = GetUserTestHistoryResponse{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[9]
+	mi := &file_userinfo_userinfo_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -730,7 +910,7 @@ func (x *GetUserTestHistoryResponse) String() string {
 func (*GetUserTestHistoryResponse) ProtoMessage() {}
 
 func (x *GetUserTestHistoryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[9]
+	mi := &file_userinfo_userinfo_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -743,7 +923,7 @@ func (x *GetUserTestHistoryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserTestHistoryResponse.ProtoReflect.Descriptor instead.
 func (*GetUserTestHistoryResponse) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{9}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetUserTestHistoryResponse) GetTests() []*TestSummary {
@@ -769,7 +949,7 @@ type GetUserAchievementsRequest struct {
 
 func (x *GetUserAchievementsRequest) Reset() {
 	*x = GetUserAchievementsRequest{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[10]
+	mi := &file_userinfo_userinfo_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -781,7 +961,7 @@ func (x *GetUserAchievementsRequest) String() string {
 func (*GetUserAchievementsRequest) ProtoMessage() {}
 
 func (x *GetUserAchievementsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[10]
+	mi := &file_userinfo_userinfo_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -794,7 +974,7 @@ func (x *GetUserAchievementsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserAchievementsRequest.ProtoReflect.Descriptor instead.
 func (*GetUserAchievementsRequest) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{10}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetUserAchievementsRequest) GetUserId() int64 {
@@ -813,7 +993,7 @@ type GetUserAchievementsResponse struct {
 
 func (x *GetUserAchievementsResponse) Reset() {
 	*x = GetUserAchievementsResponse{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[11]
+	mi := &file_userinfo_userinfo_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -825,7 +1005,7 @@ func (x *GetUserAchievementsResponse) String() string {
 func (*GetUserAchievementsResponse) ProtoMessage() {}
 
 func (x *GetUserAchievementsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[11]
+	mi := &file_userinfo_userinfo_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -838,7 +1018,7 @@ func (x *GetUserAchievementsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserAchievementsResponse.ProtoReflect.Descriptor instead.
 func (*GetUserAchievementsResponse) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{11}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetUserAchievementsResponse) GetAchievements() []*Achievement {
@@ -859,7 +1039,7 @@ type GetLeaderboardRequest struct {
 
 func (x *GetLeaderboardRequest) Reset() {
 	*x = GetLeaderboardRequest{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[12]
+	mi := &file_userinfo_userinfo_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -871,7 +1051,7 @@ func (x *GetLeaderboardRequest) String() string {
 func (*GetLeaderboardRequest) ProtoMessage() {}
 
 func (x *GetLeaderboardRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[12]
+	mi := &file_userinfo_userinfo_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -884,7 +1064,7 @@ func (x *GetLeaderboardRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLeaderboardRequest.ProtoReflect.Descriptor instead.
 func (*GetLeaderboardRequest) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{12}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetLeaderboardRequest) GetDirection() Direction {
@@ -918,7 +1098,7 @@ type GetLeaderboardResponse struct {
 
 func (x *GetLeaderboardResponse) Reset() {
 	*x = GetLeaderboardResponse{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[13]
+	mi := &file_userinfo_userinfo_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -930,7 +1110,7 @@ func (x *GetLeaderboardResponse) String() string {
 func (*GetLeaderboardResponse) ProtoMessage() {}
 
 func (x *GetLeaderboardResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[13]
+	mi := &file_userinfo_userinfo_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -943,7 +1123,7 @@ func (x *GetLeaderboardResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLeaderboardResponse.ProtoReflect.Descriptor instead.
 func (*GetLeaderboardResponse) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{13}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetLeaderboardResponse) GetUsers() []*User {
@@ -970,7 +1150,7 @@ type UpdateUserAchievementsRequest struct {
 
 func (x *UpdateUserAchievementsRequest) Reset() {
 	*x = UpdateUserAchievementsRequest{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[14]
+	mi := &file_userinfo_userinfo_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -982,7 +1162,7 @@ func (x *UpdateUserAchievementsRequest) String() string {
 func (*UpdateUserAchievementsRequest) ProtoMessage() {}
 
 func (x *UpdateUserAchievementsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[14]
+	mi := &file_userinfo_userinfo_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -995,7 +1175,7 @@ func (x *UpdateUserAchievementsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserAchievementsRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserAchievementsRequest) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{14}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *UpdateUserAchievementsRequest) GetUserId() int64 {
@@ -1023,7 +1203,7 @@ type UpdateUserAchievementsResponse struct {
 
 func (x *UpdateUserAchievementsResponse) Reset() {
 	*x = UpdateUserAchievementsResponse{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[15]
+	mi := &file_userinfo_userinfo_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1035,7 +1215,7 @@ func (x *UpdateUserAchievementsResponse) String() string {
 func (*UpdateUserAchievementsResponse) ProtoMessage() {}
 
 func (x *UpdateUserAchievementsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[15]
+	mi := &file_userinfo_userinfo_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1048,7 +1228,7 @@ func (x *UpdateUserAchievementsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserAchievementsResponse.ProtoReflect.Descriptor instead.
 func (*UpdateUserAchievementsResponse) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{15}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *UpdateUserAchievementsResponse) GetSuccess() bool {
@@ -1083,7 +1263,7 @@ type UploadUserAvatarRequest struct {
 
 func (x *UploadUserAvatarRequest) Reset() {
 	*x = UploadUserAvatarRequest{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[16]
+	mi := &file_userinfo_userinfo_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1095,7 +1275,7 @@ func (x *UploadUserAvatarRequest) String() string {
 func (*UploadUserAvatarRequest) ProtoMessage() {}
 
 func (x *UploadUserAvatarRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[16]
+	mi := &file_userinfo_userinfo_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1108,7 +1288,7 @@ func (x *UploadUserAvatarRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadUserAvatarRequest.ProtoReflect.Descriptor instead.
 func (*UploadUserAvatarRequest) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{16}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *UploadUserAvatarRequest) GetUserId() int64 {
@@ -1143,7 +1323,7 @@ type UploadUserAvatarResponse struct {
 
 func (x *UploadUserAvatarResponse) Reset() {
 	*x = UploadUserAvatarResponse{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[17]
+	mi := &file_userinfo_userinfo_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1155,7 +1335,7 @@ func (x *UploadUserAvatarResponse) String() string {
 func (*UploadUserAvatarResponse) ProtoMessage() {}
 
 func (x *UploadUserAvatarResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[17]
+	mi := &file_userinfo_userinfo_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1168,7 +1348,7 @@ func (x *UploadUserAvatarResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadUserAvatarResponse.ProtoReflect.Descriptor instead.
 func (*UploadUserAvatarResponse) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{17}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *UploadUserAvatarResponse) GetSuccess() bool {
@@ -1203,7 +1383,7 @@ type UpdateUserAvatarRequest struct {
 
 func (x *UpdateUserAvatarRequest) Reset() {
 	*x = UpdateUserAvatarRequest{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[18]
+	mi := &file_userinfo_userinfo_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1215,7 +1395,7 @@ func (x *UpdateUserAvatarRequest) String() string {
 func (*UpdateUserAvatarRequest) ProtoMessage() {}
 
 func (x *UpdateUserAvatarRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[18]
+	mi := &file_userinfo_userinfo_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1228,7 +1408,7 @@ func (x *UpdateUserAvatarRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserAvatarRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserAvatarRequest) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{18}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *UpdateUserAvatarRequest) GetUserId() int64 {
@@ -1263,7 +1443,7 @@ type UpdateUserAvatarResponse struct {
 
 func (x *UpdateUserAvatarResponse) Reset() {
 	*x = UpdateUserAvatarResponse{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[19]
+	mi := &file_userinfo_userinfo_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1275,7 +1455,7 @@ func (x *UpdateUserAvatarResponse) String() string {
 func (*UpdateUserAvatarResponse) ProtoMessage() {}
 
 func (x *UpdateUserAvatarResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[19]
+	mi := &file_userinfo_userinfo_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1288,7 +1468,7 @@ func (x *UpdateUserAvatarResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserAvatarResponse.ProtoReflect.Descriptor instead.
 func (*UpdateUserAvatarResponse) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{19}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *UpdateUserAvatarResponse) GetSuccess() bool {
@@ -1321,7 +1501,7 @@ type GetUserAvatarRequest struct {
 
 func (x *GetUserAvatarRequest) Reset() {
 	*x = GetUserAvatarRequest{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[20]
+	mi := &file_userinfo_userinfo_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1333,7 +1513,7 @@ func (x *GetUserAvatarRequest) String() string {
 func (*GetUserAvatarRequest) ProtoMessage() {}
 
 func (x *GetUserAvatarRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[20]
+	mi := &file_userinfo_userinfo_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1346,7 +1526,7 @@ func (x *GetUserAvatarRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserAvatarRequest.ProtoReflect.Descriptor instead.
 func (*GetUserAvatarRequest) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{20}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *GetUserAvatarRequest) GetUserId() int64 {
@@ -1367,7 +1547,7 @@ type GetUserAvatarResponse struct {
 
 func (x *GetUserAvatarResponse) Reset() {
 	*x = GetUserAvatarResponse{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[21]
+	mi := &file_userinfo_userinfo_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1379,7 +1559,7 @@ func (x *GetUserAvatarResponse) String() string {
 func (*GetUserAvatarResponse) ProtoMessage() {}
 
 func (x *GetUserAvatarResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[21]
+	mi := &file_userinfo_userinfo_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1392,7 +1572,7 @@ func (x *GetUserAvatarResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUserAvatarResponse.ProtoReflect.Descriptor instead.
 func (*GetUserAvatarResponse) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{21}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *GetUserAvatarResponse) GetSuccess() bool {
@@ -1425,7 +1605,7 @@ type CheckUserAchievementsRequest struct {
 
 func (x *CheckUserAchievementsRequest) Reset() {
 	*x = CheckUserAchievementsRequest{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[22]
+	mi := &file_userinfo_userinfo_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1437,7 +1617,7 @@ func (x *CheckUserAchievementsRequest) String() string {
 func (*CheckUserAchievementsRequest) ProtoMessage() {}
 
 func (x *CheckUserAchievementsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[22]
+	mi := &file_userinfo_userinfo_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1450,7 +1630,7 @@ func (x *CheckUserAchievementsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckUserAchievementsRequest.ProtoReflect.Descriptor instead.
 func (*CheckUserAchievementsRequest) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{22}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *CheckUserAchievementsRequest) GetUserId() int64 {
@@ -1471,7 +1651,7 @@ type CheckUserAchievementsResponse struct {
 
 func (x *CheckUserAchievementsResponse) Reset() {
 	*x = CheckUserAchievementsResponse{}
-	mi := &file_userinfo_userinfo_proto_msgTypes[23]
+	mi := &file_userinfo_userinfo_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1483,7 +1663,7 @@ func (x *CheckUserAchievementsResponse) String() string {
 func (*CheckUserAchievementsResponse) ProtoMessage() {}
 
 func (x *CheckUserAchievementsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userinfo_userinfo_proto_msgTypes[23]
+	mi := &file_userinfo_userinfo_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1496,7 +1676,7 @@ func (x *CheckUserAchievementsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckUserAchievementsResponse.ProtoReflect.Descriptor instead.
 func (*CheckUserAchievementsResponse) Descriptor() ([]byte, []int) {
-	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{23}
+	return file_userinfo_userinfo_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *CheckUserAchievementsResponse) GetSuccess() bool {
@@ -1556,7 +1736,20 @@ const file_userinfo_userinfo_proto_rawDesc = "" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12'\n" +
 	"\x0fcompletion_date\x18\x03 \x01(\tR\x0ecompletionDate\x12\x14\n" +
 	"\x05score\x18\x04 \x01(\x05R\x05score\x12!\n" +
-	"\ftotal_points\x18\x05 \x01(\x05R\vtotalPoints\")\n" +
+	"\ftotal_points\x18\x05 \x01(\x05R\vtotalPoints\"\x9b\x01\n" +
+	"'GetConfirmedUsersWithoutProfilesRequest\x12%\n" +
+	"\x0ecorrelation_id\x18\x01 \x01(\tR\rcorrelationId\x12+\n" +
+	"\x11requester_service\x18\x02 \x01(\tR\x10requesterService\x12\x1c\n" +
+	"\ttimestamp\x18\x03 \x01(\x03R\ttimestamp\"x\n" +
+	"\rConfirmedUser\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\x03R\x06userId\x12\x14\n" +
+	"\x05email\x18\x02 \x01(\tR\x05email\x12\x19\n" +
+	"\bis_admin\x18\x03 \x01(\bR\aisAdmin\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x04 \x01(\tR\tcreatedAt\"\x83\x01\n" +
+	"(GetConfirmedUsersWithoutProfilesResponse\x12%\n" +
+	"\x0ecorrelation_id\x18\x01 \x01(\tR\rcorrelationId\x120\n" +
+	"\x05users\x18\x02 \x03(\v2\x1a.userinfo.v1.ConfirmedUserR\x05users\")\n" +
 	"\x0eGetUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x03R\x06userId\"8\n" +
 	"\x0fGetUserResponse\x12%\n" +
@@ -1669,77 +1862,81 @@ func file_userinfo_userinfo_proto_rawDescGZIP() []byte {
 }
 
 var file_userinfo_userinfo_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_userinfo_userinfo_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_userinfo_userinfo_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
 var file_userinfo_userinfo_proto_goTypes = []any{
-	(Direction)(0),                         // 0: userinfo.v1.Direction
-	(Level)(0),                             // 1: userinfo.v1.Level
-	(*Pagination)(nil),                     // 2: userinfo.v1.Pagination
-	(*Achievement)(nil),                    // 3: userinfo.v1.Achievement
-	(*User)(nil),                           // 4: userinfo.v1.User
-	(*TestSummary)(nil),                    // 5: userinfo.v1.TestSummary
-	(*GetUserRequest)(nil),                 // 6: userinfo.v1.GetUserRequest
-	(*GetUserResponse)(nil),                // 7: userinfo.v1.GetUserResponse
-	(*UpdateUserProfileRequest)(nil),       // 8: userinfo.v1.UpdateUserProfileRequest
-	(*UpdateUserProfileResponse)(nil),      // 9: userinfo.v1.UpdateUserProfileResponse
-	(*GetUserTestHistoryRequest)(nil),      // 10: userinfo.v1.GetUserTestHistoryRequest
-	(*GetUserTestHistoryResponse)(nil),     // 11: userinfo.v1.GetUserTestHistoryResponse
-	(*GetUserAchievementsRequest)(nil),     // 12: userinfo.v1.GetUserAchievementsRequest
-	(*GetUserAchievementsResponse)(nil),    // 13: userinfo.v1.GetUserAchievementsResponse
-	(*GetLeaderboardRequest)(nil),          // 14: userinfo.v1.GetLeaderboardRequest
-	(*GetLeaderboardResponse)(nil),         // 15: userinfo.v1.GetLeaderboardResponse
-	(*UpdateUserAchievementsRequest)(nil),  // 16: userinfo.v1.UpdateUserAchievementsRequest
-	(*UpdateUserAchievementsResponse)(nil), // 17: userinfo.v1.UpdateUserAchievementsResponse
-	(*UploadUserAvatarRequest)(nil),        // 18: userinfo.v1.UploadUserAvatarRequest
-	(*UploadUserAvatarResponse)(nil),       // 19: userinfo.v1.UploadUserAvatarResponse
-	(*UpdateUserAvatarRequest)(nil),        // 20: userinfo.v1.UpdateUserAvatarRequest
-	(*UpdateUserAvatarResponse)(nil),       // 21: userinfo.v1.UpdateUserAvatarResponse
-	(*GetUserAvatarRequest)(nil),           // 22: userinfo.v1.GetUserAvatarRequest
-	(*GetUserAvatarResponse)(nil),          // 23: userinfo.v1.GetUserAvatarResponse
-	(*CheckUserAchievementsRequest)(nil),   // 24: userinfo.v1.CheckUserAchievementsRequest
-	(*CheckUserAchievementsResponse)(nil),  // 25: userinfo.v1.CheckUserAchievementsResponse
+	(Direction)(0),      // 0: userinfo.v1.Direction
+	(Level)(0),          // 1: userinfo.v1.Level
+	(*Pagination)(nil),  // 2: userinfo.v1.Pagination
+	(*Achievement)(nil), // 3: userinfo.v1.Achievement
+	(*User)(nil),        // 4: userinfo.v1.User
+	(*TestSummary)(nil), // 5: userinfo.v1.TestSummary
+	(*GetConfirmedUsersWithoutProfilesRequest)(nil),  // 6: userinfo.v1.GetConfirmedUsersWithoutProfilesRequest
+	(*ConfirmedUser)(nil),                            // 7: userinfo.v1.ConfirmedUser
+	(*GetConfirmedUsersWithoutProfilesResponse)(nil), // 8: userinfo.v1.GetConfirmedUsersWithoutProfilesResponse
+	(*GetUserRequest)(nil),                           // 9: userinfo.v1.GetUserRequest
+	(*GetUserResponse)(nil),                          // 10: userinfo.v1.GetUserResponse
+	(*UpdateUserProfileRequest)(nil),                 // 11: userinfo.v1.UpdateUserProfileRequest
+	(*UpdateUserProfileResponse)(nil),                // 12: userinfo.v1.UpdateUserProfileResponse
+	(*GetUserTestHistoryRequest)(nil),                // 13: userinfo.v1.GetUserTestHistoryRequest
+	(*GetUserTestHistoryResponse)(nil),               // 14: userinfo.v1.GetUserTestHistoryResponse
+	(*GetUserAchievementsRequest)(nil),               // 15: userinfo.v1.GetUserAchievementsRequest
+	(*GetUserAchievementsResponse)(nil),              // 16: userinfo.v1.GetUserAchievementsResponse
+	(*GetLeaderboardRequest)(nil),                    // 17: userinfo.v1.GetLeaderboardRequest
+	(*GetLeaderboardResponse)(nil),                   // 18: userinfo.v1.GetLeaderboardResponse
+	(*UpdateUserAchievementsRequest)(nil),            // 19: userinfo.v1.UpdateUserAchievementsRequest
+	(*UpdateUserAchievementsResponse)(nil),           // 20: userinfo.v1.UpdateUserAchievementsResponse
+	(*UploadUserAvatarRequest)(nil),                  // 21: userinfo.v1.UploadUserAvatarRequest
+	(*UploadUserAvatarResponse)(nil),                 // 22: userinfo.v1.UploadUserAvatarResponse
+	(*UpdateUserAvatarRequest)(nil),                  // 23: userinfo.v1.UpdateUserAvatarRequest
+	(*UpdateUserAvatarResponse)(nil),                 // 24: userinfo.v1.UpdateUserAvatarResponse
+	(*GetUserAvatarRequest)(nil),                     // 25: userinfo.v1.GetUserAvatarRequest
+	(*GetUserAvatarResponse)(nil),                    // 26: userinfo.v1.GetUserAvatarResponse
+	(*CheckUserAchievementsRequest)(nil),             // 27: userinfo.v1.CheckUserAchievementsRequest
+	(*CheckUserAchievementsResponse)(nil),            // 28: userinfo.v1.CheckUserAchievementsResponse
 }
 var file_userinfo_userinfo_proto_depIdxs = []int32{
 	0,  // 0: userinfo.v1.User.direction:type_name -> userinfo.v1.Direction
 	1,  // 1: userinfo.v1.User.level:type_name -> userinfo.v1.Level
 	3,  // 2: userinfo.v1.User.achievements:type_name -> userinfo.v1.Achievement
-	4,  // 3: userinfo.v1.GetUserResponse.user:type_name -> userinfo.v1.User
-	0,  // 4: userinfo.v1.UpdateUserProfileRequest.direction:type_name -> userinfo.v1.Direction
-	1,  // 5: userinfo.v1.UpdateUserProfileRequest.level:type_name -> userinfo.v1.Level
-	4,  // 6: userinfo.v1.UpdateUserProfileResponse.user:type_name -> userinfo.v1.User
-	2,  // 7: userinfo.v1.GetUserTestHistoryRequest.pagination:type_name -> userinfo.v1.Pagination
-	5,  // 8: userinfo.v1.GetUserTestHistoryResponse.tests:type_name -> userinfo.v1.TestSummary
-	3,  // 9: userinfo.v1.GetUserAchievementsResponse.achievements:type_name -> userinfo.v1.Achievement
-	0,  // 10: userinfo.v1.GetLeaderboardRequest.direction:type_name -> userinfo.v1.Direction
-	1,  // 11: userinfo.v1.GetLeaderboardRequest.level:type_name -> userinfo.v1.Level
-	2,  // 12: userinfo.v1.GetLeaderboardRequest.pagination:type_name -> userinfo.v1.Pagination
-	4,  // 13: userinfo.v1.GetLeaderboardResponse.users:type_name -> userinfo.v1.User
-	3,  // 14: userinfo.v1.UpdateUserAchievementsResponse.achievements:type_name -> userinfo.v1.Achievement
-	3,  // 15: userinfo.v1.CheckUserAchievementsResponse.achievements:type_name -> userinfo.v1.Achievement
-	6,  // 16: userinfo.v1.UserService.GetUser:input_type -> userinfo.v1.GetUserRequest
-	8,  // 17: userinfo.v1.UserService.UpdateUserProfile:input_type -> userinfo.v1.UpdateUserProfileRequest
-	10, // 18: userinfo.v1.UserService.GetUserTestHistory:input_type -> userinfo.v1.GetUserTestHistoryRequest
-	12, // 19: userinfo.v1.UserService.GetUserAchievements:input_type -> userinfo.v1.GetUserAchievementsRequest
-	14, // 20: userinfo.v1.UserService.GetLeaderboard:input_type -> userinfo.v1.GetLeaderboardRequest
-	16, // 21: userinfo.v1.UserService.UpdateUserAchievements:input_type -> userinfo.v1.UpdateUserAchievementsRequest
-	24, // 22: userinfo.v1.UserService.CheckUserAchievements:input_type -> userinfo.v1.CheckUserAchievementsRequest
-	18, // 23: userinfo.v1.UserService.UploadUserAvatar:input_type -> userinfo.v1.UploadUserAvatarRequest
-	20, // 24: userinfo.v1.UserService.UpdateUserAvatar:input_type -> userinfo.v1.UpdateUserAvatarRequest
-	22, // 25: userinfo.v1.UserService.GetUserAvatar:input_type -> userinfo.v1.GetUserAvatarRequest
-	7,  // 26: userinfo.v1.UserService.GetUser:output_type -> userinfo.v1.GetUserResponse
-	9,  // 27: userinfo.v1.UserService.UpdateUserProfile:output_type -> userinfo.v1.UpdateUserProfileResponse
-	11, // 28: userinfo.v1.UserService.GetUserTestHistory:output_type -> userinfo.v1.GetUserTestHistoryResponse
-	13, // 29: userinfo.v1.UserService.GetUserAchievements:output_type -> userinfo.v1.GetUserAchievementsResponse
-	15, // 30: userinfo.v1.UserService.GetLeaderboard:output_type -> userinfo.v1.GetLeaderboardResponse
-	17, // 31: userinfo.v1.UserService.UpdateUserAchievements:output_type -> userinfo.v1.UpdateUserAchievementsResponse
-	25, // 32: userinfo.v1.UserService.CheckUserAchievements:output_type -> userinfo.v1.CheckUserAchievementsResponse
-	19, // 33: userinfo.v1.UserService.UploadUserAvatar:output_type -> userinfo.v1.UploadUserAvatarResponse
-	21, // 34: userinfo.v1.UserService.UpdateUserAvatar:output_type -> userinfo.v1.UpdateUserAvatarResponse
-	23, // 35: userinfo.v1.UserService.GetUserAvatar:output_type -> userinfo.v1.GetUserAvatarResponse
-	26, // [26:36] is the sub-list for method output_type
-	16, // [16:26] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	7,  // 3: userinfo.v1.GetConfirmedUsersWithoutProfilesResponse.users:type_name -> userinfo.v1.ConfirmedUser
+	4,  // 4: userinfo.v1.GetUserResponse.user:type_name -> userinfo.v1.User
+	0,  // 5: userinfo.v1.UpdateUserProfileRequest.direction:type_name -> userinfo.v1.Direction
+	1,  // 6: userinfo.v1.UpdateUserProfileRequest.level:type_name -> userinfo.v1.Level
+	4,  // 7: userinfo.v1.UpdateUserProfileResponse.user:type_name -> userinfo.v1.User
+	2,  // 8: userinfo.v1.GetUserTestHistoryRequest.pagination:type_name -> userinfo.v1.Pagination
+	5,  // 9: userinfo.v1.GetUserTestHistoryResponse.tests:type_name -> userinfo.v1.TestSummary
+	3,  // 10: userinfo.v1.GetUserAchievementsResponse.achievements:type_name -> userinfo.v1.Achievement
+	0,  // 11: userinfo.v1.GetLeaderboardRequest.direction:type_name -> userinfo.v1.Direction
+	1,  // 12: userinfo.v1.GetLeaderboardRequest.level:type_name -> userinfo.v1.Level
+	2,  // 13: userinfo.v1.GetLeaderboardRequest.pagination:type_name -> userinfo.v1.Pagination
+	4,  // 14: userinfo.v1.GetLeaderboardResponse.users:type_name -> userinfo.v1.User
+	3,  // 15: userinfo.v1.UpdateUserAchievementsResponse.achievements:type_name -> userinfo.v1.Achievement
+	3,  // 16: userinfo.v1.CheckUserAchievementsResponse.achievements:type_name -> userinfo.v1.Achievement
+	9,  // 17: userinfo.v1.UserService.GetUser:input_type -> userinfo.v1.GetUserRequest
+	11, // 18: userinfo.v1.UserService.UpdateUserProfile:input_type -> userinfo.v1.UpdateUserProfileRequest
+	13, // 19: userinfo.v1.UserService.GetUserTestHistory:input_type -> userinfo.v1.GetUserTestHistoryRequest
+	15, // 20: userinfo.v1.UserService.GetUserAchievements:input_type -> userinfo.v1.GetUserAchievementsRequest
+	17, // 21: userinfo.v1.UserService.GetLeaderboard:input_type -> userinfo.v1.GetLeaderboardRequest
+	19, // 22: userinfo.v1.UserService.UpdateUserAchievements:input_type -> userinfo.v1.UpdateUserAchievementsRequest
+	27, // 23: userinfo.v1.UserService.CheckUserAchievements:input_type -> userinfo.v1.CheckUserAchievementsRequest
+	21, // 24: userinfo.v1.UserService.UploadUserAvatar:input_type -> userinfo.v1.UploadUserAvatarRequest
+	23, // 25: userinfo.v1.UserService.UpdateUserAvatar:input_type -> userinfo.v1.UpdateUserAvatarRequest
+	25, // 26: userinfo.v1.UserService.GetUserAvatar:input_type -> userinfo.v1.GetUserAvatarRequest
+	10, // 27: userinfo.v1.UserService.GetUser:output_type -> userinfo.v1.GetUserResponse
+	12, // 28: userinfo.v1.UserService.UpdateUserProfile:output_type -> userinfo.v1.UpdateUserProfileResponse
+	14, // 29: userinfo.v1.UserService.GetUserTestHistory:output_type -> userinfo.v1.GetUserTestHistoryResponse
+	16, // 30: userinfo.v1.UserService.GetUserAchievements:output_type -> userinfo.v1.GetUserAchievementsResponse
+	18, // 31: userinfo.v1.UserService.GetLeaderboard:output_type -> userinfo.v1.GetLeaderboardResponse
+	20, // 32: userinfo.v1.UserService.UpdateUserAchievements:output_type -> userinfo.v1.UpdateUserAchievementsResponse
+	28, // 33: userinfo.v1.UserService.CheckUserAchievements:output_type -> userinfo.v1.CheckUserAchievementsResponse
+	22, // 34: userinfo.v1.UserService.UploadUserAvatar:output_type -> userinfo.v1.UploadUserAvatarResponse
+	24, // 35: userinfo.v1.UserService.UpdateUserAvatar:output_type -> userinfo.v1.UpdateUserAvatarResponse
+	26, // 36: userinfo.v1.UserService.GetUserAvatar:output_type -> userinfo.v1.GetUserAvatarResponse
+	27, // [27:37] is the sub-list for method output_type
+	17, // [17:27] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_userinfo_userinfo_proto_init() }
@@ -1753,7 +1950,7 @@ func file_userinfo_userinfo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_userinfo_userinfo_proto_rawDesc), len(file_userinfo_userinfo_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   24,
+			NumMessages:   27,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
