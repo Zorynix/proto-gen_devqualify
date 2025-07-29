@@ -1,4 +1,4 @@
-module github.com/Zorynix/protoc
+module github.com/Zorynix/proto-gen_devqualify
 
 go 1.24.2
 
